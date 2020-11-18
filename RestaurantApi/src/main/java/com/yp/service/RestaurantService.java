@@ -1,11 +1,9 @@
 package com.yp.service;
 
-import com.google.gson.Gson;
 import com.yp.model.Product;
 import com.yp.repos.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,9 +13,17 @@ public class RestaurantService {
     @Autowired
     private ProductRepository productRepository;
 
-    public String getAllProducts(){
+    public List<Product> getAllProducts(){
         List<Product> products = productRepository.findAll();
-        return new Gson().toJson(products);
+        return products;
+    }
+
+    public List<Product> getAllWithCategory(String category){
+        return productRepository.findAllWithCategory(category);
+    }
+
+    public List<String> getDistinctCategory(){
+        return productRepository.findDistinctCategories();
     }
 
 

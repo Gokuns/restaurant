@@ -12,12 +12,32 @@ public class Product {
     @GeneratedValue
     private int id;
     private String name;
-    private String ingredients;
+    private String details;
+    private String category;
     private double price;
 
-    public Product(String name, String ingredients, double price){
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+
+
+    public Product(String name, String ingredients,String category, double price){
         this.name = name;
-        this.ingredients = ingredients;
+        this.category = category;
+        this.details = ingredients;
         this.price = price;
     }
     public Product(){}
@@ -36,14 +56,6 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
     }
 
     public double getPrice() {
