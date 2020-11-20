@@ -1,0 +1,3 @@
+INSERT INTO USERS VALUES ('user1', '{noop}pass1', true);
+
+INSERT INTO AUTHORITIES VALUES ('user1', 'ROLE_ADMIN');

@@ -1,17 +1,23 @@
 package com.yp.service;
 
+import com.yp.model.SellOrder;
 import com.yp.model.Product;
+import com.yp.model.User;
+import com.yp.repos.SellOrderRepository;
 import com.yp.repos.ProductRepository;
+import com.yp.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class RestaurantService {
+public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+
 
     public List<Product> getAllProducts(){
         List<Product> products = productRepository.findAll();
@@ -43,7 +49,6 @@ public class RestaurantService {
 
     public void deleteProduct(int id){
         productRepository.deleteById(id);
-
     }
 
 

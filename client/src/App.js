@@ -10,6 +10,7 @@ import {
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { ListGroup } from 'react-bootstrap';
 
 
 
@@ -34,6 +35,7 @@ class Home extends Component{
   this.handleAddToCart = this.handleAddToCart.bind(this);
   this.handleCheck = this.handleCheck.bind(this);
   this.handleRemove = this.handleRemove.bind(this);
+  this.handleCheckOut = this.handleCheckOut.bind(this)
 }
 
 componentDidMount(){
@@ -41,24 +43,20 @@ componentDidMount(){
   .then(res => {
     const prods = res.data;
     this.setState({products:prods });
-    console.log(this.state.products)
   });
   axios.get(this.url + '/categories')
   .then(res => {  
     const cats = res.data;
     this.setState({categories:cats });
-    console.log(this.state.categories)
   });
 
 }
 
 categoryClick(c){
-  console.log(c)
   axios.get(this.url+'/view/'+c)
   .then(res => {  
     const prods = res.data;
     this.setState({products:prods });
-    console.log(this.state.products)
   });
 }
 
@@ -67,18 +65,15 @@ refreshLst(){
   .then(res => {
     const prods = res.data;
     this.setState({products:prods });
-    console.log(this.state.products)
   });
   axios.get(this.url + '/categories')
   .then(res => {  
     const cats = res.data;
     this.setState({categories:cats });
-    console.log(this.state.categories)
   });
 }
 
 handleAddToCart(v){
-  console.log(v.data)
   const elem = {
     data:v,
     num:1
@@ -148,28 +143,53 @@ handleRemove(v){
   }
 
 }
+handleCheckOut(){
+
+  let orders = []
+  this.state.cart.map(elem => {
+    const order = {
+      productId:elem.data.id,
+      count:elem.num,
+      totalPrice:elem.data.price*elem.num
+    };
+    orders = [...orders, order]
+  });
+  axios.post(this.url + "/checkout/add",orders)
+  .then(() => {
+    this.setState({cart:[],
+    totalNum:0,
+  totalPrice:0})
+  })
+}
+
 
 render(){
   return(
-    <div class="container" className="Cont">
+    <div class="container">
+      <div class="d-flex justify-content-center">
       <div class= "row">
       <div class= "col-sm" className="catBtn">
-        <div>
-          <button class="btn btn-primary btn"onClick={this.refreshLst}>All</button>
-          <br/>
+
+        <div class= "list-group ">
+
+        <span class="border">
+        <button className="btnLst" class="list-group-item list-group-item-action"onClick={this.refreshLst}>All</button>
+
           {this.state.categories.map(c =>{
            return (<div>
-              <button class="btn btn-primary btn"onClick={() => this.categoryClick(c)}>{c}</button>
-              <br/>
+              <button className="btnLst" class="list-group-item list-group-item-action"onClick={() => this.categoryClick(c)}>{c}</button>
+
               </div>
                );
                }
                )}
+          </span>
           </div>
+
         </div>
         
-<div class= "col-sm" className="clList">
-<div  class="row row-cols-1 row-cols-md-2">
+<div class= "col-sm " className="clList">
+<div  class="row row-cols-1 row-cols-md-2 ">
 { this.state.products.map(v => 
   { return (
     <div class="card">
@@ -189,7 +209,8 @@ render(){
 <div  class="col-sm">
   <div className="Cart">
   <div class = "row">
-
+  <span class="border ">
+    <div className="asd">
   <table class="table table-hover table-sm">
   <thead class="thead-light">
   <tr>
@@ -217,6 +238,8 @@ render(){
     </tbody>
   </table>
   </div>
+  </span>
+  </div>
   <div class="w-100"></div>
   <div class='row'>
     <div className = "TotalTable">
@@ -224,7 +247,7 @@ render(){
       <thead class="thead-light">
       <tr>
       <th scope="col">Total Items</th> 
-      <th scope="col">Total Count</th>
+      <th scope="col">Total Price</th>
       </tr>
       </thead>
     <tbody>
@@ -238,10 +261,11 @@ render(){
   </div>
   <div class='row'>
     <div className = "TotalTable">
-    <button class="btn btn-success" > Checkout </button>
+    <button class="btn btn-success" onClick={this.handleCheckOut}> Checkout </button>
     </div>
   </div>
   </div>
+</div>
 </div>
 </div>
 </div>

@@ -12,9 +12,19 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
+.btnLst{
+  display:block;  
+  width: 20px;
+}
 .Cart{
-  position: absolute;
-  left: 35px;
+  position: relative;
+  left: 20px;
+}
+
+.asd{
+  height: 20cm;
+
 }
 
 .TotalTable{
@@ -27,15 +37,11 @@
   max-width: 15cm;
   min-width: 15cm;
 }
-.Cont{
-  position: relative;
-  left: 35px;
-}
+
 .catBtn{
   position: relative;
   right: 20px;
-  display: block;
-  text-align: left;
+
 }
 .App-header {
   background-color: #282c34;
