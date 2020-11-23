@@ -19,30 +19,78 @@
 }
 .Cart{
   position: relative;
+  width: auto;
   left: 20px;
 }
 
-.asd{
-  height: 20cm;
+.cartBorder{
+  height: 16cm;
+  overflow-y: scroll;
+}
+.Cartt{
+  max-width: 7cm;
+  min-width: 7cm;
+  max-height: 5cm;
+  min-height: 5cm;
+  text-align: center;
+  align-items: center;
+  align-self: center;
+  vertical-align: bottom;
+  align-content: center;
+  justify-content: center;
 
+}
+
+.OverflowY{
+  overflow-y: scroll;
+}
+
+.loginForm{
+  width: 85%;
+}
+.loginCard{
+  margin-top: 10px;
+  width: 25%;
 }
 
 .TotalTable{
   margin-left:auto;
-   margin-right:0;
-   text-align: right;
+  margin-top: 5px;
+   margin-left:0;
+   text-align: left;
+}
+
+.CheckoutBtn{
+  margin-right:auto;
+  margin-top: 4px;
+  text-align: right;
+
 }
 
 .clList{
-  max-width: 15cm;
-  min-width: 15cm;
+  max-width: 10cm;
+  min-width: 10cm;
+  max-height: 18cm;
+  overflow-y: scroll;
+}
+
+.TotalBorder{
+  width: 3cm;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.borderPadding{
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .catBtn{
   position: relative;
   right: 20px;
-
 }
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

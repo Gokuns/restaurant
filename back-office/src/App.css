@@ -31,6 +31,20 @@ html, body {
   overflow:auto;
 }
 
+.loginForm{
+  width: 85%;
+}
+.loginCard{
+  width: 25%;
+}
+
+
+.AddCancel{
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

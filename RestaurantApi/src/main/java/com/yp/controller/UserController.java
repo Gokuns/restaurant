@@ -8,34 +8,35 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/user/list")
+    @GetMapping("/list")
     public String getAllUsers(){
         return new Gson().toJson(userService.getAllUsers());
     }
 
-    @GetMapping("/user/{id}")
-    public String getUser(@PathVariable(value = "id")int id){
-        return new Gson().toJson(userService.getUser(id));
+    @GetMapping("/{username}")
+    public String getUser(@PathVariable(value = "username")String username){
+        return new Gson().toJson(userService.getUser(username));
     }
 
-    @PostMapping("/user/add")
+    @PostMapping("/add")
     public void addUser(@RequestBody User user){
         userService.addUser(user);
     }
 
-    @PutMapping("/user/{id}")
-    public void putUser(@PathVariable(value = "id")int id, @RequestBody User user){
-        userService.updateUser(id, user);
+    @PutMapping("/{username}/put")
+    public void putUser(@PathVariable(value = "username")String username, @RequestBody User user){
+        userService.updateUser(username, user);
     }
 
-    @DeleteMapping("/user/{id}")
-    public void deleteUser(@PathVariable(value = "id")int id){
-        userService.deleteUser(id);
+    @DeleteMapping("/{username}/delete")
+    public void deleteUser(@PathVariable(value = "username")String username){
+        userService.deleteUser(username);
     }
 
 

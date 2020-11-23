@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
@@ -41,11 +42,11 @@ public class ProductController {
         productService.addProduct(product);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/put")
     public void editProduct(@PathVariable(value = "id") int id, @RequestBody Product product){
         productService.editProduct(id, product);
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/delete")
     public void deleteProduct(@PathVariable(value = "id") int id){
         productService.deleteProduct(id);
     }
