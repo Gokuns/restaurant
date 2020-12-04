@@ -1,8 +1,7 @@
-package com.yp.model;
+package com.yp.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Entity
 public class SellOrder {

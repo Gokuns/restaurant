@@ -1,6 +1,7 @@
 package com.yp.controller;
 
-import com.yp.model.SellOrder;
+import com.yp.dto.SellOrderDto;
+import com.yp.entity.SellOrder;
 import com.yp.service.SellOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,8 +16,13 @@ public class SellOrderController {
     private SellOrderService sellOrderService;
 
     @PostMapping("/checkout/add")
-    public void checkOut2(@RequestBody List<SellOrder> sellOrders){
+    public void checkOut2(@RequestBody List<SellOrderDto> sellOrders){
         sellOrderService.addOrderLst(sellOrders);
+    }
+
+    @GetMapping("/list")
+    public void getAllOrders(){
+
     }
 
 }

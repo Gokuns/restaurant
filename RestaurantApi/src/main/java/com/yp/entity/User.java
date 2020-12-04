@@ -1,6 +1,11 @@
-package com.yp.model;
+package com.yp.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity(name = "USERS")
 public class User {
@@ -12,9 +17,13 @@ public class User {
     @Column(name = "ENABLED")
     private boolean enabled;
 
-
-    @Transient
-    private String role;
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @JoinTable(
+            name = "AUTHORITIES",
+            joinColumns = {@JoinColumn(name = "USERNAME")},
+            inverseJoinColumns = {@JoinColumn(name = "AUTHORITY")}
+    )
+    private Set<Authority> authorities;
 
     public User(){
 
@@ -48,12 +57,14 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-    public String getRole() {
-        return role;
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
     }
+
 
 }

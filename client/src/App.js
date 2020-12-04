@@ -21,10 +21,25 @@ class Home extends Component{
     headers:null,
     username:'',
     password:'',
-    loggedIn:false,
     totalNum:0,
+    selectedTables:[],
+    tableId:-1,
+    tables:[],
+    tableCategories:[],
+    selectedTableCategory:{
+      name:''
+    },
+    selectedTable:null,
+
+    loggedIn:false,
     menuState: true,
-    cartState: false
+    cartState: false,
+    tableState: false,
+    tableCategoriesState:false,
+    
+
+
+
 
   };
   this.categoryClick = this.categoryClick.bind(this);
@@ -46,7 +61,7 @@ class Home extends Component{
 }
 
 categoryClick(c){
-  axios.get(this.url+'/product/view/'+c,{
+  axios.get(this.url+'/category/list/'+c.id,{
     headers: this.state.headers
   })
   .then(res => {  
@@ -63,13 +78,31 @@ refreshLst(){
     const prods = res.data;
     this.setState({products:prods });
   });
-  axios.get(this.url + '/product/categories',{
+  axios.get(this.url + '/category/list',{
     headers: this.state.headers
   })
   .then(res => {  
     const cats = res.data;
+
     this.setState({categories:cats });
   });
+  axios.get(this.url + '/table/list',{
+    headers: this.state.headers
+  })
+  .then(res => {  
+    const tabs = res.data;
+
+    this.setState({tables:tabs });
+  });
+  axios.get(this.url + '/table_category/list',{
+    headers: this.state.headers
+  })
+  .then(res => {  
+    const tCat = res.data;
+    console.log(res)
+    this.setState({tableCategories:tCat });
+  });
+
 }
 
 handleAddToCart(v){
@@ -119,6 +152,8 @@ handleAddPlus (elem){
 handleCheck(val) {
   return this.state.cart.some(item => val.data === item.data);
 }
+
+
 
 handleRemove(v){
   if(this.state.cart.length===1 && v.num===1){
@@ -172,7 +207,7 @@ categoryLst(){
 
       {this.state.categories.map(c =>{
        return (<div>
-          <button className="btnLst" class="list-group-item list-group-item-action"onClick={() => this.categoryClick(c)}>{c}</button>
+          <button className="btnLst" class="list-group-item list-group-item-action"onClick={() => this.categoryClick(c)}>{c.name}</button>
 
           </div>
            );
@@ -286,6 +321,7 @@ takeOrderComp(){
       <div class= "row">
       <div class= "col-sm" className="catBtn">
       <this.categoryLst/>
+      Table:  {this.state.selectedTableCategory.name}, {this.state.tableId}
         </div>
       <div class= "col-sm " className="clList">
       <this.productCards/>
@@ -320,7 +356,7 @@ mainMenuComp(){
           </div>  
         </div>
         <div class="col m-2">
-        <div class="card ">
+        <div class="card " >
         <div className="Cartt">
           <div class="card-body ">
             <h5 class="card-title">Products</h5>
@@ -340,7 +376,7 @@ mainMenuComp(){
         </div>
         <div  class="row">
         <div class="col m-2">
-        <div class="card  ">
+        <div class="card" onClick={this.tablesClicked}>
         <div className="Cartt">
           <div class="card-body">
             <h5 class="card-title">Tables</h5>
@@ -429,7 +465,7 @@ handleLogin(){
     const prods = res.data;
     this.setState({products:prods });
   });
-  axios.get(this.url + '/product/categories',{
+  axios.get(this.url + '/category/list',{
     headers: this.state.headers
   })
   .then(res => {  
@@ -465,11 +501,88 @@ loginScreenComp(){
   );
 }
 
+tableCategoryClicked = (u) => {
+  axios.get(this.url + '/category/list/' + u.id,{
+    headers: this.state.headers
+  })
+  .then(res => {  
+    const cats = res.data;
+    this.setState({selectedTables:cats,
+      tableCategoriesState:false,
+      tableState:true,
+      selectedTableCategory:u
+     });
+  });
+}
+
+tableCategoriesComp = () => {
+  return(
+    <div className="container m-2">
+      <table className="table table-bordered table-hover">
+        {
+           this.state.tableCategories.map(u =>{
+             return(
+              <tr>
+              <td onClick={() => this.tableCategoryClicked(u)} >{u.name}</td>
+              </tr>
+             );
+
+           })
+        }
+        </table>
+    </div>
+  );
+}
+
+TablesComp = () => {
+  return(
+    <div className="container m-2">
+            <table className="table table-bordered table-hover">
+        {
+           this.state.selectedTables.map(u =>{
+             return(
+              <tr>
+              <td onClick={() => this.cartClikedFromTable(u)} >{u.id}</td>
+              </tr>
+             );
+
+           })
+        }
+        </table>
+    </div>
+  );
+}
+
+
+cartClikedFromTable = (u) => {
+  this.setState({cartState:true,
+    tableState:false,
+    selectedTable:u,
+    tableId:u.id
+  })
+}
+
 menuClicked(){
   this.setState({
     menuState:true,
-    cartState:false
+    cartState:false,
+    tableCategoriesState:false,
+    tableState:false,
+    cart:[],
+    totalNum:0,
+    totalPrice:0,
+    selectedTable:null,
+    selectedTableCategory:{name:''},
+    tableId:-1
   })
+}
+
+tablesClicked = () => {
+  this.setState({
+    menuState:false,
+    tableCategoriesState:true
+  })
+  this.refreshLst();
 }
 
 render(){
@@ -485,6 +598,8 @@ render(){
     {!this.state.loggedIn &&<this.loginScreenComp/>}
     {this.state.loggedIn && this.state.menuState && <this.mainMenuComp/>}
     {this.state.loggedIn && this.state.cartState && <this.takeOrderComp/>}
+    {this.state.loggedIn && this.state.tableState && <this.TablesComp/>}
+    {this.state.loggedIn && this.state.tableCategoriesState && <this.tableCategoriesComp/>}
     </div>
   );
 }

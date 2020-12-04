@@ -1,18 +1,16 @@
 package com.yp.repos;
 
-import com.yp.model.Product;
+import com.yp.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-    @Query("SELECT u FROM Product u WHERE u.category = :category")
-    List<Product> findAllWithCategory(@Param("category") String category);
+//    @Query("SELECT u FROM Product u WHERE u.category = :category")
+//    List<Product> findAllWithCategory(@Param("category") String category);
+//
+//    @Query("SELECT DISTINCT category FROM Product")
+//    List<String> findDistinctCategories();
 
-    @Query("SELECT DISTINCT category FROM Product")
-    List<String> findDistinctCategories();
+
 }
