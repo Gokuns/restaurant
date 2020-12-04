@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest extends TestCase {
@@ -33,7 +33,7 @@ public class UserServiceTest extends TestCase {
     private UserRepository userRepository;
 
     private User user = new User();
-    private User editUser = new User();
+    private UserDto editUserDto = new UserDto();
     private UserDto userDto = new UserDto();
     private List<User> userList = new ArrayList<>();
     private List<UserDto> userDtoList = new ArrayList<>();
@@ -47,10 +47,10 @@ public class UserServiceTest extends TestCase {
         user.setAuthorities(new HashSet<>());
         userList.add(user);
 
-        editUser.setUserName("Abc");
-        editUser.setPassWord("246");
-        editUser.setEnabled(true);
-        editUser.setAuthorities(new HashSet<>());
+        editUserDto.setName("Goko");
+        editUserDto.setPassword("246");
+        editUserDto.setEnabled(true);
+        editUserDto.setRoles(new HashSet<>());
 
 
         userDto.setName("Goko");
@@ -62,7 +62,7 @@ public class UserServiceTest extends TestCase {
     }
 
     @Test
-    public void shouldgetAuthorityWithId() {
+    public void shouldgetWithId() {
         Mockito.when(userRepository.findById("Goko")).thenReturn(Optional.of(user));
         UserDto us = userService.getUser("Goko");
         assertNotNull(us);
@@ -70,7 +70,7 @@ public class UserServiceTest extends TestCase {
     }
 
     @Test
-    public void getAuthorityList(){
+    public void shouldgetList(){
         when(userRepository.findAll()).thenReturn(userList);
         List<UserDto> lst = userService.getAllUsers();
         assertEquals(lst.get(0).getName(), userList.get(0).getUserName());
@@ -88,7 +88,15 @@ public class UserServiceTest extends TestCase {
     public void shouldEditWithId() {
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
         when(userRepository.save(any())).thenReturn(user);
-        User us = userService.updateUser("Goko", userDto);
+        User us = userService.updateUser("Goko", editUserDto);
+        assertEquals(us.getPassWord(), user.getPassWord());
+    }
+
+    @Test
+    public void shouldDeleteWithId() {
+        userService.deleteUser("Goko");
+        verify(userRepository, times(1)).deleteById(any());
+
     }
 
 }

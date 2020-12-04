@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TableCategoryServiceTest extends TestCase {
@@ -88,6 +88,13 @@ public class TableCategoryServiceTest extends TestCase {
         when(tableCategoryRepository.save(any())).thenReturn(tableCategory);
         TableCategory tableCat = tableCategoryService.editTableCategory(1,tableCategoryDto);
         assertNotNull(tableCat);
+
+    }
+
+    @Test
+    public void shouldDeleteWithId() {
+        tableCategoryService.deleteTableCategory(1);
+        verify(tableCategoryRepository, times(1)).deleteById(any());
 
     }
 

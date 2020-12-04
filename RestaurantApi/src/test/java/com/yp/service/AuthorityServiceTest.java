@@ -55,7 +55,6 @@ public class AuthorityServiceTest extends TestCase {
 
     @Test
     public void shoudReturnNullWithAuthorityId() {
-        Mockito.when(authorityRepository.findById("ROLE_ADMIN")).thenReturn(Optional.of(authority));
         AuthorityDto auth = authorityService.getRole("GOKO");
         assertNull(auth);
     }
@@ -73,6 +72,13 @@ public class AuthorityServiceTest extends TestCase {
         when(authorityRepository.save(any())).thenReturn(authority);
         Authority s = authorityService.addRole(authorityDto);
         assertEquals(authority.getAuthority(), s.getAuthority() );
+    }
+
+    @Test
+    public void shouldDeleteWithId() {
+        authorityService.deleterRole("Goko");
+        verify(authorityRepository, times(1)).deleteById(any());
+
     }
 
 

@@ -1,7 +1,6 @@
 package com.yp.controller;
 
 import com.yp.dto.SellOrderDto;
-import com.yp.entity.SellOrder;
 import com.yp.service.SellOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,8 +20,8 @@ public class SellOrderController {
     }
 
     @GetMapping("/list")
-    public void getAllOrders(){
-
+    public List<SellOrderDto> getAllOrders(){
+        return sellOrderService.getAllOrders();
     }
 
 }

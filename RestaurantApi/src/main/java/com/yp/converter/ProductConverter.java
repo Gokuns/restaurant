@@ -2,6 +2,7 @@ package com.yp.converter;
 
 import com.yp.dto.CategoryDto;
 import com.yp.dto.ProductDto;
+import com.yp.entity.Category;
 import com.yp.entity.Product;
 
 public class ProductConverter {
@@ -12,13 +13,13 @@ public class ProductConverter {
         p.setDetails(productDto.getDetails());
         p.setImg(productDto.getImg());
         p.setPrice(productDto.getPrice());
+        Category category = CategoryConverter.convertToCategory(productDto.getCategory());
+        p.setCategory(category);
         return p;
     }
     public static ProductDto convertToProductDto(Product p){
         ProductDto productDto = new ProductDto();
-        CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setId(p.getCategory().getId());
-        categoryDto.setName(p.getCategory().getName());
+        CategoryDto categoryDto = CategoryConverter.convertToCategoryDto(p.getCategory());
         productDto.setCategory(categoryDto);
         productDto.setId(p.getId());
         productDto.setName(p.getName());

@@ -14,28 +14,14 @@ public class Product {
     private String name;
     private String details;
 
-
     private String img = "";
     private double price;
-
-    public int getCat() {
-        return cat;
-    }
-
-    public void setCat(int cat) {
-        this.cat = cat;
-    }
-
-
-
 
     @ManyToOne(
             cascade = CascadeType.ALL
     )
     @JoinColumn(name = "category_id")
     private Category category;
-
-    private int cat;
 
     public String getDetails() {
         return details;

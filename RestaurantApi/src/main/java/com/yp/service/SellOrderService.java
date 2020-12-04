@@ -1,5 +1,7 @@
 package com.yp.service;
 
+import com.yp.controller.SellOrderController;
+import com.yp.converter.SellOrderConverter;
 import com.yp.dto.SellOrderDto;
 import com.yp.entity.SellOrder;
 import com.yp.repos.SellOrderRepository;
@@ -14,31 +16,22 @@ public class SellOrderService {
     @Autowired
     private SellOrderRepository sellOrderRepository;
 
-    public void addOrderLst(List<SellOrderDto> sellOrders) {
+    public List<SellOrder> addOrderLst(List<SellOrderDto> sellOrders) {
         List<SellOrder> sellOrderList = new ArrayList<>();
-        for(SellOrderDto sellOrderDto:sellOrders){
-            SellOrder sellOrder = new SellOrder();
-            sellOrder.setOrderId(sellOrderDto.getOrderId());
-            sellOrder.setProductId(sellOrderDto.getProductId());
-            sellOrder.setCount(sellOrderDto.getCount());
-            sellOrder.setTotalPrice(sellOrderDto.getTotalPrice());
+        sellOrders.forEach(sellOrderDto -> {
+            SellOrder sellOrder = SellOrderConverter.convertToSellOrder(sellOrderDto);
             sellOrderList.add(sellOrder);
-        }
-        sellOrderRepository.saveAll(sellOrderList);
+        });
+        return sellOrderRepository.saveAll(sellOrderList);
     }
 
     public List<SellOrderDto> getAllOrders(){
         List<SellOrder> sellOrderList = sellOrderRepository.findAll();
         List<SellOrderDto> sellOrderDtos = new ArrayList<>();
-        for(SellOrder sellOrder:sellOrderList){
-            SellOrderDto sellOrderDto = new SellOrderDto();
-            sellOrderDto.setOrderId(sellOrder.getOrderId());
-            sellOrderDto.setProductId(sellOrder.getProductId());
-            sellOrderDto.setCount(sellOrder.getCount());
-            sellOrderDto.setTotalPrice(sellOrder.getTotalPrice());
-            sellOrderDto.setCreateDate(sellOrder.getCreationDateTime());
+        sellOrderList.forEach(sellOrder -> {
+            SellOrderDto sellOrderDto = SellOrderConverter.convertToSellOrderDto(sellOrder);
             sellOrderDtos.add(sellOrderDto);
-        }
+        });
         return sellOrderDtos;
     }
 }

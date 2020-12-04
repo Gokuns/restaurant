@@ -14,15 +14,15 @@ INSERT INTO CATEGORIES(name) VALUES ('Drink');
 INSERT INTO CATEGORIES(name) VALUES ('Dessert');
 
 
-INSERT INTO Product(name, details, category_id, cat, price) VALUES ('Margarita Pizza', 'Pizza', 1,1 , 22);
-INSERT INTO Product(name, details, category_id, cat, price) VALUES ('Fungi Pizza', 'Pizza', 1, 1, 23);
-INSERT INTO Product(name, details, category_id, cat, price) VALUES ('Steak Burger', '200gr Steak', 2, 2, 28);
-INSERT INTO Product(name, details, category_id, cat, price) VALUES ('Cheeseburger', 'Cheddar', 2, 2, 25);
-INSERT INTO Product(name, details, category_id, cat, price) VALUES ('Steak Burger', '200gr Steak', 2, 2, 28);
-INSERT INTO Product(name, details, category_id, cat, price) VALUES ('Cheeseburger', 'Cheddar', 2, 2, 25);
-INSERT INTO Product(name, details, category_id, cat, price) VALUES ('Latte', 'Middle', 3, 3, 14);
-INSERT INTO Product(name, details, category_id, cat, price) VALUES ('Mocha', 'Middle', 3, 3, 15);
-INSERT INTO Product(name, details, category_id, cat, price) VALUES ('Flat White', 'Middle', 3, 3, 13);
+INSERT INTO Product(name, details, category_id, price) VALUES ('Margarita Pizza', 'Pizza', 1, 22);
+INSERT INTO Product(name, details, category_id, price) VALUES ('Fungi Pizza', 'Pizza', 1, 23);
+INSERT INTO Product(name, details, category_id, price) VALUES ('Steak Burger', '200gr Steak', 2, 28);
+INSERT INTO Product(name, details, category_id, price) VALUES ('Cheeseburger', 'Cheddar', 2,  25);
+INSERT INTO Product(name, details, category_id, price) VALUES ('Steak Burger', '200gr Steak', 2,  28);
+INSERT INTO Product(name, details, category_id, price) VALUES ('Cheeseburger', 'Cheddar', 2,  25);
+INSERT INTO Product(name, details, category_id, price) VALUES ('Latte', 'Middle', 3, 14);
+INSERT INTO Product(name, details, category_id, price) VALUES ('Mocha', 'Middle', 3, 15);
+INSERT INTO Product(name, details, category_id, price) VALUES ('Flat White', 'Middle', 3, 13);
 
 
 INSERT INTO TABLE_CATEGORIES(name,number) VALUES ('Inside',6);

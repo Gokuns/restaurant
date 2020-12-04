@@ -31,7 +31,6 @@ public class UserConverter {
             AuthorityDto authorityDto = AuthorityConverter.converToAuthorityDto(authority);
             userDto.getRoles().add(authorityDto);
         });
-
         return userDto;
 
     }

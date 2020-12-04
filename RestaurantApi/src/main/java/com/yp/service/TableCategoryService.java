@@ -48,10 +48,6 @@ public class TableCategoryService {
         tableCategoryRepository.deleteById(id);
     }
 
-    public int getTablesWithId(int id){
-        TableCategory tableCategory = getTabCat(id);
-        return tableCategory.getNumber();
-    }
 
     private TableCategory getTabCat(int id){
         Optional<TableCategory> opt =tableCategoryRepository.findById(id);
