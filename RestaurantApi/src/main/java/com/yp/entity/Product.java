@@ -32,14 +32,6 @@ public class Product {
     }
 
 
-    public Product(String name, String ingredients, double price){
-        this.name = name;
-
-        this.details = ingredients;
-        this.price = price;
-    }
-
-
     public Product(){}
 
     public int getId() {

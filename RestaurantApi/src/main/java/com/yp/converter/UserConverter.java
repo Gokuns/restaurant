@@ -16,9 +16,11 @@ public class UserConverter {
         user.setUserName(userDto.getName());
         user.setPassWord("{noop}" + userDto.getPassword());
         user.setEnabled(userDto.isEnabled());
+        Set<Authority> authorities = new HashSet<>();
         userDto.getRoles().forEach(authorityDto -> {
-            user.getAuthorities().add(AuthorityConverter.converToAuthority(authorityDto));
+            authorities.add(AuthorityConverter.converToAuthority(authorityDto));
         });
+        user.setAuthorities(authorities);
         return user;
 
     }
@@ -27,10 +29,12 @@ public class UserConverter {
         userDto.setEnabled(user.isEnabled());
         userDto.setName(user.getUserName());
         userDto.setPassword(user.getPassWord());
+        Set<AuthorityDto> authorityDtos = new HashSet<>();
         user.getAuthorities().forEach(authority -> {
             AuthorityDto authorityDto = AuthorityConverter.converToAuthorityDto(authority);
-            userDto.getRoles().add(authorityDto);
+            authorityDtos.add(authorityDto);
         });
+        userDto.setRoles(authorityDtos);
         return userDto;
 
     }

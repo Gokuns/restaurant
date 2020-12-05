@@ -17,10 +17,7 @@ public class TableCategory {
     public TableCategory() {
     }
 
-    public TableCategory(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+
 
     public int getId() {
         return id;

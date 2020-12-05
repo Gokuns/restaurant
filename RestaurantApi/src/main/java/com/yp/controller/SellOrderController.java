@@ -15,7 +15,7 @@ public class SellOrderController {
     private SellOrderService sellOrderService;
 
     @PostMapping("/checkout/add")
-    public void checkOut2(@RequestBody List<SellOrderDto> sellOrders){
+    public void addOrder(@RequestBody List<SellOrderDto> sellOrders){
         sellOrderService.addOrderLst(sellOrders);
     }
 

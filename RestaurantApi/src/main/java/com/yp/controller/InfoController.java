@@ -19,5 +19,4 @@ public class InfoController {
         return infoService.getInfo();
     }
 
-
 }

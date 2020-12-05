@@ -22,7 +22,7 @@ public class InfoServiceTest extends TestCase {
 
     @Before
     public void setUp(){
-        info.setDll_auto("Merhaba");
+
 
     }
 

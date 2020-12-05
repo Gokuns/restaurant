@@ -1,17 +1,16 @@
 package com.yp.service;
 
 import com.yp.converter.AuthorityConverter;
+import com.yp.converter.UserConverter;
 import com.yp.dto.AuthorityDto;
+import com.yp.dto.UserDto;
 import com.yp.entity.Authority;
 import com.yp.entity.User;
 import com.yp.repos.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class AuthorityService {
@@ -35,28 +34,27 @@ public class AuthorityService {
         });
         return authorityDtos;
     }
-
     public Authority addRole(AuthorityDto authority){
         Authority auth = AuthorityConverter.converToAuthority(authority);
         return authorityRepository.save(auth);
-
     }
-
     public Authority editRole(AuthorityDto authority, String id){
         Authority a = new Authority();
         Authority auth = authorityRepository.findById(id).get();
         a.setUsers(auth.getUsers());
         a.setAuthority(authority.getAuthority());
-        authorityRepository.deleteById(id);
         return authorityRepository.saveAndFlush(a);
     }
     public void deleterRole(String id){
         authorityRepository.deleteById(id);
     }
-
-    public Set<User> getUsersWithRole(String id){
+    public Set<UserDto> getUsersWithRole(String id){
         Authority authority = authorityRepository.findById(id).get();
-        return authority.getUsers();
+        Set<User> users = authority.getUsers();
+        Set<UserDto> userDtos = new HashSet<>();
+        users.forEach(user -> {
+            userDtos.add(UserConverter.converToUserDto(user));
+        });
+        return userDtos;
     }
-
 }

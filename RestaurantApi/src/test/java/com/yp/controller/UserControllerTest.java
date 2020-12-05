@@ -54,6 +54,13 @@ public class UserControllerTest  extends TestCase {
     }
 
     @Test
+    public void shouldEditWithDtop(){
+        userController.putUser("Goko", userDto);
+        verify(userService, times(1)).updateUser("Goko", userDto);
+
+    }
+
+    @Test
     public void shouldDeleteWithId() {
         userController.deleteUser("Goko");
         verify(userService, times(1)).deleteUser("Goko");

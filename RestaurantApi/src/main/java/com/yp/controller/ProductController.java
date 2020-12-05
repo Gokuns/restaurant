@@ -30,8 +30,8 @@ public class ProductController {
     }
 
     @PostMapping("/add/{id}")
-    public void addProduct(@PathVariable(value = "id") int id, @RequestBody ProductDto product){
-        productService.addProduct(product,id);
+    public void addProduct(@PathVariable(value = "id") int categoryId, @RequestBody ProductDto product){
+        productService.addProduct(product,categoryId);
     }
 
     @PutMapping("/{id}/put")

@@ -15,14 +15,13 @@ import java.util.List;
 public class TableCategoryController {
     @Autowired
     private TableCategoryService tableCategoryService;
-
     @GetMapping("/{id}")
-    public TableCategoryDto asd(@PathVariable(value = "id") int id){
+    public TableCategoryDto getTableCat(@PathVariable(value = "id") int id){
         return tableCategoryService.getTableCategory(id);
     }
 
     @GetMapping("/list")
-    public List<TableCategoryDto> categories(){
+    public List<TableCategoryDto> getCats(){
         return tableCategoryService.getAllTableCategories();
     }
 
@@ -37,11 +36,11 @@ public class TableCategoryController {
     }
 
     @PutMapping("/{id}/put")
-    public void editProduct(@PathVariable(value = "id") int id, @RequestBody TableCategoryDto tableCat){
+    public void editTableCat(@PathVariable(value = "id") int id, @RequestBody TableCategoryDto tableCat){
         tableCategoryService.editTableCategory(id, tableCat);
     }
     @DeleteMapping("/{id}/delete")
-    public void deleteProduct(@PathVariable(value = "id") int id){
+    public void deleteTableCat(@PathVariable(value = "id") int id){
         tableCategoryService.deleteTableCategory(id);
     }
 

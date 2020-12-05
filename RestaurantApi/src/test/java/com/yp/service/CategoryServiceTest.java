@@ -1,7 +1,9 @@
 package com.yp.service;
 
 import com.yp.dto.CategoryDto;
+import com.yp.dto.ProductDto;
 import com.yp.entity.Category;
+import com.yp.entity.Product;
 import com.yp.repos.CategoryRepository;
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -32,11 +34,21 @@ public class CategoryServiceTest extends TestCase {
     private CategoryDto categoryDto = new CategoryDto();
     private List<Category> categoryList = new ArrayList<>();
     private List<CategoryDto> categoryDtoList = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
+    private Product product = new Product();
 
     @Before
     public void setUp() {
+        product.setId(1);
+        product.setName("Pizza");
+        product.setCategory(category);
+        product.setDetails("PizzaDets");
+        product.setImg("");
+        product.setPrice(25);
+        products.add(product);
+
         category.setId(1);
-        category.setProducts(new ArrayList<>());
+        category.setProducts(products);
         category.setName("Drink");
         categoryList.add(category);
 
@@ -80,5 +92,12 @@ public class CategoryServiceTest extends TestCase {
         categoryService.deleteCategory(1);
         verify(categoryRepository, times(1)).deleteById(any());
 
+    }
+
+    @Test
+    public void shouldGetProductsFromCat(){
+        when(categoryRepository.findById(any())).thenReturn(Optional.of(category));
+        List<ProductDto> lst = categoryService.getProductsWithId(1);
+        assertNotNull(lst);
     }
 }

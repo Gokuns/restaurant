@@ -1,5 +1,6 @@
 package com.yp.service;
 
+import com.yp.dto.AuthorityDto;
 import com.yp.dto.TableCategoryDto;
 import com.yp.dto.UserDto;
 import com.yp.entity.Authority;
@@ -37,14 +38,25 @@ public class UserServiceTest extends TestCase {
     private UserDto userDto = new UserDto();
     private List<User> userList = new ArrayList<>();
     private List<UserDto> userDtoList = new ArrayList<>();
+    private AuthorityDto authorityDto = new AuthorityDto();
+    private HashSet<AuthorityDto> setDto = new HashSet<>();
+    private Authority authority = new Authority();
+    private HashSet<Authority> set = new HashSet<>();
 
 
     @Before
     public void setUp(){
+        authority.setUsers(new HashSet<>());
+        authority.setAuthority("Goko");
+        authorityDto.setAuthority("Goko");
+
+        set.add(authority);
+        setDto.add(authorityDto);
+
         user.setUserName("Goko");
         user.setPassWord("123");
         user.setEnabled(true);
-        user.setAuthorities(new HashSet<>());
+        user.setAuthorities(set);
         userList.add(user);
 
         editUserDto.setName("Goko");
@@ -56,7 +68,7 @@ public class UserServiceTest extends TestCase {
         userDto.setName("Goko");
         userDto.setPassword("123");
         userDto.setEnabled(true);
-        userDto.setRoles(new HashSet<>());
+        userDto.setRoles(setDto);
         userDtoList.add(userDto);
 
     }

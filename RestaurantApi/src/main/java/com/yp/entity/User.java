@@ -29,11 +29,6 @@ public class User {
 
     }
 
-    public User(String userName, String passWord, boolean enabled) {
-        this.userName = userName;
-        this.passWord = passWord;
-        this.enabled = enabled;
-    }
 
     public String getUserName() {
         return userName;

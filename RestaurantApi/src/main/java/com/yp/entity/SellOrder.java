@@ -13,11 +13,7 @@ public class SellOrder {
     private double totalPrice;
     private Timestamp createDate = new Timestamp(System.currentTimeMillis());
 
-    public SellOrder(int productId, int count, double totalPrice) {
-        this.productId = productId;
-        this.count = count;
-        this.totalPrice = totalPrice;
-    }
+
 
     public SellOrder() {
     }
@@ -57,8 +53,8 @@ public class SellOrder {
         return createDate;
     }
 
-    public void setCreationDateTime(Timestamp creationDateTime) {
-        this.createDate = creationDateTime;
-    }
+//    public void setCreationDateTime(Timestamp creationDateTime) {
+//        this.createDate = creationDateTime;
+//    }
 
 }

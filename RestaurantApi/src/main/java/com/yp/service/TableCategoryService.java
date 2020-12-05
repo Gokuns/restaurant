@@ -51,9 +51,7 @@ public class TableCategoryService {
 
     private TableCategory getTabCat(int id){
         Optional<TableCategory> opt =tableCategoryRepository.findById(id);
-        if (opt.isPresent()){
-            return opt.get();
-        }else return null;
+        return opt.orElse(null);
     }
 
 }

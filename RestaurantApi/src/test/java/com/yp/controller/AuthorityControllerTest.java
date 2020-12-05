@@ -47,6 +47,14 @@ public class AuthorityControllerTest extends TestCase {
 
  }
 
+
+    @Test
+    public void shouldEditWithDto() {
+        authorityController.editRole(authorityDto, "Goko");
+        verify(authorityService, times(1)).editRole(authorityDto,"Goko");
+
+    }
+
     @Test
     public void shouldDeleteWithId() {
         authorityController.deleteRole("ROLE_ADMIN");

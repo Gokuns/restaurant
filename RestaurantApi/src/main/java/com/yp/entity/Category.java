@@ -22,21 +22,6 @@ public class Category {
         )
     private List<Product> products;
 
-    public Category(int id, String name, List<Product> products) {
-        this.id = id;
-        this.name = name;
-        this.products = products;
-    }
-
-    public Category(String name) {
-        this.name = name;
-    }
-
-    public Category(int id,String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public Category() {
     }
 

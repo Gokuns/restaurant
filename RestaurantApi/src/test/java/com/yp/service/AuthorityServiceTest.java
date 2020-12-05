@@ -1,7 +1,9 @@
 package com.yp.service;
 
 import com.yp.dto.AuthorityDto;
+import com.yp.dto.UserDto;
 import com.yp.entity.Authority;
+import com.yp.entity.User;
 import com.yp.repos.AuthorityRepository;
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -12,9 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
@@ -41,6 +41,14 @@ public class AuthorityServiceTest extends TestCase {
     public void setUp() {
         authority.setAuthority("ROLE_ADMIN");
         authorityDto.setAuthority("ROLE_ADMIN");
+        HashSet<User> uSet = new HashSet<>();
+        User user = new User();
+        user.setUserName("Goko");
+        user.setPassWord("123");
+        user.setEnabled(true);
+        user.setAuthorities(new HashSet<>());
+        uSet.add(user);
+        authority.setUsers(uSet);
         authorityList.add(authority);
         authorityDtoList.add(authorityDto);
     }
@@ -78,7 +86,20 @@ public class AuthorityServiceTest extends TestCase {
     public void shouldDeleteWithId() {
         authorityService.deleterRole("Goko");
         verify(authorityRepository, times(1)).deleteById(any());
+    }
 
+    @Test
+    public void shouldEdit(){
+        Mockito.when(authorityRepository.findById(any())).thenReturn(Optional.of(authority));authorityService.editRole(authorityDto,"Goko");
+        verify(authorityRepository, times(1)).saveAndFlush(any());
+    }
+
+
+    @Test
+    public void shouldgetUsersWithId(){
+        Mockito.when(authorityRepository.findById(any())).thenReturn(Optional.of(authority));
+        Set<UserDto> userDtoSet =  authorityService.getUsersWithRole("ROLE_ADMIN");
+        assertNotNull(userDtoSet);
     }
 
 
