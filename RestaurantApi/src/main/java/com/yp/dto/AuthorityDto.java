@@ -1,6 +1,8 @@
 package com.yp.dto;
 
 public class AuthorityDto {
+    private String authority;
+
     public String getAuthority() {
         return authority;
     }
@@ -9,5 +11,5 @@ public class AuthorityDto {
         this.authority = authority;
     }
 
-    private String authority;
+
 }

@@ -5,6 +5,9 @@ import com.yp.dto.ProductDto;
 import com.yp.entity.Category;
 import com.yp.entity.Product;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ProductConverter {
     public static Product convertToProduct(ProductDto productDto){
         Product p = new Product();
@@ -13,14 +16,22 @@ public class ProductConverter {
         p.setDetails(productDto.getDetails());
         p.setImg(productDto.getImg());
         p.setPrice(productDto.getPrice());
-        Category category = CategoryConverter.convertToCategory(productDto.getCategory());
-        p.setCategory(category);
+        Set<Category> categories = new HashSet<>();
+        Set<CategoryDto> categoryDtos = productDto.getCategories();
+        categoryDtos.forEach(categoryDto -> {
+            categories.add(CategoryConverter.convertToCategory(categoryDto));
+        });
+        p.setCategories(categories);
         return p;
     }
     public static ProductDto convertToProductDto(Product p){
         ProductDto productDto = new ProductDto();
-        CategoryDto categoryDto = CategoryConverter.convertToCategoryDto(p.getCategory());
-        productDto.setCategory(categoryDto);
+        Set<Category> categories = p.getCategories();
+        Set<CategoryDto> categoryDtos = new HashSet<>();
+        categories.forEach(category -> {
+            categoryDtos.add(CategoryConverter.convertToCategoryDto(category));
+        });
+        productDto.setCategories(categoryDtos);
         productDto.setId(p.getId());
         productDto.setName(p.getName());
         productDto.setDetails(p.getDetails());

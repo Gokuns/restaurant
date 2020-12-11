@@ -1,5 +1,9 @@
 package com.yp.service;
 
+import com.yp.builder.AuthorityBuilder;
+import com.yp.builder.AuthorityDtoBuilder;
+import com.yp.builder.UserBuilder;
+import com.yp.builder.UserDtoBuilder;
 import com.yp.dto.AuthorityDto;
 import com.yp.dto.TableCategoryDto;
 import com.yp.dto.UserDto;
@@ -33,44 +37,24 @@ public class UserServiceTest extends TestCase {
     @Mock
     private UserRepository userRepository;
 
-    private User user = new User();
-    private UserDto editUserDto = new UserDto();
-    private UserDto userDto = new UserDto();
+    private User user = new UserBuilder().withPassWord("123456789").build();
+    private UserDto editUserDto = new UserDtoBuilder().build();
+    private UserDto userDto = new UserDtoBuilder().build();
     private List<User> userList = new ArrayList<>();
     private List<UserDto> userDtoList = new ArrayList<>();
-    private AuthorityDto authorityDto = new AuthorityDto();
+    private AuthorityDto authorityDto = new AuthorityDtoBuilder().build();
     private HashSet<AuthorityDto> setDto = new HashSet<>();
-    private Authority authority = new Authority();
+    private Authority authority = new AuthorityBuilder().build();
     private HashSet<Authority> set = new HashSet<>();
 
 
     @Before
     public void setUp(){
-        authority.setUsers(new HashSet<>());
-        authority.setAuthority("Goko");
-        authorityDto.setAuthority("Goko");
 
         set.add(authority);
         setDto.add(authorityDto);
-
-        user.setUserName("Goko");
-        user.setPassWord("123");
-        user.setEnabled(true);
-        user.setAuthorities(set);
         userList.add(user);
-
-        editUserDto.setName("Goko");
-        editUserDto.setPassword("246");
-        editUserDto.setEnabled(true);
-        editUserDto.setRoles(new HashSet<>());
-
-
-        userDto.setName("Goko");
-        userDto.setPassword("123");
-        userDto.setEnabled(true);
-        userDto.setRoles(setDto);
         userDtoList.add(userDto);
-
     }
 
     @Test

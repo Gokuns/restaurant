@@ -28,7 +28,9 @@ public class UserConverter {
         UserDto userDto = new UserDto();
         userDto.setEnabled(user.isEnabled());
         userDto.setName(user.getUserName());
-        userDto.setPassword(user.getPassWord());
+        String pw = user.getPassWord();
+        pw = pw.substring(6,pw.length());
+        userDto.setPassword(pw);
         Set<AuthorityDto> authorityDtos = new HashSet<>();
         user.getAuthorities().forEach(authority -> {
             AuthorityDto authorityDto = AuthorityConverter.converToAuthorityDto(authority);

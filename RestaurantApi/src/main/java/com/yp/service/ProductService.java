@@ -37,26 +37,26 @@ public class ProductService {
 
     public ProductDto getProduct(int id){
         Product p = productRepository.findById(id).get();
-        ProductDto productDto = ProductConverter.convertToProductDto(p);
-        return productDto;
+        return  ProductConverter.convertToProductDto(p);
     }
 
-    public Product addProduct(ProductDto product, int categoryId){
-        Category cat = categoryRepository.findById(categoryId).get();
+    public Product addProduct(ProductDto product){
         Product p = ProductConverter.convertToProduct(product);
-        p.setCategory(cat);
-        cat.getProducts().add(p);
+        p.getCategories().forEach(category -> {
+            Category cat = categoryRepository.findById(category.getId()).orElse(null);
+            cat.getProducts().add(p);
+        });
         return productRepository.save(p);
     }
 
     public Product editProduct(int id, ProductDto product){
         Product p = productRepository.findById(id).get();
-        Category cat = categoryRepository.findById(product.getCategory().getId()).get();
-        p.setName(product.getName());
-        p.setDetails(product.getDetails());
-        p.setImg(product.getImg());
-        p.setPrice(p.getPrice());
-        p.setCategory(cat);
+        Product newProduct = ProductConverter.convertToProduct(product);
+        p.setName(newProduct.getName());
+        p.setDetails(newProduct.getDetails());
+        p.setImg(newProduct.getImg());
+        p.setPrice(newProduct.getPrice());
+        p.setCategories(newProduct.getCategories());
         return productRepository.save(p);
     }
 

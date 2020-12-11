@@ -1,6 +1,7 @@
 package com.yp.service;
 
 import com.yp.converter.CategoryConverter;
+import com.yp.converter.MediaConverter;
 import com.yp.converter.ProductConverter;
 import com.yp.dto.CategoryDto;
 import com.yp.dto.ProductDto;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CategoryService {
@@ -42,6 +44,7 @@ public class CategoryService {
     public Category editCategory(int id, CategoryDto categoryDto){
         Category cat = categoryRepository.findById(id).get();
         cat.setName(categoryDto.getName());
+        cat.setMedia(MediaConverter.convertToMedia(categoryDto.getMedia()));
         return categoryRepository.save(cat);
     }
 
@@ -50,7 +53,7 @@ public class CategoryService {
     }
 
     public List<ProductDto> getProductsWithId(int id){
-        List<Product> products =  categoryRepository.findById(id).get().getProducts();
+        Set<Product> products =  categoryRepository.findById(id).get().getProducts();
         List<ProductDto> productDtos = new ArrayList<>();
         products.forEach(product -> {
             ProductDto productDto = ProductConverter.convertToProductDto(product);
@@ -58,5 +61,4 @@ public class CategoryService {
         });
         return productDtos;
     }
-
 }

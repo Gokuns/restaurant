@@ -10,6 +10,8 @@ public class SellOrderConverter {
         sellOrder.setProductId(sellOrderDto.getProductId());
         sellOrder.setCount(sellOrderDto.getCount());
         sellOrder.setTotalPrice(sellOrderDto.getTotalPrice());
+        sellOrder.setTableName(sellOrderDto.getTableName());
+        sellOrder.setWaiterName(sellOrderDto.getWaiterName());
         return sellOrder;
     }
     public static SellOrderDto convertToSellOrderDto(SellOrder sellOrder){
@@ -18,7 +20,9 @@ public class SellOrderConverter {
         sellOrderDto.setProductId(sellOrder.getProductId());
         sellOrderDto.setCount(sellOrder.getCount());
         sellOrderDto.setTotalPrice(sellOrder.getTotalPrice());
-        sellOrderDto.setCreateDate(sellOrder.getCreationDateTime());
+        sellOrderDto.setCreateDate(sellOrder.getCreateDate());
+        sellOrderDto.setTableName(sellOrder.getTableName());
+        sellOrderDto.setWaiterName(sellOrder.getWaiterName());
         return sellOrderDto;
     }
 }

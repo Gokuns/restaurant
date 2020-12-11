@@ -8,10 +8,8 @@ import java.util.Set;
 
 @Entity(name = "ROLES")
 public class Authority {
-
-
     @Id
-    @Column(name= "AUTHORITY")
+    @Column(name= "AUTHORITY", unique = true)
     private String authority;
 
 

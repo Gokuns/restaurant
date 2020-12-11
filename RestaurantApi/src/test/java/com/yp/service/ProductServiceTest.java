@@ -1,5 +1,9 @@
 package com.yp.service;
 
+import com.yp.builder.CategoryBuilder;
+import com.yp.builder.CategoryDtoBuilder;
+import com.yp.builder.ProductBuilder;
+import com.yp.builder.ProductDtoBuilder;
 import com.yp.dto.CategoryDto;
 import com.yp.dto.ProductDto;
 import com.yp.entity.Category;
@@ -34,38 +38,17 @@ public class ProductServiceTest extends TestCase {
     @Mock
     private CategoryRepository categoryRepository;
 
-    private Product product = new Product();
-    private ProductDto productDto = new ProductDto();
+    private Product product = new ProductBuilder().build();
+    private ProductDto productDto = new ProductDtoBuilder().build();
     private List<Product> products = new ArrayList<>();
     private List<ProductDto> productDtos = new ArrayList<>();
-    private Category cat = new Category();
-    private CategoryDto catDto = new CategoryDto();
+    private Category cat = new CategoryBuilder().build();
+    private CategoryDto catDto = new CategoryDtoBuilder().build();
 
 
     @Before
     public void setUp() {
-        cat.setName("Pizza");
-        cat.setId(1);
-        cat.setProducts(new ArrayList<>());
-
-        catDto.setName("Pizza");
-        catDto.setId(1);
-
-
-        product.setId(1);
-        product.setName("Pizza");
-        product.setCategory(cat);
-        product.setDetails("PizzaDets");
-        product.setImg("");
-        product.setPrice(25);
         products.add(product);
-
-        productDto.setId(1);
-        productDto.setName("Pizza");
-        productDto.setCategory(catDto);
-        productDto.setDetails("PizzaDets");
-        productDto.setImg("");
-        productDto.setPrice(25);
         productDtos.add(productDto);
 
 
@@ -91,7 +74,7 @@ public class ProductServiceTest extends TestCase {
     public void shouldSaveWithDto() {
         when(productRepository.save(any())).thenReturn(product);
         when(categoryRepository.findById(any())).thenReturn(Optional.of(cat));
-        Product p = productService.addProduct(productDto,1);
+        Product p = productService.addProduct(productDto);
         assertEquals(p.getName(), product.getName());
     }
 
@@ -99,7 +82,6 @@ public class ProductServiceTest extends TestCase {
     public void shouldEditWithId() {
         when(productRepository.findById(any())).thenReturn(Optional.of(product));
         when(productRepository.save(any())).thenReturn(product);
-        when(categoryRepository.findById(any())).thenReturn(Optional.of(cat));
         Product p = productService.editProduct(1, productDto);
         assertNotNull(p);
         assertEquals(p.getName(), product.getName());

@@ -1,5 +1,8 @@
 package com.yp.service;
 
+import com.yp.builder.CategoryBuilder;
+import com.yp.builder.CategoryDtoBuilder;
+import com.yp.builder.ProductBuilder;
 import com.yp.dto.CategoryDto;
 import com.yp.dto.ProductDto;
 import com.yp.entity.Category;
@@ -30,30 +33,17 @@ public class CategoryServiceTest extends TestCase {
     @Mock
     private CategoryRepository categoryRepository;
 
-    private Category category = new Category();
-    private CategoryDto categoryDto = new CategoryDto();
+    private Category category = new CategoryBuilder().build();
+    private CategoryDto categoryDto = new CategoryDtoBuilder().build();
     private List<Category> categoryList = new ArrayList<>();
     private List<CategoryDto> categoryDtoList = new ArrayList<>();
     private List<Product> products = new ArrayList<>();
-    private Product product = new Product();
+    private Product product = new ProductBuilder().build();
 
     @Before
     public void setUp() {
-        product.setId(1);
-        product.setName("Pizza");
-        product.setCategory(category);
-        product.setDetails("PizzaDets");
-        product.setImg("");
-        product.setPrice(25);
         products.add(product);
-
-        category.setId(1);
-        category.setProducts(products);
-        category.setName("Drink");
         categoryList.add(category);
-
-        categoryDto.setId(1);
-        categoryDto.setName("Drink");
         categoryDtoList.add(categoryDto);
     }
 

@@ -3,14 +3,15 @@ package com.yp.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Entity(name = "USERS")
-public class User {
+public class User implements Serializable {
     @Id
-    @Column(name = "USERNAME")
+    @Column(name = "USERNAME" , unique = true)
     private String userName;
     @Column(name = "PASSWORD")
     private String passWord;
@@ -22,13 +23,13 @@ public class User {
             name = "AUTHORITIES",
             joinColumns = {@JoinColumn(name = "USERNAME")},
             inverseJoinColumns = {@JoinColumn(name = "AUTHORITY")}
+
     )
     private Set<Authority> authorities;
 
     public User(){
 
     }
-
 
     public String getUserName() {
         return userName;

@@ -6,23 +6,17 @@ import java.sql.Timestamp;
 @Entity
 public class SellOrder {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int orderId;
     private int productId;
     private int count;
     private double totalPrice;
-    private Timestamp createDate = new Timestamp(System.currentTimeMillis());
-
+    private Timestamp createDate;
+    private String tableName;
+    private String waiterName;
 
 
     public SellOrder() {
-    }
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public int getOrderId() {
@@ -49,12 +43,35 @@ public class SellOrder {
         this.count = count;
     }
 
-    public Timestamp getCreationDateTime() {
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Timestamp getCreateDate() {
         return createDate;
     }
 
-//    public void setCreationDateTime(Timestamp creationDateTime) {
-//        this.createDate = creationDateTime;
-//    }
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
+    }
 
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public String getWaiterName() {
+        return waiterName;
+    }
+
+    public void setWaiterName(String waiterName) {
+        this.waiterName = waiterName;
+    }
 }

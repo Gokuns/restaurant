@@ -8,6 +8,8 @@ public class SellOrderDto {
     private int count;
     private double totalPrice;
     private Timestamp createDate;
+    private String tableName;
+    private String waiterName;
 
     public SellOrderDto() {
     }
@@ -50,5 +52,21 @@ public class SellOrderDto {
 
     public void setCreateDate(Timestamp createDate) {
         this.createDate = createDate;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public String getWaiterName() {
+        return waiterName;
+    }
+
+    public void setWaiterName(String waiterName) {
+        this.waiterName = waiterName;
     }
 }

@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "CATEGORIES")
-
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,12 +15,14 @@ public class Category {
     private String name;
 
     @JsonIgnore
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            mappedBy = "category"
+    @ManyToMany(
+            mappedBy = "categories"
         )
-    private List<Product> products;
+    private Set<Product> products;
+
+    @ManyToOne
+    @JoinColumn(name= "media_id")
+    private Media media;
 
     public Category() {
     }
@@ -41,11 +43,19 @@ public class Category {
         this.name = name;
     }
 
-    public List<Product> getProducts() {
+    public Set<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Set<Product> products) {
         this.products = products;
+    }
+
+    public Media getMedia() {
+        return media;
+    }
+
+    public void setMedia(Media media) {
+        this.media = media;
     }
 }

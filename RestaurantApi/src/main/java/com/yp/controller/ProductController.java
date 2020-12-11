@@ -29,9 +29,9 @@ public class ProductController {
         return productService.getProduct(id);
     }
 
-    @PostMapping("/add/{id}")
-    public void addProduct(@PathVariable(value = "id") int categoryId, @RequestBody ProductDto product){
-        productService.addProduct(product,categoryId);
+    @PostMapping("/add")
+    public void addProduct( @RequestBody ProductDto product){
+        productService.addProduct(product);
     }
 
     @PutMapping("/{id}/put")

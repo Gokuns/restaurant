@@ -15,7 +15,7 @@ public class Info {
     @Value("${spring.h2.console.enabled}")
     String enabled;
 
-    @Value("${spring.jpa.hibernate.dll-auto}")
+    @Value("${logging.level.liquibase}")
     String dll_auto;
 
     @Value("${spring.datasource.url}")

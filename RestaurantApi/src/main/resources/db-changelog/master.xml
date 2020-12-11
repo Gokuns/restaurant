@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="12-8-2020-5-15" author="gokalp.unsal">
+        <createTable tableName="Media">
+            <column autoIncrement="true" name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="file_Content" type="BINARY">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="gokalp.unsal" id="12-7-2020-4-42">
+        <createTable tableName="CATEGORIES">
+            <column name="id" autoIncrement="true" type="int(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="media_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_med" referencedColumnNames="Media(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="gokalp.unsal" id="12-7-2020-4-01">
+        <createTable tableName="Product">
+            <column autoIncrement="true" name="id" type="int(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="details" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="img" type="VARCHAR(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="price" type="FLOAT(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="12-9-2020-1-23" author="gokalp.unsal">
+        <createTable tableName="Product_CATEGORIES">
+            <column name="product_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_prod_id" references="Product(id)"/>
+            </column>
+            <column name="category_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_cat_id" references="CATEGORIES(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="gokalp.unsal" id="12-7-2020-6-11">
+        <createTable tableName="ROLES">
+            <column name="AUTHORITY" type="VARCHAR(40)">
+                <constraints primaryKey="true"  />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="gokalp.unsal" id="12-7-2020-6-12">
+        <createTable tableName="USERS">
+            <column name="USERNAME" type="VARCHAR(40)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENABLED" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="gokalp.unsal" id="12-7-2020-6-13">
+        <createTable tableName="AUTHORITIES">
+            <column name="USERNAME" type="VARCHAR(40)">
+                <constraints nullable="false" foreignKeyName="fk_USERNAME" references="USERS(USERNAME)"/>
+            </column>
+            <column name="AUTHORITY" type="VARCHAR(40)">
+                <constraints nullable="false" foreignKeyName="fk_AUTHORITY" references="ROLES(AUTHORITY)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="gokalp.unsal" id="12-7-2020-6-14">
+        <createTable tableName="TABLE_CATEGORIES">
+            <column autoIncrement="true" name="id" type="int(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(40)">
+                <constraints nullable="false" />
+            </column>
+            <column name="number" type="int">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="gokalp.unsal" id="12-7-2020-6-15">
+        <createTable tableName="Sell_Order">
+            <column autoIncrement="true" name="order_Id" type="int(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="product_Id" type="int(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="count" type="int(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_Price" type="int(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="Create_Date" type="TIMESTAMP"/>
+            <column  name="table_Name" type="VARCHAR(40)">
+                <constraints nullable="true"/>
+            </column>
+            <column  name="waiter_Name" type="VARCHAR(40)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="gokalp.unsal" id="12-7-2020-6-16">
+        <createTable tableName="Waiter">
+            <column  name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column  name="name" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="surname" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="Date_Of_Birth" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="phone" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="mail" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="media_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_media" referencedColumnNames="Media(id)" />
+            </column>
+        </createTable>
+    </changeSet>
+
+
+<include file="./db-changelog/create-entries.xml"></include>
+
+</databaseChangeLog>

@@ -1,10 +1,9 @@
 package com.yp.controller;
 
+import com.yp.builder.ProductDtoBuilder;
 import com.yp.dto.CategoryDto;
 import com.yp.dto.ProductDto;
-import com.yp.dto.UserDto;
 import com.yp.service.ProductService;
-import com.yp.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -24,17 +22,12 @@ public class ProductControllerTest {
     @Mock
     private ProductService productService;
 
-    private ProductDto productDto = new ProductDto();
+    private ProductDto productDto = new ProductDtoBuilder().build();
 
 
     @Before
     public void setUp() {
-        productDto.setCategory(new CategoryDto());
-        productDto.setPrice(12);
-        productDto.setImg("");
-        productDto.setDetails("");
-        productDto.setName("Goko");
-        productDto.setId(1);
+
     }
 
     @Test
@@ -52,8 +45,8 @@ public class ProductControllerTest {
 
     @Test
     public void shouldSaveWithDto() {
-        productController.addProduct(1, productDto);
-        verify(productService, times(1)).addProduct(productDto, 1);
+        productController.addProduct(productDto);
+        verify(productService, times(1)).addProduct(productDto);
 
     }
 

@@ -1,12 +1,14 @@
 package com.yp.dto;
 
+import java.util.Set;
+
 public class ProductDto {
     private int id;
     private String name;
     private String details;
     private String img;
     private double price;
-    private CategoryDto category;
+    private Set<CategoryDto> categories;
 
     public ProductDto() {
     }
@@ -51,11 +53,11 @@ public class ProductDto {
         this.price = price;
     }
 
-    public CategoryDto getCategory() {
-        return category;
+    public Set<CategoryDto> getCategories() {
+        return categories;
     }
 
-    public void setCategory(CategoryDto category) {
-        this.category = category;
+    public void setCategories(Set<CategoryDto> categories) {
+        this.categories = categories;
     }
 }

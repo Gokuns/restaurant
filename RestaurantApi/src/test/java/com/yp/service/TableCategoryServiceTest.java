@@ -1,5 +1,7 @@
 package com.yp.service;
 
+import com.yp.builder.TableCategoryBuilder;
+import com.yp.builder.TableCategoryDtoBuilder;
 import com.yp.dto.AuthorityDto;
 import com.yp.dto.TableCategoryDto;
 import com.yp.entity.Authority;
@@ -32,32 +34,17 @@ public class TableCategoryServiceTest extends TestCase {
     @Mock
     private TableCategoryRepository tableCategoryRepository;
 
-    private TableCategory tableCategory = new TableCategory();
-    private TableCategory editTableCat = new TableCategory();
-    private TableCategoryDto tableCategoryDto = new TableCategoryDto();
+    private TableCategory tableCategory = new TableCategoryBuilder().build();
+    private TableCategory editTableCat = new TableCategoryBuilder().build();
+    private TableCategoryDto tableCategoryDto = new TableCategoryDtoBuilder().build();
     private List<TableCategory> tableCategoryList = new ArrayList<>();
     private List<TableCategoryDto> tableCategoryDtoList = new ArrayList<>();
 
 
     @Before
     public void setUp(){
-        tableCategory.setId(1);
-        tableCategory.setNumber(5);
-        tableCategory.setName("Outside");
         tableCategoryList.add(tableCategory);
-
-        editTableCat.setId(1);
-        editTableCat.setNumber(7);
-        editTableCat.setName("Goko");
-
-        tableCategoryDto.setId(1);
-        tableCategoryDto.setId(5);
-        tableCategoryDto.setName("Outside");
         tableCategoryDtoList.add(tableCategoryDto);
-
-
-
-
     }
 
     @Test

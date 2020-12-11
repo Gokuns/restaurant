@@ -2,9 +2,8 @@ package com.yp.entity;
 
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -17,11 +16,11 @@ public class Product {
     private String img = "";
     private double price;
 
-    @ManyToOne(
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @ManyToMany
+    @JoinTable(name = "PRODUCT_CATEGORIES",
+    joinColumns = {@JoinColumn(name="product_id")},
+    inverseJoinColumns = {@JoinColumn(name = "category_id")})
+    private Set<Category> categories;
 
     public String getDetails() {
         return details;
@@ -57,12 +56,12 @@ public class Product {
     public void setPrice(double price) {
         this.price = price;
     }
-    public Category getCategory() {
-        return category;
+    public Set<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
     public String getImg() {
         return img;

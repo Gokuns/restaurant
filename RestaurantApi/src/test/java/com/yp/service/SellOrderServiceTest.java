@@ -1,5 +1,7 @@
 package com.yp.service;
 
+import com.yp.builder.SellOrderBuilder;
+import com.yp.builder.SellOrderDtoBuilder;
 import com.yp.dto.SellOrderDto;
 import com.yp.dto.UserDto;
 import com.yp.entity.SellOrder;
@@ -28,24 +30,15 @@ public class SellOrderServiceTest extends TestCase {
     @Mock
     SellOrderRepository sellOrderRepository;
 
-    SellOrder sellOrder = new SellOrder();
-    SellOrderDto sellOrderDto = new SellOrderDto();
+    SellOrder sellOrder = new SellOrderBuilder().build();
+    SellOrderDto sellOrderDto = new SellOrderDtoBuilder().build();
     List<SellOrder> sellOrders = new ArrayList<>();
     List<SellOrderDto> sellOrderDtos = new ArrayList<>();
 
 
     @Before
     public void setUp() {
-        sellOrder.setTotalPrice(100);
-        sellOrder.setCount(10);
-        sellOrder.setProductId(2);
-        sellOrder.setOrderId(1);
         sellOrders.add(sellOrder);
-
-        sellOrderDto.setTotalPrice(100);
-        sellOrderDto.setCount(10);
-        sellOrderDto.setProductId(2);
-        sellOrderDto.setOrderId(1);
         sellOrderDtos.add(sellOrderDto);
 
 

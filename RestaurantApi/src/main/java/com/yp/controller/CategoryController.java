@@ -30,11 +30,11 @@ public class CategoryController {
     public String getCatName(@PathVariable(value = "id") int id){
         return categoryService.getCategory(id).getName();
     }
-    @PostMapping("/add/")
+    @PostMapping("/add")
     public void addCategory(@RequestBody CategoryDto categoryDto){
        categoryService.addCategory(categoryDto);
     }
-    @PutMapping("/{id}/put/")
+    @PutMapping("/{id}/put")
     public void editCategory(@PathVariable(value = "id") int id, @RequestBody CategoryDto categoryDto){
         categoryService.editCategory(id, categoryDto);
     }

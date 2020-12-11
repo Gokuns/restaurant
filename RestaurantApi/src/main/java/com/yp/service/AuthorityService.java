@@ -21,17 +21,14 @@ public class AuthorityService {
         Optional<Authority> optionalAuthority= authorityRepository.findById(id);
         if(optionalAuthority.isPresent()){
             Authority authority=  optionalAuthority.get();
-            AuthorityDto auth =AuthorityConverter.converToAuthorityDto(authority);
-            return auth;
-
+            return AuthorityConverter.converToAuthorityDto(authority);
         }else return  null;
     }
     public List<AuthorityDto> getAllRoles(){
         List<Authority> auths = authorityRepository.findAll();
         List<AuthorityDto>  authorityDtos = new ArrayList<>();
-        auths.forEach(authority -> {
-            authorityDtos.add(AuthorityConverter.converToAuthorityDto(authority));
-        });
+        auths.forEach(authority ->
+            authorityDtos.add(AuthorityConverter.converToAuthorityDto(authority)));
         return authorityDtos;
     }
     public Authority addRole(AuthorityDto authority){
@@ -40,21 +37,29 @@ public class AuthorityService {
     }
     public Authority editRole(AuthorityDto authority, String id){
         Authority a = new Authority();
-        Authority auth = authorityRepository.findById(id).get();
-        a.setUsers(auth.getUsers());
-        a.setAuthority(authority.getAuthority());
+        Optional<Authority> optionalAuthority = authorityRepository.findById(id);
+        if (optionalAuthority.isPresent()){
+            Authority auth = optionalAuthority.get();
+            a.setUsers(auth.getUsers());
+            a.setAuthority(authority.getAuthority());
+        }
         return authorityRepository.saveAndFlush(a);
     }
     public void deleterRole(String id){
         authorityRepository.deleteById(id);
     }
+
     public Set<UserDto> getUsersWithRole(String id){
-        Authority authority = authorityRepository.findById(id).get();
-        Set<User> users = authority.getUsers();
+        Optional<Authority> optionalAuthority = authorityRepository.findById(id);
         Set<UserDto> userDtos = new HashSet<>();
-        users.forEach(user -> {
-            userDtos.add(UserConverter.converToUserDto(user));
-        });
+        if (optionalAuthority.isPresent()){
+            Authority authority = optionalAuthority.get();
+            Set<User> users = authority.getUsers();
+
+            users.forEach(user ->
+                    userDtos.add(UserConverter.converToUserDto(user)));
+        }
+
         return userDtos;
     }
 }

@@ -1,5 +1,7 @@
 package com.yp.service;
 
+import com.yp.builder.AuthorityBuilder;
+import com.yp.builder.AuthorityDtoBuilder;
 import com.yp.dto.AuthorityDto;
 import com.yp.dto.UserDto;
 import com.yp.entity.Authority;
@@ -30,8 +32,8 @@ public class AuthorityServiceTest extends TestCase {
     @Mock
     private AuthorityRepository authorityRepository;
 
-    private Authority authority = new Authority();
-    private AuthorityDto authorityDto = new AuthorityDto();
+    private Authority authority = new AuthorityBuilder().build();
+    private AuthorityDto authorityDto = new AuthorityDtoBuilder().build();
     private List<Authority> authorityList = new ArrayList<>();
     private List<AuthorityDto> authorityDtoList = new ArrayList<>();
 
@@ -39,16 +41,6 @@ public class AuthorityServiceTest extends TestCase {
 
     @Before
     public void setUp() {
-        authority.setAuthority("ROLE_ADMIN");
-        authorityDto.setAuthority("ROLE_ADMIN");
-        HashSet<User> uSet = new HashSet<>();
-        User user = new User();
-        user.setUserName("Goko");
-        user.setPassWord("123");
-        user.setEnabled(true);
-        user.setAuthorities(new HashSet<>());
-        uSet.add(user);
-        authority.setUsers(uSet);
         authorityList.add(authority);
         authorityDtoList.add(authorityDto);
     }
