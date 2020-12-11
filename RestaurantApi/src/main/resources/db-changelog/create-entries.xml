@@ -151,14 +151,14 @@
     <changeSet author="gokalp.unsal" id="12-7-2020-20-21">
         <insert tableName="USERS">
             <column name="USERNAME" value="user1" />
-            <column name="PASSWORD" value="{noop}pass1" />
+            <column name="PASSWORD" value="$2y$12$oh7UtirmVnSMk/4sQF6fp.duoalDq95XtFkiKaq3ADQ0tPCjPUUdS" />
             <column name="ENABLED" value="true" />
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-22">
         <insert tableName="USERS">
             <column name="USERNAME" value="user2" />
-            <column name="PASSWORD" value="{noop}pass2" />
+            <column name="PASSWORD" value="$2y$12$.l6NT.PGNriin7PxaJT0W.26XgvtKbVtGvYvx9Ct8WtMs4uB4MYum " />
             <column name="ENABLED" value="true" />
         </insert>
     </changeSet>

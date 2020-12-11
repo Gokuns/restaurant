@@ -6,6 +6,7 @@ import com.yp.entity.User;
 import com.yp.repos.AuthorityRepository;
 import com.yp.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,14 +21,10 @@ public class UserService {
     @Autowired
     private AuthorityService authorityService;
 
-    public List<UserDto> getAllUsers(){
-        List<User> users = userRepository.findAll();
-        List<UserDto> userDtos = new ArrayList<>();
-        users.forEach(user -> {
-            UserDto userDto = UserConverter.converToUserDto(user);
-            userDtos.add(userDto);
-        });
 
+    public List<UserDto> getAllUsers(){
+        List<UserDto> userDtos = new ArrayList<>();
+        userRepository.findAll().iterator().forEachRemaining(user -> userDtos.add(UserConverter.converToUserDto(user)));
         return userDtos;
     }
 

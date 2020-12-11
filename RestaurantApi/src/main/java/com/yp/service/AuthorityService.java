@@ -25,10 +25,9 @@ public class AuthorityService {
         }else return  null;
     }
     public List<AuthorityDto> getAllRoles(){
-        List<Authority> auths = authorityRepository.findAll();
         List<AuthorityDto>  authorityDtos = new ArrayList<>();
-        auths.forEach(authority ->
-            authorityDtos.add(AuthorityConverter.converToAuthorityDto(authority)));
+        authorityRepository.findAll().iterator().forEachRemaining(authority ->
+                authorityDtos.add(AuthorityConverter.converToAuthorityDto(authority)));
         return authorityDtos;
     }
     public Authority addRole(AuthorityDto authority){

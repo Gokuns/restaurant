@@ -79,7 +79,7 @@
             <column name="USERNAME" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="PASSWORD" type="VARCHAR(40)">
+            <column name="PASSWORD" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="ENABLED" type="BOOL">
