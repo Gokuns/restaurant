@@ -6,6 +6,7 @@ import com.yp.dto.SellOrderDto;
 import com.yp.dto.UserDto;
 import com.yp.entity.SellOrder;
 import com.yp.entity.User;
+import com.yp.mapper.SellOrderMapper;
 import com.yp.repos.SellOrderRepository;
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -25,23 +26,24 @@ import static org.mockito.Mockito.when;
 public class SellOrderServiceTest extends TestCase {
 
     @InjectMocks
-    SellOrderService sellOrderService;
+    private SellOrderService sellOrderService;
 
     @Mock
-    SellOrderRepository sellOrderRepository;
+    private SellOrderRepository sellOrderRepository;
 
-    SellOrder sellOrder = new SellOrderBuilder().build();
-    SellOrderDto sellOrderDto = new SellOrderDtoBuilder().build();
-    List<SellOrder> sellOrders = new ArrayList<>();
-    List<SellOrderDto> sellOrderDtos = new ArrayList<>();
+    @Mock
+    private SellOrderMapper sellOrderMapper;
+
+    private SellOrder sellOrder = new SellOrderBuilder().build();
+    private SellOrderDto sellOrderDto = new SellOrderDtoBuilder().build();
+    private List<SellOrder> sellOrders = new ArrayList<>();
+    private List<SellOrderDto> sellOrderDtos = new ArrayList<>();
 
 
     @Before
     public void setUp() {
         sellOrders.add(sellOrder);
         sellOrderDtos.add(sellOrderDto);
-
-
     }
 
     @Test
