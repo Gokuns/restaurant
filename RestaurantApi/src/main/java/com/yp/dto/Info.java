@@ -1,9 +1,13 @@
 package com.yp.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
+@NoArgsConstructor
+@Data
 public class Info {
 
     @Value("${server.port}")
@@ -47,59 +51,4 @@ public class Info {
 
     @Value("${spring.datasource.initialization-mode}")
     String initialization_mode;
-
-
-    public Info(){}
-
-    public String getPort() {
-        return port;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEnabled() {
-        return enabled;
-    }
-
-    public String getDll_auto() {
-        return dll_auto;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getShow_sql() {
-        return show_sql;
-    }
-
-    public String getFormat_sql() {
-        return format_sql;
-    }
-
-    public String getHibernate_type() {
-        return hibernate_type;
-    }
-
-    public String getDriverClassName() {
-        return driverClassName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getHbm2ddl_auto() {
-        return hbm2ddl_auto;
-    }
-
-    public String getInitialization_mode() {
-        return initialization_mode;
-    }
 }

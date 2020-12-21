@@ -9,12 +9,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserDtoBuilder extends  Builder{
+    private int _id;
+
     private String _userName;
     private String _passWord;
     private boolean _enabled;
     private Set<AuthorityDto> _authorities;
 
     public UserDtoBuilder(){
+        this._id=1;
         this._userName="";
         this._passWord="";
         this._enabled=true;
@@ -24,6 +27,7 @@ public class UserDtoBuilder extends  Builder{
 
     @Override
     public UserDtoBuilder withId(int id) {
+        this._id=id;
         return this;
     }
 
@@ -51,6 +55,7 @@ public class UserDtoBuilder extends  Builder{
 
     public UserDto build(){
         UserDto user = new UserDto();
+        user.setId(this._id);
         user.setName(this._userName);
         user.setPassword(this._passWord);
         user.setEnabled(this._enabled);

@@ -28,8 +28,8 @@ public class UserService {
         return userDtos;
     }
 
-    public UserDto getUser(String username){
-        User user=  userRepository.findById(username).get();
+    public UserDto getUser(int id){
+        User user=  userRepository.findById(id).get();
         UserDto userDto = UserConverter.converToUserDto(user);
         return userDto;
     }
@@ -39,9 +39,9 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public User updateUser(String username, UserDto user){
+    public User updateUser(int id, UserDto user){
         User newUser = UserConverter.converToUser(user);
-        User oldUser = userRepository.findById(username).get();
+        User oldUser = userRepository.findById(id).get();
         oldUser.setUserName(newUser.getUserName());
         oldUser.setPassWord(newUser.getPassWord());
         oldUser.setAuthorities(newUser.getAuthorities());
@@ -49,9 +49,8 @@ public class UserService {
         return userRepository.save(oldUser);
     }
 
-    public void deleteUser(String username){
-
-        userRepository.deleteById(username);
+    public void deleteUser(int id){
+        userRepository.deleteById(id);
 
     }
 

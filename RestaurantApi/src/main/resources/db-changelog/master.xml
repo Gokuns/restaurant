@@ -46,8 +46,8 @@
             <column name="details" type="VARCHAR(40)">
                 <constraints nullable="false"/>
             </column>
-            <column name="img" type="VARCHAR(100)">
-                <constraints nullable="true"/>
+            <column name="media_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_med_id" referencedColumnNames="Media(id)"/>
             </column>
             <column name="price" type="FLOAT(10)">
                 <constraints nullable="false"/>
@@ -68,16 +68,22 @@
     
     <changeSet author="gokalp.unsal" id="12-7-2020-6-11">
         <createTable tableName="ROLES">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
             <column name="AUTHORITY" type="VARCHAR(40)">
-                <constraints primaryKey="true"  />
+                <constraints nullable="false"  />
             </column>
         </createTable>
     </changeSet>
 
     <changeSet author="gokalp.unsal" id="12-7-2020-6-12">
         <createTable tableName="USERS">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
             <column name="USERNAME" type="VARCHAR(40)">
-                <constraints primaryKey="true" nullable="false"/>
+                <constraints  nullable="false"/>
             </column>
             <column name="PASSWORD" type="VARCHAR(100)">
                 <constraints nullable="false"/>
@@ -90,11 +96,11 @@
 
     <changeSet author="gokalp.unsal" id="12-7-2020-6-13">
         <createTable tableName="AUTHORITIES">
-            <column name="USERNAME" type="VARCHAR(40)">
-                <constraints nullable="false" foreignKeyName="fk_USERNAME" references="USERS(USERNAME)"/>
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_USERNAME" references="USERS(id)"/>
             </column>
-            <column name="AUTHORITY" type="VARCHAR(40)">
-                <constraints nullable="false" foreignKeyName="fk_AUTHORITY" references="ROLES(AUTHORITY)"/>
+            <column name="authority_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_AUTHORITY" references="ROLES(id)"/>
             </column>
         </createTable>
     </changeSet>

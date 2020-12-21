@@ -30,6 +30,7 @@ public class UserConverter {
     }
     public static UserDto converToUserDto(User user){
         UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
         userDto.setEnabled(user.isEnabled());
         userDto.setName(user.getUserName());
         String pw = user.getPassWord();

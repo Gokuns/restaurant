@@ -47,15 +47,15 @@ public class AuthorityServiceTest extends TestCase {
 
     @Test
     public void shouldgetAuthorityWithId() {
-        Mockito.when(authorityRepository.findById("ROLE_ADMIN")).thenReturn(Optional.of(authority));
-        AuthorityDto auth = authorityService.getRole("ROLE_ADMIN");
+        Mockito.when(authorityRepository.findById(1)).thenReturn(Optional.of(authority));
+        AuthorityDto auth = authorityService.getRole(1);
         assertNotNull(auth);
         assertEquals(authority.getAuthority(), auth.getAuthority() );
     }
 
     @Test
     public void shoudReturnNullWithAuthorityId() {
-        AuthorityDto auth = authorityService.getRole("GOKO");
+        AuthorityDto auth = authorityService.getRole(1);
         assertNull(auth);
     }
 
@@ -76,13 +76,13 @@ public class AuthorityServiceTest extends TestCase {
 
     @Test
     public void shouldDeleteWithId() {
-        authorityService.deleterRole("Goko");
+        authorityService.deleterRole(1);
         verify(authorityRepository, times(1)).deleteById(any());
     }
 
     @Test
     public void shouldEdit(){
-        Mockito.when(authorityRepository.findById(any())).thenReturn(Optional.of(authority));authorityService.editRole(authorityDto,"Goko");
+        Mockito.when(authorityRepository.findById(any())).thenReturn(Optional.of(authority));authorityService.editRole(authorityDto,1);
         verify(authorityRepository, times(1)).saveAndFlush(any());
     }
 
@@ -90,7 +90,7 @@ public class AuthorityServiceTest extends TestCase {
     @Test
     public void shouldgetUsersWithId(){
         Mockito.when(authorityRepository.findById(any())).thenReturn(Optional.of(authority));
-        Set<UserDto> userDtoSet =  authorityService.getUsersWithRole("ROLE_ADMIN");
+        Set<UserDto> userDtoSet =  authorityService.getUsersWithRole(1);
         assertNotNull(userDtoSet);
     }
 

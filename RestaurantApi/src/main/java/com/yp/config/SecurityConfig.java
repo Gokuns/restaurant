@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("h2-console/**").permitAll();
         http.csrf().disable();
         http.headers().frameOptions().disable();
-        http.authorizeRequests().antMatchers("/product/list").access("hasAnyRole('ADMIN',  'USER')");
+        http.authorizeRequests().antMatchers("/product/list").access("hasAnyRole('ADMIN', 'USER')");
         http.authorizeRequests().antMatchers("/product/view/{category}").access("hasAnyRole('ADMIN', 'USER')");
         http.authorizeRequests().antMatchers("/product/categories").access("hasAnyRole('ADMIN', 'USER')");
         http.authorizeRequests().antMatchers("/product/{id}").access("hasAnyRole('ADMIN', 'USER')");
@@ -51,17 +51,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/product/{id}/delete").access("hasRole('ADMIN')");
 
         http.authorizeRequests().antMatchers("/role/list").access("hasAnyRole('ADMIN',  'USER')");
-        http.authorizeRequests().antMatchers("/role/{name}").access("hasAnyRole('ADMIN', 'USER')");
+        http.authorizeRequests().antMatchers("/role/{id}").access("hasAnyRole('ADMIN', 'USER')");
         http.authorizeRequests().antMatchers("/role/add").access("hasRole('ADMIN')");
-        http.authorizeRequests().antMatchers("/role/{name}/put").access("hasRole('ADMIN')");
-        http.authorizeRequests().antMatchers("/role/{name}/delete").access("hasRole('ADMIN')");
+        http.authorizeRequests().antMatchers("/role/{id}/put").access("hasRole('ADMIN')");
+        http.authorizeRequests().antMatchers("/role/{id}/delete").access("hasRole('ADMIN')");
 
 
         http.authorizeRequests().antMatchers("/user/list").access("hasAnyRole('ADMIN', 'USER')");
-        http.authorizeRequests().antMatchers("/user/{username}").access("hasAnyRole('ADMIN', 'USER')");
+        http.authorizeRequests().antMatchers("/user/{id}").access("hasAnyRole('ADMIN', 'USER')");
         http.authorizeRequests().antMatchers("/user/add").access("hasRole('ADMIN')");
-        http.authorizeRequests().antMatchers("/user/{username}/put").access("hasRole('ADMIN')");
-        http.authorizeRequests().antMatchers("/user/{username}/delete").access("hasRole('ADMIN')");
+        http.authorizeRequests().antMatchers("/user/{id}/put").access("hasRole('ADMIN')");
+        http.authorizeRequests().antMatchers("/user/{id}/delete").access("hasRole('ADMIN')");
 
         http.authorizeRequests().antMatchers("/waiter/list").access("hasAnyRole('ADMIN', 'USER')");
         http.authorizeRequests().antMatchers("/waiter/{id}").access("hasAnyRole('ADMIN', 'USER')");
@@ -104,6 +104,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource);
+        auth.authenticationProvider(authenticationProvider());
     }
 }

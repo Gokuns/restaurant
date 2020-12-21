@@ -1,6 +1,8 @@
 package com.yp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,8 +11,12 @@ import java.util.List;
 import java.util.Set;
 
 @Entity(name = "USERS")
+@Data
+@NoArgsConstructor
 public class User implements Serializable {
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int id;
     @Column(name = "USERNAME" , unique = true)
     private String userName;
     @Column(name = "PASSWORD")
@@ -18,49 +24,12 @@ public class User implements Serializable {
     @Column(name = "ENABLED")
     private boolean enabled;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "AUTHORITIES",
-            joinColumns = {@JoinColumn(name = "USERNAME")},
-            inverseJoinColumns = {@JoinColumn(name = "AUTHORITY")}
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_id")}
 
     )
     private Set<Authority> authorities;
-
-    public User(){
-
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassWord() {
-        return passWord;
-    }
-
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
-    }
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public Set<Authority> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
-    }
-
-
 }

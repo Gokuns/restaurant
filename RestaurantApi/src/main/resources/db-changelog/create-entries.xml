@@ -43,6 +43,7 @@
             <column name="name" value="Margarita Pizza" />
             <column name="details" value="Pizza" />
             <column name="price" value="22" />
+            <column name="media_id" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-15">
@@ -50,6 +51,7 @@
             <column name="name" value="Fungi Pizza" />
             <column name="details" value="Pizza" />
             <column name="price" value="23" />
+            <column name="media_id" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-16">
@@ -57,6 +59,7 @@
             <column name="name" value="Steak Burger" />
             <column name="details" value="200gr Steak" />
             <column name="price" value="28" />
+            <column name="media_id" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-17">
@@ -64,6 +67,7 @@
             <column name="name" value="Cheeseburger" />
             <column name="details" value="Cheddar" />
             <column name="price" value="25" />
+            <column name="media_id" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-18">
@@ -71,6 +75,7 @@
             <column name="name" value="Latte" />
             <column name="details" value="Middle" />
             <column name="price" value="14" />
+            <column name="media_id" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-19">
@@ -78,6 +83,7 @@
             <column name="name" value="Mocha" />
             <column name="details" value="Middle" />
             <column name="price" value="15" />
+            <column name="media_id" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-20">
@@ -85,6 +91,7 @@
             <column name="name" value="Flat White" />
             <column name="details" value="Middle" />
             <column name="price" value="13" />
+            <column name="media_id" value="1"/>
         </insert>
     </changeSet>
 
@@ -176,21 +183,21 @@
 
     <changeSet author="gokalp.unsal" id="12-7-2020-20-25">
         <insert tableName="AUTHORITIES">
-            <column name="USERNAME" value="user1" />
-            <column name="AUTHORITY" value="ROLE_ADMIN" />
+            <column name="user_id" value="1" />
+            <column name="authority_id" value="1" />
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-26">
         <insert tableName="AUTHORITIES">
-            <column name="USERNAME" value="user1" />
-            <column name="AUTHORITY" value="ROLE_USER" />
+            <column name="user_id" value="1" />
+            <column name="authority_id" value="2" />
         </insert>
     </changeSet>
 
     <changeSet author="gokalp.unsal" id="12-7-2020-20-27">
         <insert tableName="AUTHORITIES">
-            <column name="USERNAME" value="user2" />
-            <column name="AUTHORITY" value="ROLE_USER" />
+            <column name="user_id" value="2" />
+            <column name="authority_id" value="2" />
         </insert>
     </changeSet>
 

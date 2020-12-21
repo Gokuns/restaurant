@@ -8,12 +8,14 @@ import java.util.Set;
 
 public class UserBuilder extends Builder{
 
+    private int _id;
     private String _userName;
     private String _passWord;
     private boolean _enabled;
     private Set<Authority> _authorities;
 
     public UserBuilder(){
+        this._id=1;
         this._userName="";
         this._passWord="";
         this._enabled=true;
@@ -23,6 +25,7 @@ public class UserBuilder extends Builder{
 
     @Override
     public UserBuilder withId(int id) {
+        this._id=id;
         return this;
     }
 
@@ -50,6 +53,7 @@ public class UserBuilder extends Builder{
 
     public User build(){
         User user = new User();
+        user.setId(this._id);
         user.setUserName(this._userName);
         user.setPassWord(this._passWord);
         user.setEnabled(this._enabled);

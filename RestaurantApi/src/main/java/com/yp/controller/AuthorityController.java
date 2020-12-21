@@ -22,9 +22,9 @@ public class AuthorityController {
         return authorityService.getAllRoles();
     }
 
-    @GetMapping("/{name}")
-    public AuthorityDto getRole(@PathVariable(name = "name") String name){
-        return authorityService.getRole(name);
+    @GetMapping("/{id}")
+    public AuthorityDto getRole(@PathVariable(name = "id") int id){
+        return authorityService.getRole(id);
     }
 
     @PostMapping("/add")
@@ -32,13 +32,13 @@ public class AuthorityController {
         authorityService.addRole(authority);
     }
 
-    @PutMapping("/{name}/put")
-    public void editRole(@RequestBody AuthorityDto authority, @PathVariable(name = "name") String name){
-        authorityService.editRole(authority,name);
+    @PutMapping("/{id}/put")
+    public void editRole(@RequestBody AuthorityDto authority, @PathVariable(name = "id") int id){
+        authorityService.editRole(authority,id);
     }
-    @DeleteMapping("{name}/delete")
-    public void deleteRole(@PathVariable(name = "name") String name){
-        authorityService.deleterRole(name);
+    @DeleteMapping("{id}/delete")
+    public void deleteRole(@PathVariable(name = "id") int id){
+        authorityService.deleterRole(id);
     }
 
 }

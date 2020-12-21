@@ -14,7 +14,7 @@ public class ProductConverter {
         p.setId(productDto.getId());
         p.setName(productDto.getName());
         p.setDetails(productDto.getDetails());
-        p.setImg(productDto.getImg());
+        p.setMedia(MediaConverter.convertToMedia(productDto.getMedia()));
         p.setPrice(productDto.getPrice());
         Set<Category> categories = new HashSet<>();
         Set<CategoryDto> categoryDtos = productDto.getCategories();
@@ -35,7 +35,7 @@ public class ProductConverter {
         productDto.setId(p.getId());
         productDto.setName(p.getName());
         productDto.setDetails(p.getDetails());
-        productDto.setImg(p.getImg());
+        productDto.setMedia(MediaConverter.convertToMediaDto(p.getMedia()));
         productDto.setPrice(p.getPrice());
         return productDto;
     }

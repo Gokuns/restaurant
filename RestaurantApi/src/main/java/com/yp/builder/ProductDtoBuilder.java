@@ -1,8 +1,10 @@
 package com.yp.builder;
 
 import com.yp.dto.CategoryDto;
+import com.yp.dto.MediaDto;
 import com.yp.dto.ProductDto;
 import com.yp.entity.Category;
+import com.yp.entity.Media;
 import com.yp.entity.Product;
 
 import java.util.HashSet;
@@ -12,7 +14,7 @@ public class ProductDtoBuilder extends Builder{
     private int _id;
     private String _name;
     private String _details;
-    private String _img;
+    private MediaDto _media;
     private double _price;
     private Set<CategoryDto> _categories;
 
@@ -20,7 +22,7 @@ public class ProductDtoBuilder extends Builder{
         this._id=1;
         this._name="";
         this._details="";
-        this._img="";
+        this._media=new MediaDtoBuilder().build();
         this._price=1;
         this._categories = new HashSet<>();
         this._categories.add(new CategoryDtoBuilder().build());
@@ -43,8 +45,8 @@ public class ProductDtoBuilder extends Builder{
         this._details=details;
         return this;
     }
-    public ProductDtoBuilder withImg(String img){
-        this._img=img;
+    public ProductDtoBuilder withMedia(MediaDto media){
+        this._media=media;
         return this;
     }
     public ProductDtoBuilder withPrice(double price){
@@ -61,7 +63,7 @@ public class ProductDtoBuilder extends Builder{
         product.setId(this._id);
         product.setName(this._name);
         product.setDetails(this._details);
-        product.setImg(this._img);
+        product.setMedia(this._media);
         product.setCategories(this._categories);
         return product;
     }

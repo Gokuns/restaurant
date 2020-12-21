@@ -8,14 +8,17 @@ import com.yp.entity.User;
 import java.util.Set;
 
 public class AuthorityDtoBuilder extends Builder{
+    private int _id;
     private String _authority;
 
 
     public AuthorityDtoBuilder () {
+        this._id=1;
         this._authority="";
     }
     @Override
     public AuthorityDtoBuilder withId(int id) {
+        this._id=id;
         return this;
     }
 
@@ -31,6 +34,7 @@ public class AuthorityDtoBuilder extends Builder{
 
     public AuthorityDto build(){
         AuthorityDto authority = new AuthorityDto();
+        authority.setId(this._id);
         authority.setAuthority(this._authority);
         return authority;
     }

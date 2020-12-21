@@ -1,43 +1,22 @@
 package com.yp.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Getter;
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
+
 
 @Entity(name = "ROLES")
+@Data
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Authority {
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int id;
     @Column(name= "AUTHORITY", unique = true)
     private String authority;
-
-
-    @JsonIgnore
-    @ManyToMany(
-            cascade = CascadeType.PERSIST,
-            mappedBy = "authorities"
-    )
-    private Set<User> users;
-
-    public Authority(){
-
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-
-    public String getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(String authority) {
-        this.authority = authority;
-    }
 }

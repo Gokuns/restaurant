@@ -7,17 +7,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AuthorityBuilder extends Builder{
+    private int _id;
     private String _authority;
-    private Set<User> _users;
 
     public AuthorityBuilder () {
+        this._id=1;
         this._authority="";
-        this._users= new HashSet<>();
 
     }
 
     @Override
     public AuthorityBuilder withId(int id) {
+        this._id=id;
         return this;
     }
 
@@ -31,15 +32,11 @@ public class AuthorityBuilder extends Builder{
         return this;
     }
 
-    public AuthorityBuilder withUsers(Set<User> users) {
-        this._users = users;
-        return this;
-    }
 
     public Authority build(){
         Authority authority = new Authority();
+        authority.setId(this._id);
         authority.setAuthority(this._authority);
-        authority.setUsers(this._users);
         return authority;
     }
 }

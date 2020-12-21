@@ -54,7 +54,7 @@ public class ProductService {
         Product newProduct = ProductConverter.convertToProduct(product);
         p.setName(newProduct.getName());
         p.setDetails(newProduct.getDetails());
-        p.setImg(newProduct.getImg());
+        p.setMedia(newProduct.getMedia());
         p.setPrice(newProduct.getPrice());
         p.setCategories(newProduct.getCategories());
         return productRepository.save(p);

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AuthorityRepository extends JpaRepository<Authority, String> {
+public interface AuthorityRepository extends JpaRepository<Authority, Integer> {
 
 //    @Query("SELECT DISTINCT authority FROM AUTHORITIES")
 //    List<String> findDistinctRoles();

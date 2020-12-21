@@ -1,5 +1,6 @@
 package com.yp.controller;
 
+import com.yp.builder.UserDtoBuilder;
 import com.yp.dto.UserDto;
 import com.yp.service.UserService;
 import junit.framework.TestCase;
@@ -24,20 +25,16 @@ public class UserControllerTest  extends TestCase {
     @Mock
     private UserService userService;
 
-    private UserDto userDto = new UserDto();
+    private UserDto userDto = new UserDtoBuilder().build();
 
     @Before
     public void setUp() {
-        userDto.setRoles(new HashSet<>());
-        userDto.setName("Goko");
-        userDto.setPassword("123");
-        userDto.setEnabled(true);
     }
 
     @Test
     public void shouldgetAuthorityWithId() {
-        userController.getUser("Goko");
-        verify(userService,times(1)).getUser("Goko");
+        userController.getUser(1);
+        verify(userService,times(1)).getUser(1);
     }
 
     @Test
@@ -55,15 +52,15 @@ public class UserControllerTest  extends TestCase {
 
     @Test
     public void shouldEditWithDtop(){
-        userController.putUser("Goko", userDto);
-        verify(userService, times(1)).updateUser("Goko", userDto);
+        userController.putUser(1, userDto);
+        verify(userService, times(1)).updateUser(1, userDto);
 
     }
 
     @Test
     public void shouldDeleteWithId() {
-        userController.deleteUser("Goko");
-        verify(userService, times(1)).deleteUser("Goko");
+        userController.deleteUser(1);
+        verify(userService, times(1)).deleteUser(1);
     }
 
 }
