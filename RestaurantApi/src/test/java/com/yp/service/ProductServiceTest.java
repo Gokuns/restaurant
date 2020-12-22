@@ -8,6 +8,7 @@ import com.yp.dto.CategoryDto;
 import com.yp.dto.ProductDto;
 import com.yp.entity.Category;
 import com.yp.entity.Product;
+import com.yp.mapper.ProductMapper;
 import com.yp.repos.CategoryRepository;
 import com.yp.repos.ProductRepository;
 import junit.framework.TestCase;
@@ -37,6 +38,8 @@ public class ProductServiceTest extends TestCase {
 
     @Mock
     private CategoryRepository categoryRepository;
+    @Mock
+    private ProductMapper productMapper;
 
     private Product product = new ProductBuilder().build();
     private ProductDto productDto = new ProductDtoBuilder().build();
@@ -50,6 +53,8 @@ public class ProductServiceTest extends TestCase {
     public void setUp() {
         products.add(product);
         productDtos.add(productDto);
+        when(productMapper.toDto(any())).thenReturn(productDto);
+        when(productMapper.toEntity(any())).thenReturn(product);
 
 
     }

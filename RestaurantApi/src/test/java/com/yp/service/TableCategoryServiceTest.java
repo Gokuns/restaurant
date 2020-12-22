@@ -6,6 +6,7 @@ import com.yp.dto.AuthorityDto;
 import com.yp.dto.TableCategoryDto;
 import com.yp.entity.Authority;
 import com.yp.entity.TableCategory;
+import com.yp.mapper.TableCategoryMapper;
 import com.yp.repos.AuthorityRepository;
 import com.yp.repos.TableCategoryRepository;
 import com.yp.service.AuthorityService;
@@ -34,6 +35,9 @@ public class TableCategoryServiceTest extends TestCase {
     @Mock
     private TableCategoryRepository tableCategoryRepository;
 
+    @Mock
+    private TableCategoryMapper tableCategoryMapper;
+
     private TableCategory tableCategory = new TableCategoryBuilder().build();
     private TableCategory editTableCat = new TableCategoryBuilder().build();
     private TableCategoryDto tableCategoryDto = new TableCategoryDtoBuilder().build();
@@ -45,6 +49,8 @@ public class TableCategoryServiceTest extends TestCase {
     public void setUp(){
         tableCategoryList.add(tableCategory);
         tableCategoryDtoList.add(tableCategoryDto);
+        when(tableCategoryMapper.toDto(any())).thenReturn(tableCategoryDto);
+        when(tableCategoryMapper.toEntity(any())).thenReturn(tableCategory);
     }
 
     @Test

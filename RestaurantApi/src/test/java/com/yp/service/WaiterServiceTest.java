@@ -6,6 +6,7 @@ import com.yp.dto.UserDto;
 import com.yp.dto.WaiterDto;
 import com.yp.entity.User;
 import com.yp.entity.Waiter;
+import com.yp.mapper.WaiterMapper;
 import com.yp.repos.WaiterRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +35,9 @@ public class WaiterServiceTest {
     @Mock
     private WaiterRepository waiterRepository;
 
+    @Mock
+    private WaiterMapper waiterMapper;
+
     private Waiter waiter = new WaiterBuilder().build();
     private WaiterDto waiterDto = new WaiterDtoBuilder().build();
     private List<Waiter> waiters = new ArrayList<>();
@@ -45,6 +49,8 @@ public class WaiterServiceTest {
     public void setUp() throws Exception {
         waiters.add(waiter);
         waiterDtos.add(waiterDto);
+        when(waiterMapper.toDto(any())).thenReturn(waiterDto);
+        when(waiterMapper.toEntity(any())).thenReturn(waiter);
     }
 
     @Test

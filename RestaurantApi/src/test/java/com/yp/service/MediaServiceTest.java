@@ -4,6 +4,7 @@ import com.yp.builder.MediaBuilder;
 import com.yp.builder.MediaDtoBuilder;
 import com.yp.dto.MediaDto;
 import com.yp.entity.Media;
+import com.yp.mapper.MediaMapper;
 import com.yp.repos.MediaRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +36,8 @@ public class MediaServiceTest {
 
     @Mock
     private MediaRepository mediaRepository;
+    @Mock
+    private MediaMapper mediaMapper;
 
 
     private String filepath= "C:\\Users\\gokal\\Desktop\\pic.png";
@@ -59,6 +62,8 @@ public class MediaServiceTest {
         medias.add(media);
         mediaDtos.add(mediaDto);
         p= Paths.get("D:/codes/restauran/RestaurantApi/target");
+        when(mediaMapper.toDto(any())).thenReturn(mediaDto);
+//        when(mediaMapper.toEntity(any())).thenReturn(media);
     }
 
     @Test

@@ -10,6 +10,7 @@ import com.yp.dto.UserDto;
 import com.yp.entity.Authority;
 import com.yp.entity.TableCategory;
 import com.yp.entity.User;
+import com.yp.mapper.UserMapper;
 import com.yp.repos.UserRepository;
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -37,6 +38,9 @@ public class UserServiceTest extends TestCase {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private UserMapper userMapper;
+
     private User user = new UserBuilder().withPassWord("123456789").build();
     private UserDto editUserDto = new UserDtoBuilder().build();
     private UserDto userDto = new UserDtoBuilder().build();
@@ -55,6 +59,8 @@ public class UserServiceTest extends TestCase {
         setDto.add(authorityDto);
         userList.add(user);
         userDtoList.add(userDto);
+        when(userMapper.toDto(any())).thenReturn(userDto);
+        when(userMapper.toEntity(any())).thenReturn(user);
     }
 
     @Test
@@ -62,21 +68,21 @@ public class UserServiceTest extends TestCase {
         Mockito.when(userRepository.findById(1)).thenReturn(Optional.of(user));
         UserDto us = userService.getUser(1);
         assertNotNull(us);
-        assertEquals(user.getUserName(), us.getName());
+        assertEquals(user.getUsername(), us.getName());
     }
 
     @Test
     public void shouldgetList(){
         when(userRepository.findAll()).thenReturn(userList);
         List<UserDto> lst = userService.getAllUsers();
-        assertEquals(lst.get(0).getName(), userList.get(0).getUserName());
+        assertEquals(lst.get(0).getName(), userList.get(0).getUsername());
     }
 
     @Test
     public void shouldSaveWithDto() {
         when(userRepository.save(any())).thenReturn(user);
         User us = userService.addUser(userDto);
-        assertEquals(us.getUserName(), user.getUserName());
+        assertEquals(us.getUsername(), user.getUsername());
 
     }
 
@@ -85,7 +91,7 @@ public class UserServiceTest extends TestCase {
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
         when(userRepository.save(any())).thenReturn(user);
         User us = userService.updateUser(1, editUserDto);
-        assertEquals(us.getPassWord(), user.getPassWord());
+        assertEquals(us.getPassword(), user.getPassword());
     }
 
     @Test

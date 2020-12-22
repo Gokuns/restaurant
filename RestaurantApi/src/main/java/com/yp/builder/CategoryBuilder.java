@@ -9,7 +9,6 @@ import java.util.*;
 public class CategoryBuilder extends Builder{
     private int _id;
     private String _name;
-    private Set<Product> _products = new HashSet<>();
     private Media _media;
 
     public CategoryBuilder(){
@@ -31,11 +30,6 @@ public class CategoryBuilder extends Builder{
         return this;
     }
 
-    public CategoryBuilder withProducts(Set<Product> products) {
-        this._products=products;
-        return this;
-    }
-
     public CategoryBuilder withMedia(Media media){
         this._media = media;
         return this;
@@ -48,7 +42,6 @@ public class CategoryBuilder extends Builder{
         Category category = new Category();
         category.setId(this._id);
         category.setName(this._name);
-        category.setProducts(_products);
         category.setMedia(this._media);
         return category;
     }

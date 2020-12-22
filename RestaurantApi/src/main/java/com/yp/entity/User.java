@@ -18,9 +18,9 @@ public class User implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     @Column(name = "USERNAME" , unique = true)
-    private String userName;
+    private String username;
     @Column(name = "PASSWORD")
-    private String passWord;
+    private String password;
     @Column(name = "ENABLED")
     private boolean enabled;
 

@@ -170,5 +170,8 @@
 
 
 <include file="./db-changelog/create-entries.xml"></include>
+    <changeSet author="gokalp.unsal" id="11-22-2020-10-10" runOnChange="true">
+        <sqlFile path="/db-changelog/data.sql" stripComments="true"/>
+    </changeSet>
 
 </databaseChangeLog>

@@ -4,6 +4,7 @@ import com.yp.converter.AuthorityConverter;
 import com.yp.dto.AuthorityDto;
 import com.yp.dto.UserDto;
 import com.yp.entity.Authority;
+import com.yp.mapper.AuthorityMapper;
 import com.yp.repos.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,23 +14,26 @@ import java.util.*;
 @Service
 public class AuthorityService {
     @Autowired
-    AuthorityRepository authorityRepository;
+    private AuthorityRepository authorityRepository;
+
+    @Autowired
+    private AuthorityMapper authorityMapper;
 
     public AuthorityDto getRole(int id){
         Optional<Authority> optionalAuthority= authorityRepository.findById(id);
         if(optionalAuthority.isPresent()){
             Authority authority=  optionalAuthority.get();
-            return AuthorityConverter.converToAuthorityDto(authority);
+            return authorityMapper.toDto(authority);
         }else return  null;
     }
     public List<AuthorityDto> getAllRoles(){
         List<AuthorityDto>  authorityDtos = new ArrayList<>();
         authorityRepository.findAll().iterator().forEachRemaining(authority ->
-                authorityDtos.add(AuthorityConverter.converToAuthorityDto(authority)));
+                authorityDtos.add(authorityMapper.toDto(authority)));
         return authorityDtos;
     }
     public Authority addRole(AuthorityDto authority){
-        Authority auth = AuthorityConverter.converToAuthority(authority);
+        Authority auth = authorityMapper.toEntity(authority);
         return authorityRepository.save(auth);
     }
     public Authority editRole(AuthorityDto authority, int id){

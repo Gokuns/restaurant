@@ -44,6 +44,8 @@ public class SellOrderServiceTest extends TestCase {
     public void setUp() {
         sellOrders.add(sellOrder);
         sellOrderDtos.add(sellOrderDto);
+        when(sellOrderMapper.toDto(any())).thenReturn(sellOrderDto);
+        when(sellOrderMapper.toEntity(any())).thenReturn(sellOrder);
     }
 
     @Test

@@ -54,8 +54,8 @@ public class UserBuilder extends Builder{
     public User build(){
         User user = new User();
         user.setId(this._id);
-        user.setUserName(this._userName);
-        user.setPassWord(this._passWord);
+        user.setUsername(this._userName);
+        user.setPassword(this._passWord);
         user.setEnabled(this._enabled);
         user.setAuthorities(this._authorities);
         return user;

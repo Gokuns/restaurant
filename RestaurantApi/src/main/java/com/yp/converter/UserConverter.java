@@ -16,9 +16,9 @@ public class UserConverter {
 
     public static User converToUser(UserDto userDto){
         User user = new User();
-        user.setUserName(userDto.getName());
+        user.setUsername(userDto.getName());
         String pw = encoder.encode(userDto.getPassword());
-        user.setPassWord(pw);
+        user.setPassword(pw);
         user.setEnabled(userDto.isEnabled());
         Set<Authority> authorities = new HashSet<>();
         userDto.getRoles().forEach(authorityDto -> {
@@ -32,8 +32,8 @@ public class UserConverter {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setEnabled(user.isEnabled());
-        userDto.setName(user.getUserName());
-        String pw = user.getPassWord();
+        userDto.setName(user.getUsername());
+        String pw = user.getPassword();
         userDto.setPassword(pw);
         Set<AuthorityDto> authorityDtos = new HashSet<>();
         user.getAuthorities().forEach(authority -> {

@@ -6,6 +6,7 @@ import com.yp.dto.AuthorityDto;
 import com.yp.dto.UserDto;
 import com.yp.entity.Authority;
 import com.yp.entity.User;
+import com.yp.mapper.AuthorityMapper;
 import com.yp.repos.AuthorityRepository;
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -30,6 +31,9 @@ public class AuthorityServiceTest extends TestCase {
     private AuthorityService authorityService;
 
     @Mock
+    private AuthorityMapper authorityMapper;
+
+    @Mock
     private AuthorityRepository authorityRepository;
 
     private Authority authority = new AuthorityBuilder().build();
@@ -43,6 +47,8 @@ public class AuthorityServiceTest extends TestCase {
     public void setUp() {
         authorityList.add(authority);
         authorityDtoList.add(authorityDto);
+        when(authorityMapper.toDto(any())).thenReturn(authorityDto);
+        when(authorityMapper.toEntity(any())).thenReturn(authority);
     }
 
     @Test

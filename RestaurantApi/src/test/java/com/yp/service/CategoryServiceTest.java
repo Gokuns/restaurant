@@ -7,6 +7,7 @@ import com.yp.dto.CategoryDto;
 import com.yp.dto.ProductDto;
 import com.yp.entity.Category;
 import com.yp.entity.Product;
+import com.yp.mapper.CategoryMapper;
 import com.yp.repos.CategoryRepository;
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -33,6 +34,9 @@ public class CategoryServiceTest extends TestCase {
     @Mock
     private CategoryRepository categoryRepository;
 
+    @Mock
+    private CategoryMapper categoryMapper;
+
     private Category category = new CategoryBuilder().build();
     private CategoryDto categoryDto = new CategoryDtoBuilder().build();
     private List<Category> categoryList = new ArrayList<>();
@@ -45,6 +49,8 @@ public class CategoryServiceTest extends TestCase {
         products.add(product);
         categoryList.add(category);
         categoryDtoList.add(categoryDto);
+        when(categoryMapper.toDto(any())).thenReturn(categoryDto);
+        when(categoryMapper.toEntity(any())).thenReturn(category);
     }
 
     @Test

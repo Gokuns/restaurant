@@ -4,13 +4,16 @@ import com.yp.converter.ProductConverter;
 import com.yp.dto.ProductDto;
 import com.yp.entity.Category;
 import com.yp.entity.Product;
+import com.yp.mapper.ProductMapper;
 import com.yp.repos.CategoryRepository;
 import com.yp.repos.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProductService {
@@ -19,6 +22,8 @@ public class ProductService {
     private ProductRepository productRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private ProductMapper productMapper;
 
 
 
@@ -27,7 +32,7 @@ public class ProductService {
         List<ProductDto> productDtos = new ArrayList<>();
 
         products.forEach(product -> {
-            ProductDto productDto = ProductConverter.convertToProductDto(product);
+            ProductDto productDto = productMapper.toDto(product);
             productDtos.add(productDto);
         });
         return productDtos;
@@ -41,17 +46,19 @@ public class ProductService {
     }
 
     public Product addProduct(ProductDto product){
-        Product p = ProductConverter.convertToProduct(product);
+        Product p = productMapper.toEntity(product);
+        Set<Category> categories = new HashSet<>();
         p.getCategories().forEach(category -> {
             Category cat = categoryRepository.findById(category.getId()).orElse(null);
-            cat.getProducts().add(p);
+            categories.add(cat);
         });
+        p.setCategories(categories);
         return productRepository.save(p);
     }
 
     public Product editProduct(int id, ProductDto product){
         Product p = productRepository.findById(id).get();
-        Product newProduct = ProductConverter.convertToProduct(product);
+        Product newProduct = productMapper.toEntity(product);
         p.setName(newProduct.getName());
         p.setDetails(newProduct.getDetails());
         p.setMedia(newProduct.getMedia());

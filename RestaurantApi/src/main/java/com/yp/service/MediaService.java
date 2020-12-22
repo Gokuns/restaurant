@@ -3,6 +3,7 @@ package com.yp.service;
 import com.yp.converter.MediaConverter;
 import com.yp.dto.MediaDto;
 import com.yp.entity.Media;
+import com.yp.mapper.MediaMapper;
 import com.yp.repos.MediaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,10 +30,13 @@ public class MediaService {
     @Autowired
     private MediaRepository mediaRepository;
 
+    @Autowired
+    private MediaMapper mediaMapper;
+
     public List<MediaDto> getAllMedia(){
         List<Media> medias = mediaRepository.findAll();
         List<MediaDto> mediaDtos = new ArrayList<>();
-        medias.forEach(media -> mediaDtos.add(MediaConverter.convertToMediaDto(media)));
+        medias.forEach(media -> mediaDtos.add(mediaMapper.toDto(media)));
         return mediaDtos;
     }
 

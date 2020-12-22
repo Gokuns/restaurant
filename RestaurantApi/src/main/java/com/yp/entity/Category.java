@@ -17,11 +17,6 @@ public class Category {
 
     private String name;
 
-    @JsonIgnore
-    @ManyToMany(
-            mappedBy = "categories"
-        )
-    private Set<Product> products;
 
     @ManyToOne
     @JoinColumn(name= "media_id")

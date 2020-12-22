@@ -89,7 +89,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.3.4.RELEASE</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -128,7 +127,7 @@
         <itext7.core.version>7.1.6</itext7.core.version>
         <java.version>11</java.version>
         <mapstruct.version>1.2.0.Final</mapstruct.version>
-        <projectlombok.version>1.16.18</projectlombok.version>
+        <projectlombok.version>1.18.12</projectlombok.version>
         <maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>
     </properties>
 </project>

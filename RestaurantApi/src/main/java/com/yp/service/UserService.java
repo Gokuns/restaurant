@@ -3,6 +3,8 @@ package com.yp.service;
 import com.yp.converter.UserConverter;
 import com.yp.dto.UserDto;
 import com.yp.entity.User;
+import com.yp.mapper.AuthorityMapper;
+import com.yp.mapper.UserMapper;
 import com.yp.repos.AuthorityRepository;
 import com.yp.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,30 +22,32 @@ public class UserService {
     private AuthorityRepository authorityRepository;
     @Autowired
     private AuthorityService authorityService;
+    @Autowired
+    private UserMapper userMapper;
 
 
     public List<UserDto> getAllUsers(){
         List<UserDto> userDtos = new ArrayList<>();
-        userRepository.findAll().iterator().forEachRemaining(user -> userDtos.add(UserConverter.converToUserDto(user)));
+        userRepository.findAll().iterator().forEachRemaining(user -> userDtos.add(userMapper.toDto(user)));
         return userDtos;
     }
 
     public UserDto getUser(int id){
         User user=  userRepository.findById(id).get();
-        UserDto userDto = UserConverter.converToUserDto(user);
+        UserDto userDto = userMapper.toDto(user);
         return userDto;
     }
 
     public User addUser(UserDto user){
-        User newUser = UserConverter.converToUser(user);
+        User newUser = userMapper.toEntity(user);
         return userRepository.save(newUser);
     }
 
     public User updateUser(int id, UserDto user){
-        User newUser = UserConverter.converToUser(user);
+        User newUser = userMapper.toEntity(user);
         User oldUser = userRepository.findById(id).get();
-        oldUser.setUserName(newUser.getUserName());
-        oldUser.setPassWord(newUser.getPassWord());
+        oldUser.setUsername(newUser.getUsername());
+        oldUser.setPassword(newUser.getPassword());
         oldUser.setAuthorities(newUser.getAuthorities());
         oldUser.setEnabled(newUser.isEnabled());
         return userRepository.save(oldUser);
