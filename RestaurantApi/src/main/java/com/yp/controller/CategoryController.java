@@ -6,11 +6,13 @@ import com.yp.dto.ProductDto;
 import com.yp.entity.Category;
 import com.yp.entity.Product;
 import com.yp.service.CategoryService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(tags = "Category Controller")
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/category")
@@ -42,10 +44,14 @@ public class CategoryController {
     public void deleteCategory(@PathVariable(value = "id") int id){
         categoryService.deleteCategory(id);
     }
+
     @GetMapping("/list/{id}")
     public List<ProductDto> getProductsofCategory(@PathVariable(value = "id")int id){
         return categoryService.getProductsWithId(id);
     }
+
+
+
 
 
 }

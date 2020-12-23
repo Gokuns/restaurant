@@ -4,11 +4,13 @@ import com.yp.dto.UserDto;
 import com.yp.dto.WaiterDto;
 import com.yp.repos.WaiterRepository;
 import com.yp.service.WaiterService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(tags = "Waiter Controller")
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/waiter")

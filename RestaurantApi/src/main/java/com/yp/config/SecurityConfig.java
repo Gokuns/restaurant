@@ -20,6 +20,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+    private static final String[] AUTH_LIST = {
+            // -- swagger ui
+            "**/swagger-resources/**",
+            "/swagger-ui.html",
+            "/v2/api-docs",
+            "/webjars/**"
+    };
+
+
     @Bean
     public UserDetailsService userDetailsService() {
         return new UserDetailsServiceImpl();
@@ -40,6 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("h2-console/**").permitAll();
+        http.authorizeRequests().antMatchers("swagger-ui.html/**").permitAll();
+
         http.csrf().disable();
         http.headers().frameOptions().disable();
         http.authorizeRequests().antMatchers("/product/list").access("hasAnyRole('ADMIN', 'USER')");

@@ -4,11 +4,13 @@ import com.google.gson.Gson;
 import com.yp.dto.UserDto;
 import com.yp.entity.User;
 import com.yp.service.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(tags = "User Controller")
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/user")

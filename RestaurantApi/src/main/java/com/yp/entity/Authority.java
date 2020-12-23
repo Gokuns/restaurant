@@ -5,9 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 
-
+@SQLDelete(
+        sql="UPDATE ROLES SET deleted= true where id=?")
+@Where(clause = "deleted=false")
 @Entity(name = "ROLES")
 @Data
 @Getter

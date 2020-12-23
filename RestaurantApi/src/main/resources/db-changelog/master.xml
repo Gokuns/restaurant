@@ -17,6 +17,7 @@
             <column name="file_Content" type="BINARY">
                 <constraints nullable="false"/>
             </column>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
         </createTable>
     </changeSet>
 
@@ -26,12 +27,13 @@
             <column name="id" autoIncrement="true" type="int(10)">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="name" type="VARCHAR(20)">
+            <column name="name" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
             <column name="media_id" type="int">
                 <constraints nullable="false" foreignKeyName="fk_med" referencedColumnNames="Media(id)"/>
             </column>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
         </createTable>
     </changeSet>
 
@@ -40,10 +42,10 @@
             <column autoIncrement="true" name="id" type="int(10)">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="name" type="VARCHAR(20)">
+            <column name="name" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="details" type="VARCHAR(40)">
+            <column name="details" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
             <column name="media_id" type="int">
@@ -52,6 +54,7 @@
             <column name="price" type="FLOAT(10)">
                 <constraints nullable="false"/>
             </column>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
         </createTable>
     </changeSet>
     
@@ -74,6 +77,7 @@
             <column name="AUTHORITY" type="VARCHAR(40)">
                 <constraints nullable="false"  />
             </column>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
         </createTable>
     </changeSet>
 
@@ -91,6 +95,7 @@
             <column name="ENABLED" type="BOOL">
                 <constraints nullable="false"/>
             </column>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
         </createTable>
     </changeSet>
 
@@ -116,6 +121,7 @@
             <column name="number" type="int">
                 <constraints nullable="false" />
             </column>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
         </createTable>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-6-15">
@@ -139,6 +145,7 @@
             <column  name="waiter_Name" type="VARCHAR(40)">
                 <constraints nullable="true"/>
             </column>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
         </createTable>
     </changeSet>
 
@@ -165,6 +172,7 @@
             <column name="media_id" type="int">
                 <constraints nullable="false" foreignKeyName="fk_media" referencedColumnNames="Media(id)" />
             </column>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
         </createTable>
     </changeSet>
 

@@ -8,6 +8,9 @@ import com.yp.mapper.ProductMapper;
 import com.yp.repos.CategoryRepository;
 import com.yp.repos.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -65,6 +68,22 @@ public class ProductService {
         p.setPrice(newProduct.getPrice());
         p.setCategories(newProduct.getCategories());
         return productRepository.save(p);
+    }
+
+    public Slice<ProductDto> getProductSlices(Pageable pageable){
+        Slice<ProductDto> productSlice = productRepository.findAllSlice(pageable).map(productMapper::toDto);
+        return productSlice;
+    }
+
+    public Slice<ProductDto> getProductSliceWithCategory(int categoryId, Pageable pageable){
+        Category cat = categoryRepository.findById(categoryId).get();
+        Slice<ProductDto> productSlice = productRepository.findAllByCategories(cat, pageable).map(productMapper::toDto);
+        return productSlice;
+    }
+
+    public Page<ProductDto> getProductPage(Pageable pageable){
+        Page<ProductDto> productSlice = productRepository.findAllPages(pageable).map(productMapper::toDto);
+        return productSlice;
     }
 
     public void deleteProduct(int id){

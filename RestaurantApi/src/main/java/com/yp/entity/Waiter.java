@@ -2,6 +2,8 @@ package com.yp.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
+@SQLDelete(
+        sql="UPDATE Waiter SET deleted= true where id=?")
+@Where(clause = "deleted=false")
 @Entity
 @Data
 @NoArgsConstructor

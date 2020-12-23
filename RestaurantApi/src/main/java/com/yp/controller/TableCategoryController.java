@@ -4,11 +4,12 @@ import com.google.gson.Gson;
 import com.yp.dto.TableCategoryDto;
 import com.yp.entity.TableCategory;
 import com.yp.service.TableCategoryService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Api(tags = "TableCategory Controller")
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/table_category")

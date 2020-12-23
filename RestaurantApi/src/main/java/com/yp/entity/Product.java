@@ -4,6 +4,8 @@ package com.yp.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -11,6 +13,9 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
+@SQLDelete(
+        sql="UPDATE Product SET deleted= true where id=?")
+@Where(clause = "deleted=false")
 public class Product {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
