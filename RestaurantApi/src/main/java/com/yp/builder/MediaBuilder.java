@@ -6,18 +6,18 @@ import static org.apache.tomcat.util.buf.HexUtils.fromHexString;
 
 public class MediaBuilder extends Builder {
 
-    private int _id;
+    private Long _id;
     private String _name;
     private byte[] _content;
 
     public MediaBuilder(){
-        this._id=1;
+        this._id=1L;
         this._name="";
         this._content= fromHexString("00");
     }
 
     @Override
-    public MediaBuilder withId(int id) {
+    public MediaBuilder withId(Long id) {
         this._id = id;
         return this;
     }

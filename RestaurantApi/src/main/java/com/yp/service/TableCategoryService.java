@@ -1,6 +1,5 @@
 package com.yp.service;
 
-import com.yp.converter.TableCategoryConverter;
 import com.yp.dto.TableCategoryDto;
 import com.yp.entity.TableCategory;
 import com.yp.mapper.TableCategoryMapper;
@@ -29,7 +28,7 @@ public class TableCategoryService {
         return tableCategoryDtos;
     }
 
-    public TableCategoryDto getTableCategory(int id){
+    public TableCategoryDto getTableCategory(Long id){
         TableCategory tableCategory =  getTabCat(id);
         TableCategoryDto tableCategoryDto = tableCategoryMapper.toDto(tableCategory);
         return tableCategoryDto;
@@ -40,19 +39,19 @@ public class TableCategoryService {
         return tableCategoryRepository.save(tableCategory);
     }
 
-    public TableCategory editTableCategory(int id, TableCategoryDto tabCat){
+    public TableCategory editTableCategory(Long id, TableCategoryDto tabCat){
         TableCategory cat = getTabCat(id);
         cat.setName(tabCat.getName());
         cat.setNumber(tabCat.getNumber());
         return tableCategoryRepository.save(cat);
     }
 
-    public void deleteTableCategory(int id){
+    public void deleteTableCategory(Long id){
         tableCategoryRepository.deleteById(id);
     }
 
 
-    private TableCategory getTabCat(int id){
+    private TableCategory getTabCat(Long id){
         Optional<TableCategory> opt =tableCategoryRepository.findById(id);
         return opt.orElse(null);
     }

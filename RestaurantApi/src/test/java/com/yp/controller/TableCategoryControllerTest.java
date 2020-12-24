@@ -34,8 +34,8 @@ public class TableCategoryControllerTest {
 
     @Test
     public void shouldgetWithId() {
-        tableCategoryController.getTableCat(1);
-        verify(tableCategoryService,times(1)).getTableCategory(1);
+        tableCategoryController.getTableCat(1L);
+        verify(tableCategoryService,times(1)).getTableCategory(1L);
     }
 
 
@@ -48,16 +48,16 @@ public class TableCategoryControllerTest {
 
     @Test
     public void shouldgetNameWithId() {
-        Mockito.when(tableCategoryService.getTableCategory(1)).thenReturn(tableCategoryDto);
+        Mockito.when(tableCategoryService.getTableCategory(1L)).thenReturn(tableCategoryDto);
 
-        tableCategoryController.getCatName(1);
-        verify(tableCategoryService,times(1)).getTableCategory(1);
+        tableCategoryController.getCatName(1L);
+        verify(tableCategoryService,times(1)).getTableCategory(1L);
     }
 
     @Test
     public void shouldEditWithDto(){
-        tableCategoryController.editTableCat(1, tableCategoryDto);
-        verify(tableCategoryService, times(1)).editTableCategory(1, tableCategoryDto);
+        tableCategoryController.editTableCat(1L, tableCategoryDto);
+        verify(tableCategoryService, times(1)).editTableCategory(1L, tableCategoryDto);
     }
 
     @Test
@@ -69,8 +69,8 @@ public class TableCategoryControllerTest {
 
     @Test
     public void shouldDeleteWithId() {
-        tableCategoryController.deleteTableCat(1);
-        verify(tableCategoryService, times(1)).deleteTableCategory(1);
+        tableCategoryController.deleteTableCat(1L);
+        verify(tableCategoryService, times(1)).deleteTableCategory(1L);
     }
 
 }

@@ -21,3 +21,5 @@ INSERT INTO PRODUCT_CATEGORIES (category_id,product_id) VALUES (4,68),(1,69),(4,
 INSERT INTO PRODUCT_CATEGORIES (category_id,product_id) VALUES (5,78),(1,79),(2,80),(3,81),(2,82),(5,83),(1,84),(1,85),(2,86),(2,87);
 INSERT INTO PRODUCT_CATEGORIES (category_id,product_id) VALUES (2,88),(4,89),(5,90),(2,91),(4,92),(3,93),(1,94),(1,95),(3,96),(4,97);
 INSERT INTO PRODUCT_CATEGORIES (category_id,product_id) VALUES (4,98),(1,99),(3,100),(4,101),(1,102),(5,103),(2,104),(3,105),(4,106),(2,107);
+
+INSERT INTO Customer (name, surname, phone, address) VALUES ('Gokalp', 'Unsal', '05350811300', 'Soyak Olympiakent Halkali Kucukcekmece');

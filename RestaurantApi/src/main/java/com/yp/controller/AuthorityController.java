@@ -28,7 +28,7 @@ public class AuthorityController {
 
     @ApiOperation(value = "Get Role", notes = "Gets the role with the given id")
     @GetMapping("/{id}")
-    public AuthorityDto getRole(@PathVariable(name = "id") int id){
+    public AuthorityDto getRole(@PathVariable(name = "id") Long id){
         return authorityService.getRole(id);
     }
 
@@ -39,11 +39,11 @@ public class AuthorityController {
     }
 
     @PutMapping("/{id}/put")
-    public void editRole(@RequestBody AuthorityDto authority, @PathVariable(name = "id") int id){
+    public void editRole(@RequestBody AuthorityDto authority, @PathVariable(name = "id") Long id){
         authorityService.editRole(authority,id);
     }
     @DeleteMapping("{id}/delete")
-    public void deleteRole(@PathVariable(name = "id") int id){
+    public void deleteRole(@PathVariable(name = "id") Long id){
         authorityService.deleterRole(id);
     }
 

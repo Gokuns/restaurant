@@ -1,11 +1,14 @@
 package com.yp.service;
 
+import com.yp.builder.MediaBuilder;
 import com.yp.builder.WaiterBuilder;
 import com.yp.builder.WaiterDtoBuilder;
 import com.yp.dto.UserDto;
 import com.yp.dto.WaiterDto;
+import com.yp.entity.Media;
 import com.yp.entity.User;
 import com.yp.entity.Waiter;
+import com.yp.mapper.MediaMapper;
 import com.yp.mapper.WaiterMapper;
 import com.yp.repos.WaiterRepository;
 import org.junit.Before;
@@ -37,11 +40,14 @@ public class WaiterServiceTest {
 
     @Mock
     private WaiterMapper waiterMapper;
+    @Mock
+    private MediaMapper mediaMapper;
 
     private Waiter waiter = new WaiterBuilder().build();
     private WaiterDto waiterDto = new WaiterDtoBuilder().build();
     private List<Waiter> waiters = new ArrayList<>();
     private List<WaiterDto> waiterDtos = new ArrayList<>();
+    private Media media = new MediaBuilder().build();
 
 
 
@@ -51,6 +57,7 @@ public class WaiterServiceTest {
         waiterDtos.add(waiterDto);
         when(waiterMapper.toDto(any())).thenReturn(waiterDto);
         when(waiterMapper.toEntity(any())).thenReturn(waiter);
+        when(mediaMapper.toEntity(any())).thenReturn(media);
     }
 
     @Test
@@ -80,13 +87,13 @@ public class WaiterServiceTest {
     public void shouldEditWithId() {
         when(waiterRepository.findById(any())).thenReturn(Optional.of(waiter));
         when(waiterRepository.save(any())).thenReturn(waiter);
-        Waiter us = waiterService.updateWaiter(Long.valueOf(1), waiterDto);
+        Waiter us = waiterService.updateWaiter(1L, waiterDto);
         assertEquals(us.getName(), waiter.getName());
     }
 
     @Test
     public void shouldDeleteWithId() {
-        waiterService.deleteWaiter(Long.valueOf(1));
+        waiterService.deleteWaiter(1L);
         verify(waiterRepository, times(1)).deleteById(any());
 
     }

@@ -8,7 +8,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 public class ProductDto {
-    private int id;
+    private Long id;
     private String name;
     private String details;
     private MediaDto media;

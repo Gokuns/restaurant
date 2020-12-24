@@ -33,8 +33,8 @@ public class UserControllerTest  extends TestCase {
 
     @Test
     public void shouldgetAuthorityWithId() {
-        userController.getUser(1);
-        verify(userService,times(1)).getUser(1);
+        userController.getUser(1L);
+        verify(userService,times(1)).getUser(1L);
     }
 
     @Test
@@ -52,15 +52,15 @@ public class UserControllerTest  extends TestCase {
 
     @Test
     public void shouldEditWithDtop(){
-        userController.putUser(1, userDto);
-        verify(userService, times(1)).updateUser(1, userDto);
+        userController.putUser(1L, userDto);
+        verify(userService, times(1)).updateUser(1L, userDto);
 
     }
 
     @Test
     public void shouldDeleteWithId() {
-        userController.deleteUser(1);
-        verify(userService, times(1)).deleteUser(1);
+        userController.deleteUser(1L);
+        verify(userService, times(1)).deleteUser(1L);
     }
 
 }

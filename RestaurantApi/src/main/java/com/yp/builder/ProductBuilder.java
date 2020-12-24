@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ProductBuilder extends Builder{
-    private int _id;
+    private Long _id;
     private String _name;
     private String _details;
     private Media _media;
@@ -17,7 +17,7 @@ public class ProductBuilder extends Builder{
     private Set<Category> _categories;
 
     public ProductBuilder(){
-        this._id=1;
+        this._id=1L;
         this._name="";
         this._details="";
         this._media=new MediaBuilder().build();
@@ -27,7 +27,7 @@ public class ProductBuilder extends Builder{
     }
 
     @Override
-    public ProductBuilder withId(int id) {
+    public ProductBuilder withId(Long id) {
         this._id=id;
         return this;
     }

@@ -5,19 +5,19 @@ import com.yp.dto.MediaDto;
 import com.yp.entity.Category;
 
 public class CategoryDtoBuilder extends  Builder{
-    private int _id;
+    private Long _id;
     private String _name;
     private MediaDto _media;
 
     public CategoryDtoBuilder(){
-        this._id=1;
+        this._id=1L;
         this._name="";
         this._media=new MediaDtoBuilder().build();
     }
 
 
     @Override
-    public CategoryDtoBuilder withId(int id) {
+    public CategoryDtoBuilder withId(Long id) {
         this._id=id;
         return this;
     }

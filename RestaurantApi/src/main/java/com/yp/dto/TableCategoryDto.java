@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TableCategoryDto {
 
-    private int id;
+    private Long id;
     private String name;
     private int number;
 }

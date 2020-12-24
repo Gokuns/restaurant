@@ -6,7 +6,7 @@ import liquibase.pro.packaged.T;
 import java.sql.Timestamp;
 
 public class SellOrderBuilder extends Builder{
-    private int _orderId;
+    private Long _id;
     private int _productId;
     private int _count;
     private double _totalPrice;
@@ -15,7 +15,7 @@ public class SellOrderBuilder extends Builder{
     private String _waiterName;
 
     public SellOrderBuilder(){
-        this._orderId=1;
+        this._id=1L;
         this._productId=1;
         this._count=1;
         this._totalPrice=1;
@@ -25,17 +25,12 @@ public class SellOrderBuilder extends Builder{
     }
 
     @Override
-    public SellOrderBuilder withId(int id) {
-        return null;
+    public SellOrderBuilder withId(Long id) {
+        this._id=id;
+        return this;
     }
     @Override
     public SellOrderBuilder withName(String name) {
-        return this;
-    }
-
-
-    public SellOrderBuilder withOrderId(int orderId) {
-        this._orderId=orderId;
         return this;
     }
 
@@ -68,7 +63,7 @@ public class SellOrderBuilder extends Builder{
 
     public SellOrder build() {
         SellOrder sellOrder = new SellOrder();
-        sellOrder.setOrderId(this._orderId);
+        sellOrder.setId(this._id);
         sellOrder.setProductId(this._productId);
         sellOrder.setCount(this._count);
         sellOrder.setTotalPrice(this._totalPrice);

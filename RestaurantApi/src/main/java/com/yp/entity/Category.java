@@ -15,10 +15,7 @@ import java.util.Set;
 @Entity(name = "CATEGORIES")
 @Data
 @NoArgsConstructor
-public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Category extends BaseEntity{
 
     private String name;
 

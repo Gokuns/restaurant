@@ -1,9 +1,8 @@
 package com.yp.service;
 
-import com.yp.converter.MediaConverter;
-import com.yp.converter.WaiterConverter;
 import com.yp.dto.WaiterDto;
 import com.yp.entity.Waiter;
+import com.yp.mapper.MediaMapper;
 import com.yp.mapper.WaiterMapper;
 import com.yp.repos.WaiterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,10 @@ public class WaiterService {
     private WaiterRepository waiterRepository;
     @Autowired
     private WaiterMapper waiterMapper;
+    @Autowired
+    private MediaMapper mediaMapper;
+
+
 
 
     public List<WaiterDto> getAllWaiters(){
@@ -44,11 +47,12 @@ public class WaiterService {
         Waiter waiter = waiterRepository.findById(id).orElse(null);
         Waiter newWaiter = waiterMapper.toEntity(waiterDto);
         waiter.setName(newWaiter.getName());
+        waiter.setWaiterId(newWaiter.getWaiterId());
         waiter.setSurname(newWaiter.getSurname());
         waiter.setDateOfBirth(newWaiter.getDateOfBirth());
         waiter.setPhone(waiterDto.getPhone());
         waiter.setMail(waiterDto.getMail());
-        waiter.setMedia(MediaConverter.convertToMedia(waiterDto.getMedia()));
+        waiter.setMedia(mediaMapper.toEntity(waiterDto.getMedia()));
         return waiterRepository.save(waiter);
 
     }

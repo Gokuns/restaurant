@@ -7,19 +7,19 @@ import com.yp.entity.Product;
 import java.util.*;
 
 public class CategoryBuilder extends Builder{
-    private int _id;
+    private Long _id;
     private String _name;
     private Media _media;
 
     public CategoryBuilder(){
-        this._id=1;
+        this._id=1L;
         this._name="";
         this._media = new MediaBuilder().build();
     }
 
 
     @Override
-    public CategoryBuilder withId(int id) {
+    public CategoryBuilder withId(Long id) {
         this._id=id;
         return this;
     }

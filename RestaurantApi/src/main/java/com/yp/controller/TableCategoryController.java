@@ -17,7 +17,7 @@ public class TableCategoryController {
     @Autowired
     private TableCategoryService tableCategoryService;
     @GetMapping("/{id}")
-    public TableCategoryDto getTableCat(@PathVariable(value = "id") int id){
+    public TableCategoryDto getTableCat(@PathVariable(value = "id") Long id){
         return tableCategoryService.getTableCategory(id);
     }
 
@@ -27,7 +27,7 @@ public class TableCategoryController {
     }
 
     @GetMapping("/{id}/name")
-    public String getCatName(@PathVariable(value = "id") int id){
+    public String getCatName(@PathVariable(value = "id") Long id){
         return tableCategoryService.getTableCategory(id).getName();
     }
 
@@ -37,11 +37,11 @@ public class TableCategoryController {
     }
 
     @PutMapping("/{id}/put")
-    public void editTableCat(@PathVariable(value = "id") int id, @RequestBody TableCategoryDto tableCat){
+    public void editTableCat(@PathVariable(value = "id") Long id, @RequestBody TableCategoryDto tableCat){
         tableCategoryService.editTableCategory(id, tableCat);
     }
     @DeleteMapping("/{id}/delete")
-    public void deleteTableCat(@PathVariable(value = "id") int id){
+    public void deleteTableCat(@PathVariable(value = "id") Long id){
         tableCategoryService.deleteTableCategory(id);
     }
 

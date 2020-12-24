@@ -55,8 +55,8 @@ public class TableCategoryServiceTest extends TestCase {
 
     @Test
     public void shouldgetAuthorityWithId() {
-        Mockito.when(tableCategoryRepository.findById(1)).thenReturn(Optional.of(tableCategory));
-        TableCategoryDto auth = tableCategoryService.getTableCategory(1);
+        Mockito.when(tableCategoryRepository.findById(1L)).thenReturn(Optional.of(tableCategory));
+        TableCategoryDto auth = tableCategoryService.getTableCategory(1L);
         assertNotNull(auth);
         assertEquals(tableCategory.getName(), auth.getName());
     }
@@ -79,14 +79,14 @@ public class TableCategoryServiceTest extends TestCase {
     public void shouldEditWithId() {
         when(tableCategoryRepository.findById(any())).thenReturn(Optional.of(tableCategory));
         when(tableCategoryRepository.save(any())).thenReturn(tableCategory);
-        TableCategory tableCat = tableCategoryService.editTableCategory(1,tableCategoryDto);
+        TableCategory tableCat = tableCategoryService.editTableCategory(1L,tableCategoryDto);
         assertNotNull(tableCat);
 
     }
 
     @Test
     public void shouldDeleteWithId() {
-        tableCategoryService.deleteTableCategory(1);
+        tableCategoryService.deleteTableCategory(1L);
         verify(tableCategoryRepository, times(1)).deleteById(any());
 
     }

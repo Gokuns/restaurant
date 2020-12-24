@@ -18,10 +18,8 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Authority {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+public class Authority extends BaseEntity{
+
     @Column(name= "AUTHORITY", unique = true)
     private String authority;
 }

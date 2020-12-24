@@ -1,6 +1,5 @@
 package com.yp.service;
 
-import com.yp.converter.UserConverter;
 import com.yp.dto.UserDto;
 import com.yp.entity.User;
 import com.yp.mapper.AuthorityMapper;
@@ -32,7 +31,7 @@ public class UserService {
         return userDtos;
     }
 
-    public UserDto getUser(int id){
+    public UserDto getUser(Long id){
         User user=  userRepository.findById(id).get();
         UserDto userDto = userMapper.toDto(user);
         return userDto;
@@ -43,7 +42,7 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public User updateUser(int id, UserDto user){
+    public User updateUser(Long id, UserDto user){
         User newUser = userMapper.toEntity(user);
         User oldUser = userRepository.findById(id).get();
         oldUser.setUsername(newUser.getUsername());
@@ -53,7 +52,7 @@ public class UserService {
         return userRepository.save(oldUser);
     }
 
-    public void deleteUser(int id){
+    public void deleteUser(Long id){
         userRepository.deleteById(id);
 
     }

@@ -29,8 +29,8 @@ public class AuthorityControllerTest extends TestCase {
 
     @Test
     public void shouldgetAuthorityWithId() {
-        authorityController.getRole(1);
-        verify(authorityService,times(1)).getRole(1);
+        authorityController.getRole(1L);
+        verify(authorityService,times(1)).getRole(1L);
     }
 
 
@@ -50,15 +50,15 @@ public class AuthorityControllerTest extends TestCase {
 
     @Test
     public void shouldEditWithDto() {
-        authorityController.editRole(authorityDto, 1);
-        verify(authorityService, times(1)).editRole(authorityDto,1);
+        authorityController.editRole(authorityDto, 1L);
+        verify(authorityService, times(1)).editRole(authorityDto,1L);
 
     }
 
     @Test
     public void shouldDeleteWithId() {
-        authorityController.deleteRole(1);
-        verify(authorityService, times(1)).deleterRole(1);
+        authorityController.deleteRole(1L);
+        verify(authorityService, times(1)).deleterRole(1L);
   }
 
 }

@@ -6,9 +6,10 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
+
     <changeSet id="12-8-2020-5-15" author="gokalp.unsal">
         <createTable tableName="Media">
-            <column autoIncrement="true" name="id" type="int">
+            <column autoIncrement="true" name="id"  type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(100)">
@@ -24,7 +25,7 @@
 
     <changeSet author="gokalp.unsal" id="12-7-2020-4-42">
         <createTable tableName="CATEGORIES">
-            <column name="id" autoIncrement="true" type="int(10)">
+            <column name="id" autoIncrement="true"  type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(50)">
@@ -39,7 +40,7 @@
 
     <changeSet author="gokalp.unsal" id="12-7-2020-4-01">
         <createTable tableName="Product">
-            <column autoIncrement="true" name="id" type="int(10)">
+            <column autoIncrement="true" name="id"  type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(50)">
@@ -60,7 +61,7 @@
     
     <changeSet id="12-9-2020-1-23" author="gokalp.unsal">
         <createTable tableName="Product_CATEGORIES">
-            <column name="product_id" type="int">
+            <column name="product_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_prod_id" references="Product(id)"/>
             </column>
             <column name="category_id" type="int">
@@ -71,7 +72,7 @@
     
     <changeSet author="gokalp.unsal" id="12-7-2020-6-11">
         <createTable tableName="ROLES">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id"  type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="AUTHORITY" type="VARCHAR(40)">
@@ -83,7 +84,7 @@
 
     <changeSet author="gokalp.unsal" id="12-7-2020-6-12">
         <createTable tableName="USERS">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id"  type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="USERNAME" type="VARCHAR(40)">
@@ -112,7 +113,7 @@
 
     <changeSet author="gokalp.unsal" id="12-7-2020-6-14">
         <createTable tableName="TABLE_CATEGORIES">
-            <column autoIncrement="true" name="id" type="int(10)">
+            <column autoIncrement="true" name="id"  type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(40)">
@@ -126,7 +127,7 @@
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-6-15">
         <createTable tableName="Sell_Order">
-            <column autoIncrement="true" name="order_Id" type="int(10)">
+            <column autoIncrement="true" name="id"  type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
             <column name="product_Id" type="int(10)">
@@ -145,14 +146,20 @@
             <column  name="waiter_Name" type="VARCHAR(40)">
                 <constraints nullable="true"/>
             </column>
+            <column name="customer_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
             <column name="deleted" type="boolean" defaultValueBoolean="false"/>
         </createTable>
     </changeSet>
 
     <changeSet author="gokalp.unsal" id="12-7-2020-6-16">
         <createTable tableName="Waiter">
-            <column  name="id" type="BIGINT">
+            <column  autoIncrement="true"  name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
+            </column>
+            <column name="waiter_id"  type="BIGINT">
+                <constraints nullable="false"/>
             </column>
             <column  name="name" type="VARCHAR(40)">
                 <constraints nullable="false"/>
@@ -175,6 +182,29 @@
             <column name="deleted" type="boolean" defaultValueBoolean="false"/>
         </createTable>
     </changeSet>
+
+
+    <changeSet id="24-12-2020-10-10" author="gokalp.unsal">
+        <createTable tableName="Customer">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="VARCHAR(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="phone" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted" type="boolean" defaultValueBoolean="false"/>
+        </createTable>
+    </changeSet>
+
 
 
 <include file="./db-changelog/create-entries.xml"></include>

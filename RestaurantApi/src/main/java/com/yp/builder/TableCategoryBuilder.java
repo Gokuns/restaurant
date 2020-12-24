@@ -3,18 +3,18 @@ package com.yp.builder;
 import com.yp.entity.TableCategory;
 
 public class TableCategoryBuilder extends Builder{
-    private int _id;
+    private Long _id;
     private String _name;
     private int _number;
 
     public TableCategoryBuilder(){
-        this._id=1;
+        this._id=1L;
         this._name="";
         this._number=1;
     }
 
     @Override
-    public TableCategoryBuilder withId(int id) {
+    public TableCategoryBuilder withId(Long id) {
         this._id=id;
         return this;
     }

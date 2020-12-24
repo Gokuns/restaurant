@@ -8,16 +8,16 @@ import com.yp.entity.User;
 import java.util.Set;
 
 public class AuthorityDtoBuilder extends Builder{
-    private int _id;
+    private Long _id;
     private String _authority;
 
 
     public AuthorityDtoBuilder () {
-        this._id=1;
+        this._id=1L;
         this._authority="";
     }
     @Override
-    public AuthorityDtoBuilder withId(int id) {
+    public AuthorityDtoBuilder withId(Long id) {
         this._id=id;
         return this;
     }

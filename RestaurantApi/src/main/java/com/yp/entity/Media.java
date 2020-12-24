@@ -16,10 +16,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-public class Media {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Media extends BaseEntity{
 
     private String name;
 

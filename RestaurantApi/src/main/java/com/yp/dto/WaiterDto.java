@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class WaiterDto {
     private Long id;
+    private Long waiterId;
     private String name;
     private String surname;
     @Column(name = "DATE_OF_BIRTH")

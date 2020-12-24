@@ -16,10 +16,8 @@ import java.util.Set;
 @SQLDelete(
         sql="UPDATE Product SET deleted= true where id=?")
 @Where(clause = "deleted=false")
-public class Product {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+public class Product extends BaseEntity{
+
     private String name;
     private String details;
 

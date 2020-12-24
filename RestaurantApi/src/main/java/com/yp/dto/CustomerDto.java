@@ -5,9 +5,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class MediaDto {
-
+public class CustomerDto {
     private Long id;
     private String name;
-    private byte[] fileContent;
+    private String surname;
+    private String phone;
+    private String address;
 }

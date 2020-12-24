@@ -12,6 +12,7 @@ public class WaiterDtoBuilder extends Builder{
 
 
     private Long _id;
+    private Long _waiterId;
     private String _name;
     private String _surname;
     private String _dateOfBirth;
@@ -21,6 +22,7 @@ public class WaiterDtoBuilder extends Builder{
 
     public WaiterDtoBuilder() {
         this._id = 1L;
+        this._waiterId=1L;
         this._name ="";
         this._surname = "";
         this._dateOfBirth = "2020-12-10";
@@ -29,14 +31,15 @@ public class WaiterDtoBuilder extends Builder{
         this._media = new MediaDtoBuilder().build();
     }
 
-    public WaiterDtoBuilder withId(Long id) {
-        this._id= id;
+    public WaiterDtoBuilder withWaiterId(Long id) {
+        this._waiterId= id;
         return this;
     }
 
     @Override
-    public WaiterDtoBuilder withId(int id) {
-        return null;
+    public WaiterDtoBuilder withId(Long id) {
+        this._id=id;
+        return this;
     }
 
     @Override
@@ -72,6 +75,7 @@ public class WaiterDtoBuilder extends Builder{
     public WaiterDto build(){
         WaiterDto waiter = new WaiterDto();
         waiter.setId(this._id);
+        waiter.setWaiterId(this._waiterId);
         waiter.setName(this._name);
         waiter.setSurname(this._surname);
         waiter.setDateOfBirth(this._dateOfBirth);

@@ -7,17 +7,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AuthorityBuilder extends Builder{
-    private int _id;
+    private Long _id;
     private String _authority;
 
     public AuthorityBuilder () {
-        this._id=1;
+        this._id=1L;
         this._authority="";
 
     }
 
     @Override
-    public AuthorityBuilder withId(int id) {
+    public AuthorityBuilder withId(Long id) {
         this._id=id;
         return this;
     }

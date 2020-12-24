@@ -1,6 +1,5 @@
 package com.yp.service;
 
-import com.yp.converter.ProductConverter;
 import com.yp.dto.ProductDto;
 import com.yp.entity.Category;
 import com.yp.entity.Product;
@@ -43,9 +42,9 @@ public class ProductService {
 
 
 
-    public ProductDto getProduct(int id){
+    public ProductDto getProduct(Long id){
         Product p = productRepository.findById(id).get();
-        return  ProductConverter.convertToProductDto(p);
+        return  productMapper.toDto(p);
     }
 
     public Product addProduct(ProductDto product){
@@ -59,7 +58,7 @@ public class ProductService {
         return productRepository.save(p);
     }
 
-    public Product editProduct(int id, ProductDto product){
+    public Product editProduct(Long id, ProductDto product){
         Product p = productRepository.findById(id).get();
         Product newProduct = productMapper.toEntity(product);
         p.setName(newProduct.getName());
@@ -71,22 +70,21 @@ public class ProductService {
     }
 
     public Slice<ProductDto> getProductSlices(Pageable pageable){
-        Slice<ProductDto> productSlice = productRepository.findAllSlice(pageable).map(productMapper::toDto);
-        return productSlice;
+        return productRepository.findAllSlice(pageable).map(productMapper::toDto);
     }
 
-    public Slice<ProductDto> getProductSliceWithCategory(int categoryId, Pageable pageable){
+    public Slice<ProductDto> getProductSliceWithCategory(Long categoryId, Pageable pageable){
         Category cat = categoryRepository.findById(categoryId).get();
-        Slice<ProductDto> productSlice = productRepository.findAllByCategories(cat, pageable).map(productMapper::toDto);
-        return productSlice;
+        return  productRepository.findAllByCategories(cat, pageable).map(productMapper::toDto);
+
     }
 
     public Page<ProductDto> getProductPage(Pageable pageable){
-        Page<ProductDto> productSlice = productRepository.findAllPages(pageable).map(productMapper::toDto);
-        return productSlice;
+        return productRepository.findAllPages(pageable).map(productMapper::toDto);
+
     }
 
-    public void deleteProduct(int id){
+    public void deleteProduct(Long id){
         productRepository.deleteById(id);
     }
 

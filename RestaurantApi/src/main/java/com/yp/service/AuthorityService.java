@@ -1,6 +1,6 @@
 package com.yp.service;
 
-import com.yp.converter.AuthorityConverter;
+
 import com.yp.dto.AuthorityDto;
 import com.yp.dto.UserDto;
 import com.yp.entity.Authority;
@@ -19,7 +19,7 @@ public class AuthorityService {
     @Autowired
     private AuthorityMapper authorityMapper;
 
-    public AuthorityDto getRole(int id){
+    public AuthorityDto getRole(Long id){
         Optional<Authority> optionalAuthority= authorityRepository.findById(id);
         if(optionalAuthority.isPresent()){
             Authority authority=  optionalAuthority.get();
@@ -36,7 +36,7 @@ public class AuthorityService {
         Authority auth = authorityMapper.toEntity(authority);
         return authorityRepository.save(auth);
     }
-    public Authority editRole(AuthorityDto authority, int id){
+    public Authority editRole(AuthorityDto authority, Long id){
         Optional<Authority> optionalAuthority = authorityRepository.findById(id);
         if (optionalAuthority.isPresent()){
             Authority auth = optionalAuthority.get();
@@ -45,11 +45,11 @@ public class AuthorityService {
         }
         return null;
     }
-    public void deleterRole(int id){
+    public void deleterRole(Long id){
         authorityRepository.deleteById(id);
     }
 
-    public Set<UserDto> getUsersWithRole(int id){
+    public Set<UserDto> getUsersWithRole(Long id){
         Optional<Authority> optionalAuthority = authorityRepository.findById(id);
         Set<UserDto> userDtos = new HashSet<>();
         if (optionalAuthority.isPresent()){

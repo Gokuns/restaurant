@@ -21,7 +21,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/{id}")
-    public CategoryDto getCat(@PathVariable(value = "id") int id){
+    public CategoryDto getCat(@PathVariable(value = "id") Long id){
         return categoryService.getCategory(id);
     }
     @GetMapping("/list")
@@ -29,7 +29,7 @@ public class CategoryController {
         return categoryService.getAllCategory();
     }
     @GetMapping("/{id}/name")
-    public String getCatName(@PathVariable(value = "id") int id){
+    public String getCatName(@PathVariable(value = "id") Long id){
         return categoryService.getCategory(id).getName();
     }
     @PostMapping("/add")
@@ -37,16 +37,16 @@ public class CategoryController {
        categoryService.addCategory(categoryDto);
     }
     @PutMapping("/{id}/put")
-    public void editCategory(@PathVariable(value = "id") int id, @RequestBody CategoryDto categoryDto){
+    public void editCategory(@PathVariable(value = "id") Long id, @RequestBody CategoryDto categoryDto){
         categoryService.editCategory(id, categoryDto);
     }
     @DeleteMapping("/{id}/delete")
-    public void deleteCategory(@PathVariable(value = "id") int id){
+    public void deleteCategory(@PathVariable(value = "id") Long id){
         categoryService.deleteCategory(id);
     }
 
     @GetMapping("/list/{id}")
-    public List<ProductDto> getProductsofCategory(@PathVariable(value = "id")int id){
+    public List<ProductDto> getProductsofCategory(@PathVariable(value = "id")Long id){
         return categoryService.getProductsWithId(id);
     }
 

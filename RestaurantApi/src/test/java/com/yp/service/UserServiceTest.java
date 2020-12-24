@@ -65,8 +65,8 @@ public class UserServiceTest extends TestCase {
 
     @Test
     public void shouldgetWithId() {
-        Mockito.when(userRepository.findById(1)).thenReturn(Optional.of(user));
-        UserDto us = userService.getUser(1);
+        Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        UserDto us = userService.getUser(1L);
         assertNotNull(us);
         assertEquals(user.getUsername(), us.getName());
     }
@@ -90,13 +90,13 @@ public class UserServiceTest extends TestCase {
     public void shouldEditWithId() {
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
         when(userRepository.save(any())).thenReturn(user);
-        User us = userService.updateUser(1, editUserDto);
+        User us = userService.updateUser(1L, editUserDto);
         assertEquals(us.getPassword(), user.getPassword());
     }
 
     @Test
     public void shouldDeleteWithId() {
-        userService.deleteUser(1);
+        userService.deleteUser(1L);
         verify(userRepository, times(1)).deleteById(any());
 
     }

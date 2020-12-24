@@ -4,7 +4,7 @@ public abstract class Builder {
     public Builder() {
 
     }
-    public abstract Builder withId(int id);
+    public abstract Builder withId(Long id);
     public abstract Builder withName(String name);
 
 }

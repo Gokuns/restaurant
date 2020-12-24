@@ -10,6 +10,7 @@ public class WaiterBuilder extends Builder{
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private Long _id;
+    private Long _waiterId;
     private String _name;
     private String _surname;
     private LocalDate _dateOfBirth;
@@ -19,6 +20,7 @@ public class WaiterBuilder extends Builder{
 
     public WaiterBuilder() {
         this._id = 1L;
+        this._waiterId=1L;
         this._name ="";
         this._surname = "";
         this._dateOfBirth = LocalDate.now();
@@ -26,15 +28,15 @@ public class WaiterBuilder extends Builder{
         this._mail = "asd@gmail.com";
         this._media = new MediaBuilder().build();
     }
-
+    @Override
     public WaiterBuilder withId(Long id) {
         this._id= id;
         return this;
     }
 
-    @Override
-    public WaiterBuilder withId(int id) {
-        return null;
+    public WaiterBuilder withWaiterId(Long id) {
+        this._waiterId=id;
+        return this;
     }
 
     @Override
@@ -69,6 +71,7 @@ public class WaiterBuilder extends Builder{
     public Waiter build(){
         Waiter waiter = new Waiter();
         waiter.setId(this._id);
+        waiter.setWaiterId(this._waiterId);
         waiter.setName(this._name);
         waiter.setSurname(this._surname);
         waiter.setDateOfBirth(this._dateOfBirth);

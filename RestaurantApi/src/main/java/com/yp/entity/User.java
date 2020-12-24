@@ -18,10 +18,8 @@ import java.util.Set;
 @Entity(name = "USERS")
 @Data
 @NoArgsConstructor
-public class User implements Serializable {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+public class User extends BaseEntity {
+
     @Column(name = "USERNAME" , unique = true)
     private String username;
     @Column(name = "PASSWORD")

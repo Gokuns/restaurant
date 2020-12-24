@@ -4,18 +4,18 @@ import com.yp.dto.TableCategoryDto;
 import com.yp.entity.TableCategory;
 
 public class TableCategoryDtoBuilder extends Builder{
-    private int _id;
+    private Long _id;
     private String _name;
     private int _number;
 
     public TableCategoryDtoBuilder(){
-        this._id=1;
+        this._id=1L;
         this._name="";
         this._number=1;
     }
 
     @Override
-    public TableCategoryDtoBuilder withId(int id) {
+    public TableCategoryDtoBuilder withId(Long id) {
         this._id=id;
         return this;
     }

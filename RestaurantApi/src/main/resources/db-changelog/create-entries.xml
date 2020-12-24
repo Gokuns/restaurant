@@ -231,7 +231,7 @@
 
     <changeSet author="gokalp.unsal" id="12-7-2020-20-32">
         <insert tableName="Waiter">
-            <column name="id" value="18485280848" />
+            <column name="waiter_id" value="18485280848" />
             <column name="name" value="Gokalp" />
             <column name="surname" value="Unsal" />
             <column name="DATE_OF_BIRTH" value="1997-11-14" />
@@ -243,7 +243,7 @@
 
     <changeSet author="gokalp.unsal" id="12-7-2020-20-33">
         <insert tableName="Waiter">
-            <column name="id" value="12345678912" />
+            <column name="waiter_id" value="12345678912" />
             <column name="name" value="Ahmet" />
             <column name="surname" value="Yılmaz" />
             <column name="DATE_OF_BIRTH" value="2000-05-12" />

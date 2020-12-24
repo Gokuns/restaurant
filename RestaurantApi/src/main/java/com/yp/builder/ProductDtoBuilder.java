@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ProductDtoBuilder extends Builder{
-    private int _id;
+    private Long _id;
     private String _name;
     private String _details;
     private MediaDto _media;
@@ -19,7 +19,7 @@ public class ProductDtoBuilder extends Builder{
     private Set<CategoryDto> _categories;
 
     public ProductDtoBuilder(){
-        this._id=1;
+        this._id=1L;
         this._name="";
         this._details="";
         this._media=new MediaDtoBuilder().build();
@@ -29,7 +29,7 @@ public class ProductDtoBuilder extends Builder{
     }
 
     @Override
-    public ProductDtoBuilder withId(int id) {
+    public ProductDtoBuilder withId(Long id) {
         this._id=id;
         return this;
     }

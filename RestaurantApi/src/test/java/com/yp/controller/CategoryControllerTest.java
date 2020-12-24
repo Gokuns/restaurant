@@ -33,21 +33,21 @@ public class CategoryControllerTest {
 
     @Before
     public void setUp(){
-        categoryDto.setId(1);
+        categoryDto.setId(1L);
         categoryDto.setName("Goko");
     }
 
     @Test
     public void shouldgetWithId() {
 
-        categoryController.getCat(1);
-        verify(categoryService,times(1)).getCategory(1);
+        categoryController.getCat(1L);
+        verify(categoryService,times(1)).getCategory(1L);
     }
     @Test
     public void shouldgetNameWithId() {
-        Mockito.when(categoryService.getCategory(1)).thenReturn(categoryDto);
-        categoryController.getCatName(1);
-        verify(categoryService,times(1)).getCategory(1);
+        Mockito.when(categoryService.getCategory(1L)).thenReturn(categoryDto);
+        categoryController.getCatName(1L);
+        verify(categoryService,times(1)).getCategory(1L);
     }
 
 
@@ -59,8 +59,8 @@ public class CategoryControllerTest {
 
     @Test
     public void shouldEditWithDto(){
-        categoryController.editCategory(1, categoryDto);
-        verify(categoryService, times(1)).editCategory(1, categoryDto);
+        categoryController.editCategory(1L, categoryDto);
+        verify(categoryService, times(1)).editCategory(1L, categoryDto);
     }
 
     @Test
@@ -72,14 +72,14 @@ public class CategoryControllerTest {
 
     @Test
     public void shouldDeleteWithId() {
-        categoryController.deleteCategory(1);
-        verify(categoryService, times(1)).deleteCategory(1);
+        categoryController.deleteCategory(1L);
+        verify(categoryService, times(1)).deleteCategory(1L);
     }
 
     @Test
     public void shouldgetProdsWithId() {
-        categoryController.getProductsofCategory(1);
-        verify(categoryService,times(1)).getProductsWithId(1);
+        categoryController.getProductsofCategory(1L);
+        verify(categoryService,times(1)).getProductsWithId(1L);
     }
 
 }

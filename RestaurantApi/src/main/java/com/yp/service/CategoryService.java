@@ -1,8 +1,6 @@
 package com.yp.service;
 
-import com.yp.converter.CategoryConverter;
-import com.yp.converter.MediaConverter;
-import com.yp.converter.ProductConverter;
+
 import com.yp.dto.CategoryDto;
 import com.yp.dto.ProductDto;
 import com.yp.entity.Category;
@@ -20,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class CategoryService {
@@ -49,7 +46,7 @@ public class CategoryService {
         return categoryDtos;
     }
 
-    public CategoryDto getCategory(int id){
+    public CategoryDto getCategory(Long id){
         Category category = categoryRepository.findById(id).get();
         CategoryDto categoryDto = categoryMapper.toDto(category);
         return categoryDto;
@@ -60,18 +57,18 @@ public class CategoryService {
         return categoryRepository.save(cat);
     }
 
-    public Category editCategory(int id, CategoryDto categoryDto){
+    public Category editCategory(Long id, CategoryDto categoryDto){
         Category cat = categoryRepository.findById(id).get();
         cat.setName(categoryDto.getName());
         cat.setMedia(mediaMapper.toEntity(categoryDto.getMedia()));
         return categoryRepository.save(cat);
     }
 
-    public void deleteCategory(int id){
+    public void deleteCategory(Long id){
         categoryRepository.deleteById(id);
     }
 
-    public List<ProductDto> getProductsWithId(int id){
+    public List<ProductDto> getProductsWithId(Long id){
         Category category = categoryRepository.findById(id).get();
         List<Product> products = productRepository.findAllByCategoriesIn(Arrays.asList(category));
         List<ProductDto> productDtos = new ArrayList<>();
@@ -82,7 +79,7 @@ public class CategoryService {
         return productDtos;
     }
 
-    public Slice<ProductDto> getProductSliceWithId(int id, Pageable pageable){
+    public Slice<ProductDto> getProductSliceWithId(Long id, Pageable pageable){
         Category category = categoryRepository.findById(id).get();
         Slice<ProductDto> productSlice = productRepository.findAllByCategories(category, pageable).map(productMapper::toDto);
         return productSlice;

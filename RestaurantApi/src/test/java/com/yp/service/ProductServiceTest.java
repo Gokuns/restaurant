@@ -61,8 +61,8 @@ public class ProductServiceTest extends TestCase {
 
     @Test
     public void shouldgetAuthorityWithId() {
-        when(productRepository.findById(1)).thenReturn(Optional.of(product));
-        ProductDto p = productService.getProduct(1);
+        when(productRepository.findById(1L)).thenReturn(Optional.of(product));
+        ProductDto p = productService.getProduct(1L);
         assertNotNull(p);
         assertEquals(p.getName(), product.getName());
     }
@@ -87,14 +87,14 @@ public class ProductServiceTest extends TestCase {
     public void shouldEditWithId() {
         when(productRepository.findById(any())).thenReturn(Optional.of(product));
         when(productRepository.save(any())).thenReturn(product);
-        Product p = productService.editProduct(1, productDto);
+        Product p = productService.editProduct(1L, productDto);
         assertNotNull(p);
         assertEquals(p.getName(), product.getName());
     }
 
     @Test
     public void shouldDeleteWithId() {
-        productService.deleteProduct(1);
+        productService.deleteProduct(1L);
         verify(productRepository, times(1)).deleteById(any());
 
     }

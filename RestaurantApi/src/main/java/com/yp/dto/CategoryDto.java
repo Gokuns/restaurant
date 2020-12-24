@@ -9,7 +9,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 public class CategoryDto {
-    private int id;
+    private Long id;
     private String name;
     private MediaDto media;
 }

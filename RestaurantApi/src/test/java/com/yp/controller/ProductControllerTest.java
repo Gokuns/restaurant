@@ -32,9 +32,9 @@ public class ProductControllerTest {
 
     @Test
     public void shouldgetAuthorityWithId() {
-        productController.getProduct(1);
+        productController.getProduct(1L);
 
-        verify(productService,times(1)).getProduct(1);
+        verify(productService,times(1)).getProduct(1L);
     }
 
     @Test
@@ -52,14 +52,14 @@ public class ProductControllerTest {
 
     @Test
     public void shouldEditWithDtop(){
-        productController.editProduct(1, productDto);
-        verify(productService, times(1)).editProduct(1, productDto);
+        productController.editProduct(1L, productDto);
+        verify(productService, times(1)).editProduct(1L, productDto);
 
     }
 
     @Test
     public void shouldDeleteWithId() {
-        productController.deleteProduct(1);
-        verify(productService, times(1)).deleteProduct(1);
+        productController.deleteProduct(1L);
+        verify(productService, times(1)).deleteProduct(1L);
     }
 }

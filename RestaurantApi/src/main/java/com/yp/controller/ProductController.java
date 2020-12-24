@@ -1,9 +1,6 @@
 package com.yp.controller;
 
-import com.google.gson.Gson;
 import com.yp.dto.ProductDto;
-import com.yp.entity.Product;
-import com.yp.mapper.ProductMapper;
 import com.yp.service.ProductService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +32,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductDto getProduct(@PathVariable(value = "id") int id){
+    public ProductDto getProduct(@PathVariable(value = "id") Long id){
         return productService.getProduct(id);
     }
 
@@ -45,16 +42,16 @@ public class ProductController {
     }
 
     @PutMapping("/{id}/put")
-    public void editProduct(@PathVariable(value = "id") int id, @RequestBody ProductDto product){
+    public void editProduct(@PathVariable(value = "id") Long id, @RequestBody ProductDto product){
         productService.editProduct(id, product);
     }
     @DeleteMapping("/{id}/delete")
-    public void deleteProduct(@PathVariable(value = "id") int id){
+    public void deleteProduct(@PathVariable(value = "id") Long id){
         productService.deleteProduct(id);
     }
 
     @GetMapping("/list_2/{id}")
-    public Slice<ProductDto> getProductSliceWithCategory(@PathVariable(value = "id")int id, Pageable pageable){
+    public Slice<ProductDto> getProductSliceWithCategory(@PathVariable(value = "id")Long id, Pageable pageable){
         return productService.getProductSliceWithCategory(id, pageable);
     }
 

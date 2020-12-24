@@ -15,14 +15,13 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @NoArgsConstructor
-public class SellOrder {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int orderId;
+public class SellOrder extends BaseEntity{
+
     private int productId;
     private int count;
     private double totalPrice;
     private Timestamp createDate;
     private String tableName;
     private String waiterName;
+    private Long customerId;
 }

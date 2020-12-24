@@ -15,11 +15,7 @@ import java.util.List;
 @Entity(name = "TABLE_CATEGORIES")
 @Data
 @NoArgsConstructor
-public class TableCategory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+public class TableCategory extends BaseEntity{
     private String name;
     private int number;
 }
