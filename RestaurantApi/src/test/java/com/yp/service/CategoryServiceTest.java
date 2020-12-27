@@ -21,7 +21,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,17 +66,19 @@ public class CategoryServiceTest extends TestCase {
         when(categoryMapper.toDto(any())).thenReturn(categoryDto);
         when(categoryMapper.toEntity(any())).thenReturn(category);
         when(mediaMapper.toEntity(any())).thenReturn(media);
+        when(categoryMapper.toDtoList(any())).thenReturn(categoryDtoList);
+//        when(categoryMapper.toEntityList(any())).thenReturn(categoryList);
     }
 
     @Test
-    public void shouldgetAuthorityWithId() {
+    public void shouldgetCategoryWithId() {
         when(categoryRepository.findById(1L)).thenReturn(Optional.of(category));
         CategoryDto cat = categoryService.getCategory(1L);
         assertEquals(cat.getName(), category.getName());
     }
 
     @Test
-    public void getAuthorityList(){
+    public void getCategoryList(){
         when(categoryRepository.findAll()).thenReturn(categoryList);
         List<CategoryDto> lst = categoryService.getAllCategory();
         assertEquals(lst.get(0).getName(), categoryList.get(0).getName());
@@ -110,7 +111,7 @@ public class CategoryServiceTest extends TestCase {
     public void shouldGetProductsFromCat(){
         when(categoryRepository.findById(any())).thenReturn(Optional.of(category));
         when(productRepository.findAllByCategoriesIn(any())).thenReturn(products);
-        List<ProductDto> lst = categoryService.getProductsWithId(1L);
+        List<ProductDto> lst = categoryService.getProductsWithCategoryId(1L);
         assertNotNull(lst);
     }
 }

@@ -23,6 +23,7 @@ public class UserService {
     private AuthorityService authorityService;
     @Autowired
     private UserMapper userMapper;
+    private BCryptPasswordEncoder encoder;
 
 
     public List<UserDto> getAllUsers(){
@@ -39,6 +40,7 @@ public class UserService {
 
     public User addUser(UserDto user){
         User newUser = userMapper.toEntity(user);
+        newUser.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(newUser);
     }
 

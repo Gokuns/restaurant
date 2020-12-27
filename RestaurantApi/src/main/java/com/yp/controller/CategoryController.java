@@ -1,10 +1,7 @@
 package com.yp.controller;
 
-import com.google.gson.Gson;
 import com.yp.dto.CategoryDto;
 import com.yp.dto.ProductDto;
-import com.yp.entity.Category;
-import com.yp.entity.Product;
 import com.yp.service.CategoryService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +44,7 @@ public class CategoryController {
 
     @GetMapping("/list/{id}")
     public List<ProductDto> getProductsofCategory(@PathVariable(value = "id")Long id){
-        return categoryService.getProductsWithId(id);
+        return categoryService.getProductsWithCategoryId(id);
     }
 
 

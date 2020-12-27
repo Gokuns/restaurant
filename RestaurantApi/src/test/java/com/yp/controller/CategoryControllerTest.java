@@ -1,10 +1,7 @@
 package com.yp.controller;
 
 import com.yp.dto.CategoryDto;
-import com.yp.dto.UserDto;
-import com.yp.entity.Category;
 import com.yp.service.CategoryService;
-import com.yp.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,9 +10,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Optional;
-
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -79,7 +73,7 @@ public class CategoryControllerTest {
     @Test
     public void shouldgetProdsWithId() {
         categoryController.getProductsofCategory(1L);
-        verify(categoryService,times(1)).getProductsWithId(1L);
+        verify(categoryService,times(1)).getProductsWithCategoryId(1L);
     }
 
 }
