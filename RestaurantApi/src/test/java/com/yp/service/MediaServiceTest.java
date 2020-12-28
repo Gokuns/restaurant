@@ -11,8 +11,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,6 +39,9 @@ public class MediaServiceTest {
     private MediaRepository mediaRepository;
     @Mock
     private MediaMapper mediaMapper;
+    @Mock
+    private MessageSource messageSource;
+
 
 
     private String filepath= "C:\\Users\\gokal\\Desktop\\pic.png";
@@ -51,6 +55,7 @@ public class MediaServiceTest {
     private Media media = new MediaBuilder().build();
     private List<MediaDto> mediaDtos = new ArrayList<>();
     private List<Media> medias = new ArrayList<>();
+    private String lang = "en";
     private Path p;
 
 
@@ -78,7 +83,7 @@ public class MediaServiceTest {
         when(mediaRepository.save(any())).thenReturn(media);
         Media m = null;
         try {
-            m = mediaService.addMedia(file, "name");
+            m = mediaService.addMedia(file, "name", lang);
         } catch (IOException e) {
             e.printStackTrace();
         }

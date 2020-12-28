@@ -28,36 +28,48 @@ public class CustomerService {
 
     @Autowired
     private MessageSource messageSource;
+    private static final String BUSINESS_RULE_EXCEPTION = "BusinessRuleException";
+    private static final String CONTENT_NOT_FOUND = "ContentNotFound";
 
 
     public CustomerDto getCustomer(Long id, String lang){
-        if(id==null) throw new BusinessRuleException(messageSource.getMessage("BusinessRuleException", new Object[0], new Locale(lang)));
+        if(id==null) throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
-        if(optionalCustomer.isEmpty()) throw new ContentNotFoundException(messageSource.getMessage("ContentNotFound",new Object[0], new Locale(lang)));
+        if(optionalCustomer.isEmpty()) throw new ContentNotFoundException(messageSource.getMessage(CONTENT_NOT_FOUND,new Object[0], new Locale(lang)));
         return customerMapper.toDto(optionalCustomer.get());
     }
 
-    public List<CustomerDto> getCustomerList(String lang){
+    public List<CustomerDto> getCustomerList(){
         return customerRepository.findAll().stream().map(customerMapper::toDto).collect(Collectors.toList());
     }
 
     public Page<CustomerDto> getCutomerPage(Pageable pageable, String lang){
+        if(pageable==null){
+            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        }
         return customerRepository.findAllPages(pageable).map(customerMapper::toDto);
     }
 
     public Slice<CustomerDto> getCostomerSlice(Pageable pageable, String lang){
+        if(pageable==null){
+            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        }
         return customerRepository.findAllSlices(pageable).map(customerMapper::toDto);
     }
 
     public String addCustomer(CustomerDto customerDto, String lang){
-        if(customerDto==null) throw new BusinessRuleException(messageSource.getMessage("BusinessRuleException", new Object[0], new Locale(lang)));
+        if(customerDto==null) throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         customerRepository.save(customerMapper.toEntity(customerDto));
         return "Success";
     }
 
     public String editCustomer(Long id, CustomerDto customerDto, String lang){
-        if(id==null) throw  new BusinessRuleException(messageSource.getMessage("BusinessRuleException", new Object[0], new Locale(lang)));
-        if(customerDto==null) throw new BusinessRuleException(messageSource.getMessage("BusinessRuleException", new Object[0], new Locale(lang)));
+        if(id==null){
+            throw  new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        }
+        if(customerDto==null){
+            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        }
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
         if(optionalCustomer.isEmpty()){
             customerRepository.save(customerMapper.toEntity(customerDto));
@@ -77,7 +89,7 @@ public class CustomerService {
     }
 
     public String deleteCustomer(Long id, String lang){
-        if(id==null) throw new BusinessRuleException(messageSource.getMessage("BusinessRuleException", new Object[0], new Locale(lang)));
+        if(id==null) throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         customerRepository.deleteById(id);
         return "Successfully deleted";
     }

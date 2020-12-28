@@ -5,23 +5,26 @@ import com.yp.service.SellOrderService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @Api(tags = "SellOrder Controller")
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class SellOrderController {
     @Autowired
     private SellOrderService sellOrderService;
 
-    @PostMapping("/checkout/add")
-    public void addOrder(@RequestBody List<SellOrderDto> sellOrders){
-        sellOrderService.addOrderLst(sellOrders);
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    public void addOrder(@RequestBody List<SellOrderDto> sellOrders, @RequestParam(value = "lang", defaultValue = "en") String lang){
+        sellOrderService.addOrderLst(sellOrders, lang);
     }
 
-    @GetMapping("/list")
+    @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<SellOrderDto> getAllOrders(){
         return sellOrderService.getAllOrders();
     }

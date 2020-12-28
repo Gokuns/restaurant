@@ -2,9 +2,7 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
-    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="gokalp.unsal" id="12-9-2020-2-20">
         <insert tableName="CATEGORIES">
@@ -201,31 +199,6 @@
         </insert>
     </changeSet>
 
-    <changeSet author="gokalp.unsal" id="12-7-2020-20-28">
-        <insert tableName="TABLE_CATEGORIES">
-            <column name="name" value="Inside" />
-            <column name="number" value="6" />
-        </insert>
-    </changeSet>
-
-    <changeSet author="gokalp.unsal" id="12-7-2020-20-29">
-        <insert tableName="TABLE_CATEGORIES">
-            <column name="name" value="Outside" />
-            <column name="number" value="4" />
-        </insert>
-    </changeSet>
-    <changeSet author="gokalp.unsal" id="12-7-2020-20-30">
-        <insert tableName="TABLE_CATEGORIES">
-            <column name="name" value="Balcony" />
-            <column name="number" value="5" />
-        </insert>
-    </changeSet>
-    <changeSet author="gokalp.unsal" id="12-7-2020-20-31">
-        <insert tableName="TABLE_CATEGORIES">
-            <column name="name" value="Window side" />
-            <column name="number" value="4" />
-        </insert>
-    </changeSet>
 
 
 

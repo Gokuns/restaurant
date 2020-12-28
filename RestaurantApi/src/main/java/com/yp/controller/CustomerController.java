@@ -4,7 +4,6 @@ import com.yp.dto.CustomerDto;
 import com.yp.service.CustomerService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,12 +13,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Locale;
 
 @Api(tags = "Customer Controller")
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/customers")
 public class CustomerController {
 
     @Autowired
@@ -31,8 +29,8 @@ public class CustomerController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
-    public List<CustomerDto> getAllCustomers(@RequestParam(value = "lang", defaultValue = "en") String lang){
-        return customerService.getCustomerList(lang);
+    public List<CustomerDto> getAllCustomers(){
+        return customerService.getCustomerList();
     }
 
     @GetMapping("/paged")
@@ -71,17 +69,5 @@ public class CustomerController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteCustomer(@PathVariable(value = "id") Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
         return customerService.deleteCustomer(id, lang);
-    }
-
-    @GetMapping("/greet")
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
-    public String getGreeting(){
-        return messageSource.getMessage("greeting", new Object[0], new Locale("tr"));
-    }
-
-    @GetMapping("/greeting")
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
-    public String getGreetings(@RequestParam(value = "lang", defaultValue = "en") String lang){
-        return messageSource.getMessage("greeting", new Object[0], new Locale(lang));
     }
 }

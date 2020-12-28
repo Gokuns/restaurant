@@ -3,13 +3,15 @@ package com.yp.service;
 
 import com.yp.dto.SellOrderDto;
 import com.yp.entity.SellOrder;
+import com.yp.exception.BusinessRuleException;
 import com.yp.mapper.SellOrderMapper;
 import com.yp.repos.SellOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 @Service
 public class SellOrderService {
@@ -18,24 +20,19 @@ public class SellOrderService {
 
     @Autowired
     private SellOrderMapper sellOrderMapper;
+    @Autowired
+    private MessageSource messageSource;
 
 
-    public List<SellOrder> addOrderLst(List<SellOrderDto> sellOrders) {
-        List<SellOrder> sellOrderList = new ArrayList<>();
-        sellOrders.forEach(sellOrderDto -> {
-            SellOrder sellOrder = sellOrderMapper.toEntity(sellOrderDto);
-            sellOrderList.add(sellOrder);
-        });
+    public List<SellOrder> addOrderLst(List<SellOrderDto> sellOrders, String lang) {
+        if(sellOrders==null){
+            throw new BusinessRuleException(messageSource.getMessage("BusinessRuleException", new Object[0], new Locale(lang)));
+        }
+        List<SellOrder> sellOrderList = sellOrders.stream().map(sellOrderMapper::toEntity).collect(Collectors.toList());
         return sellOrderRepository.saveAll(sellOrderList);
     }
 
     public List<SellOrderDto> getAllOrders(){
-        List<SellOrder> sellOrderList = sellOrderRepository.findAll();
-        List<SellOrderDto> sellOrderDtos = new ArrayList<>();
-        sellOrderList.forEach(sellOrder -> {
-            SellOrderDto sellOrderDto = sellOrderMapper.toDto(sellOrder);
-            sellOrderDtos.add(sellOrderDto);
-        });
-        return sellOrderDtos;
+       return  sellOrderRepository.findAll().stream().map(sellOrderMapper::toDto).collect(Collectors.toList());
     }
 }

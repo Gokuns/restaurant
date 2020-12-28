@@ -1,20 +1,20 @@
 package com.yp.controller;
 
+import com.yp.dto.Info;
 import com.yp.service.InfoService;
-import com.yp.service.UserService;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+import junit.framework.TestCase;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+
+
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class InfoControllerTest {
+public class InfoControllerTest extends TestCase{
 
     @InjectMocks
     private InfoController infoController;
@@ -22,10 +22,15 @@ public class InfoControllerTest {
     @Mock
     private InfoService infoService;
 
+
+
+    private String lang = "en";
+
     @Test
-    public void shouldgetAuthorityWithId() {
-        infoController.lstInfo();
-        verify(infoService,times(1)).getInfo();
+    public void shouldgetInfoWithId() {
+        when(infoService.getInfo()).thenReturn(new Info());
+        Info info = infoController.lstInfo();
+        assertNotNull(info);
     }
 
 

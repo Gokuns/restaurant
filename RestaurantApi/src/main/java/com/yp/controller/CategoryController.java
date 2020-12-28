@@ -5,6 +5,7 @@ import com.yp.dto.ProductDto;
 import com.yp.service.CategoryService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,39 +13,43 @@ import java.util.List;
 @Api(tags = "Category Controller")
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/categories")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
     @GetMapping("/{id}")
-    public CategoryDto getCat(@PathVariable(value = "id") Long id){
-        return categoryService.getCategory(id);
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    public CategoryDto getCat(@PathVariable(value = "id") Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
+        return categoryService.getCategory(id, lang);
     }
-    @GetMapping("/list")
+    @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
     public List<CategoryDto> getAllCats(){
         return categoryService.getAllCategory();
     }
-    @GetMapping("/{id}/name")
-    public String getCatName(@PathVariable(value = "id") Long id){
-        return categoryService.getCategory(id).getName();
+
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void addCategory(@RequestBody CategoryDto categoryDto, @RequestParam(value = "lang", defaultValue = "en") String lang){
+       categoryService.addCategory(categoryDto, lang);
     }
-    @PostMapping("/add")
-    public void addCategory(@RequestBody CategoryDto categoryDto){
-       categoryService.addCategory(categoryDto);
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void editCategory(@PathVariable(value = "id") Long id,  @RequestBody CategoryDto categoryDto,@RequestParam(value = "lang", defaultValue = "en")String lang){
+        categoryService.editCategory(id, categoryDto, lang);
     }
-    @PutMapping("/{id}/put")
-    public void editCategory(@PathVariable(value = "id") Long id, @RequestBody CategoryDto categoryDto){
-        categoryService.editCategory(id, categoryDto);
-    }
-    @DeleteMapping("/{id}/delete")
-    public void deleteCategory(@PathVariable(value = "id") Long id){
-        categoryService.deleteCategory(id);
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void deleteCategory(@PathVariable(value = "id") Long id, @RequestParam(value = "lang", defaultValue = "en")String lang){
+        categoryService.deleteCategory(id, lang);
     }
 
+
     @GetMapping("/list/{id}")
-    public List<ProductDto> getProductsofCategory(@PathVariable(value = "id")Long id){
-        return categoryService.getProductsWithCategoryId(id);
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    public List<ProductDto> getProductsofCategory(@PathVariable(value = "id")Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
+        return categoryService.getProductsWithCategoryId(id, lang);
     }
 
 

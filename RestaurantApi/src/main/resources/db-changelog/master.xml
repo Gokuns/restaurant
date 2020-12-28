@@ -2,9 +2,8 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
-    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 
     <changeSet id="12-8-2020-5-15" author="gokalp.unsal">
@@ -116,6 +115,9 @@
             <column autoIncrement="true" name="id"  type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
+            <column name="media_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_media_table" referencedColumnNames="Media(id)" />
+            </column>
             <column name="name" type="VARCHAR(40)">
                 <constraints nullable="false" />
             </column>
@@ -189,6 +191,9 @@
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
+            <column name="media_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_media_cust" referencedColumnNames="Media(id)" />
+            </column>
             <column name="name" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
@@ -207,7 +212,7 @@
 
 
 
-<include file="./db-changelog/create-entries.xml"></include>
+<include file="./db-changelog/create-entries.xml"/>
     <changeSet author="gokalp.unsal" id="11-22-2020-10-10" runOnChange="true">
         <sqlFile path="/db-changelog/data.sql" stripComments="true"/>
     </changeSet>

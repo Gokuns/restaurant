@@ -1,12 +1,11 @@
 package com.yp.controller;
 
 import com.yp.dto.AuthorityDto;
-import com.yp.entity.Authority;
 import com.yp.service.AuthorityService;
-import com.yp.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,37 +13,42 @@ import java.util.List;
 @Api(tags = "Authority Controller")
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/roles")
 public class AuthorityController {
 
     @Autowired
     private AuthorityService authorityService;
 
     @ApiOperation(value = "List roles", notes = "Lists through all the roles.")
-    @GetMapping("/list")
+    @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
     public List<AuthorityDto> getAllRoles(){
         return authorityService.getAllRoles();
     }
 
     @ApiOperation(value = "Get Role", notes = "Gets the role with the given id")
     @GetMapping("/{id}")
-    public AuthorityDto getRole(@PathVariable(name = "id") Long id){
-        return authorityService.getRole(id);
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    public AuthorityDto getRole(@PathVariable(name = "id") Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
+        return authorityService.getRole(id, lang);
     }
 
 
-    @PostMapping("/add")
-    public void addRole(@RequestBody AuthorityDto authority){
-        authorityService.addRole(authority);
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void addRole(@RequestBody AuthorityDto authority, @RequestParam(value = "lang", defaultValue = "en") String lang){
+        authorityService.addRole(authority, lang);
     }
 
-    @PutMapping("/{id}/put")
-    public void editRole(@RequestBody AuthorityDto authority, @PathVariable(name = "id") Long id){
-        authorityService.editRole(authority,id);
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void editRole(@RequestBody AuthorityDto authority, @PathVariable(name = "id") Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
+        authorityService.editRole(authority,id, lang);
     }
-    @DeleteMapping("{id}/delete")
-    public void deleteRole(@PathVariable(name = "id") Long id){
-        authorityService.deleterRole(id);
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void deleteRole(@PathVariable(name = "id") Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
+        authorityService.deleterRole(id, lang);
     }
 
 }

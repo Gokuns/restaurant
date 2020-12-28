@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.*;
 
@@ -23,7 +23,7 @@ public class ProductControllerTest {
     private ProductService productService;
 
     private ProductDto productDto = new ProductDtoBuilder().build();
-
+    private String lang = "en";
 
     @Before
     public void setUp() {
@@ -32,9 +32,9 @@ public class ProductControllerTest {
 
     @Test
     public void shouldgetAuthorityWithId() {
-        productController.getProduct(1L);
+        productController.getProduct(1L, lang);
 
-        verify(productService,times(1)).getProduct(1L);
+        verify(productService,times(1)).getProduct(1L, lang);
     }
 
     @Test
@@ -45,21 +45,21 @@ public class ProductControllerTest {
 
     @Test
     public void shouldSaveWithDto() {
-        productController.addProduct(productDto);
-        verify(productService, times(1)).addProduct(productDto);
+        productController.addProduct(productDto, lang);
+        verify(productService, times(1)).addProduct(productDto, lang);
 
     }
 
     @Test
     public void shouldEditWithDtop(){
-        productController.editProduct(1L, productDto);
-        verify(productService, times(1)).editProduct(1L, productDto);
+        productController.editProduct(1L, productDto, lang);
+        verify(productService, times(1)).editProduct(1L, productDto, lang);
 
     }
 
     @Test
     public void shouldDeleteWithId() {
-        productController.deleteProduct(1L);
-        verify(productService, times(1)).deleteProduct(1L);
+        productController.deleteProduct(1L, lang);
+        verify(productService, times(1)).deleteProduct(1L, lang);
     }
 }

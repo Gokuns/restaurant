@@ -4,19 +4,19 @@ import com.yp.dto.Info;
 import com.yp.service.InfoService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
 @Api(tags = "Info Controller")
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/info")
+@RequestMapping("/infos")
 public class InfoController {
     @Autowired
     InfoService infoService;
 
-    @GetMapping("/list")
+    @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
     public Info lstInfo(){
         return infoService.getInfo();
     }

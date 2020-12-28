@@ -2,15 +2,10 @@ package com.yp.service;
 
 import com.yp.builder.TableCategoryBuilder;
 import com.yp.builder.TableCategoryDtoBuilder;
-import com.yp.dto.AuthorityDto;
 import com.yp.dto.TableCategoryDto;
-import com.yp.entity.Authority;
 import com.yp.entity.TableCategory;
 import com.yp.mapper.TableCategoryMapper;
-import com.yp.repos.AuthorityRepository;
 import com.yp.repos.TableCategoryRepository;
-import com.yp.service.AuthorityService;
-import com.yp.service.TableCategoryService;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +13,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.context.MessageSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +33,16 @@ public class TableCategoryServiceTest extends TestCase {
 
     @Mock
     private TableCategoryMapper tableCategoryMapper;
+    @Mock
+    private MessageSource messageSource;
+
 
     private TableCategory tableCategory = new TableCategoryBuilder().build();
     private TableCategory editTableCat = new TableCategoryBuilder().build();
     private TableCategoryDto tableCategoryDto = new TableCategoryDtoBuilder().build();
     private List<TableCategory> tableCategoryList = new ArrayList<>();
     private List<TableCategoryDto> tableCategoryDtoList = new ArrayList<>();
+    private String lang = "en";
 
 
     @Before
@@ -56,7 +56,7 @@ public class TableCategoryServiceTest extends TestCase {
     @Test
     public void shouldgetAuthorityWithId() {
         Mockito.when(tableCategoryRepository.findById(1L)).thenReturn(Optional.of(tableCategory));
-        TableCategoryDto auth = tableCategoryService.getTableCategory(1L);
+        TableCategoryDto auth = tableCategoryService.getTableCategory(1L, lang);
         assertNotNull(auth);
         assertEquals(tableCategory.getName(), auth.getName());
     }
@@ -71,7 +71,7 @@ public class TableCategoryServiceTest extends TestCase {
     @Test
     public void shouldSaveWithDto() {
         when(tableCategoryRepository.save(any())).thenReturn(tableCategory);
-        TableCategory tableCat = tableCategoryService.addTableCategory(tableCategoryDto);
+        TableCategory tableCat = tableCategoryService.addTableCategory(tableCategoryDto, lang);
         assertEquals(tableCategory.getName(), tableCat.getName());
     }
 
@@ -79,14 +79,14 @@ public class TableCategoryServiceTest extends TestCase {
     public void shouldEditWithId() {
         when(tableCategoryRepository.findById(any())).thenReturn(Optional.of(tableCategory));
         when(tableCategoryRepository.save(any())).thenReturn(tableCategory);
-        TableCategory tableCat = tableCategoryService.editTableCategory(1L,tableCategoryDto);
+        TableCategory tableCat = tableCategoryService.editTableCategory(1L,tableCategoryDto, lang);
         assertNotNull(tableCat);
 
     }
 
     @Test
     public void shouldDeleteWithId() {
-        tableCategoryService.deleteTableCategory(1L);
+        tableCategoryService.deleteTableCategory(1L, lang);
         verify(tableCategoryRepository, times(1)).deleteById(any());
 
     }

@@ -1,11 +1,10 @@
 package com.yp.controller;
 
-import com.google.gson.Gson;
 import com.yp.dto.UserDto;
-import com.yp.entity.User;
 import com.yp.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,35 +12,40 @@ import java.util.List;
 @Api(tags = "User Controller")
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/list")
+    @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
     public List<UserDto> getAllUsers(){
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public UserDto getUser(@PathVariable(value = "id")Long id){
-        return userService.getUser(id);
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    public UserDto getUser(@PathVariable(value = "id")Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
+        return userService.getUser(id, lang);
     }
 
-    @PostMapping("/add")
-    public void addUser(@RequestBody UserDto user){
-        userService.addUser(user);
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void addUser(@RequestBody UserDto user, @RequestParam(value = "lang", defaultValue = "en") String lang){
+        userService.addUser(user, lang);
     }
 
-    @PutMapping("/{id}/put")
-    public void putUser(@PathVariable(value = "id")Long id, @RequestBody UserDto user){
-        userService.updateUser(id, user);
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void putUser(@PathVariable(value = "id")Long id, @RequestBody UserDto user, @RequestParam(value = "lang", defaultValue = "en") String lang){
+        userService.updateUser(id, user, lang);
     }
 
-    @DeleteMapping("/{id}/delete")
-    public void deleteUser(@PathVariable(value = "id")Long id){
-        userService.deleteUser(id);
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void deleteUser(@PathVariable(value = "id")Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
+        userService.deleteUser(id, lang);
     }
 
 

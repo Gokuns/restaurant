@@ -7,11 +7,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CategoryControllerTest {
@@ -22,28 +21,23 @@ public class CategoryControllerTest {
     @Mock
     private CategoryService categoryService;
 
-    private CategoryDto categoryDto = new CategoryDto();
 
+    private CategoryDto categoryDto = new CategoryDto();
+    private String lang= "en";
 
     @Before
     public void setUp(){
         categoryDto.setId(1L);
         categoryDto.setName("Goko");
+
     }
 
     @Test
     public void shouldgetWithId() {
 
-        categoryController.getCat(1L);
-        verify(categoryService,times(1)).getCategory(1L);
+        categoryController.getCat(1L,lang);
+        verify(categoryService,times(1)).getCategory(1L,lang);
     }
-    @Test
-    public void shouldgetNameWithId() {
-        Mockito.when(categoryService.getCategory(1L)).thenReturn(categoryDto);
-        categoryController.getCatName(1L);
-        verify(categoryService,times(1)).getCategory(1L);
-    }
-
 
     @Test
     public void shouldgetList(){
@@ -53,27 +47,27 @@ public class CategoryControllerTest {
 
     @Test
     public void shouldEditWithDto(){
-        categoryController.editCategory(1L, categoryDto);
-        verify(categoryService, times(1)).editCategory(1L, categoryDto);
+        categoryController.editCategory(1L,  categoryDto, lang);
+        verify(categoryService, times(1)).editCategory(1L, categoryDto,lang);
     }
 
     @Test
     public void shouldSaveWithDto() {
-        categoryController.addCategory(categoryDto);
-        verify(categoryService, times(1)).addCategory(categoryDto);
+        categoryController.addCategory(categoryDto,lang);
+        verify(categoryService, times(1)).addCategory(categoryDto,lang);
 
     }
 
     @Test
     public void shouldDeleteWithId() {
-        categoryController.deleteCategory(1L);
-        verify(categoryService, times(1)).deleteCategory(1L);
+        categoryController.deleteCategory(1L, lang);
+        verify(categoryService, times(1)).deleteCategory(1L, lang);
     }
 
     @Test
     public void shouldgetProdsWithId() {
-        categoryController.getProductsofCategory(1L);
-        verify(categoryService,times(1)).getProductsWithCategoryId(1L);
+        categoryController.getProductsofCategory(1L, lang);
+        verify(categoryService,times(1)).getProductsWithCategoryId(1L, lang);
     }
 
 }

@@ -3,9 +3,7 @@ package com.yp.service;
 import com.yp.builder.SellOrderBuilder;
 import com.yp.builder.SellOrderDtoBuilder;
 import com.yp.dto.SellOrderDto;
-import com.yp.dto.UserDto;
 import com.yp.entity.SellOrder;
-import com.yp.entity.User;
 import com.yp.mapper.SellOrderMapper;
 import com.yp.repos.SellOrderRepository;
 import junit.framework.TestCase;
@@ -14,7 +12,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.context.MessageSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +32,15 @@ public class SellOrderServiceTest extends TestCase {
 
     @Mock
     private SellOrderMapper sellOrderMapper;
+    @Mock
+    private MessageSource messageSource;
+
 
     private SellOrder sellOrder = new SellOrderBuilder().build();
     private SellOrderDto sellOrderDto = new SellOrderDtoBuilder().build();
     private List<SellOrder> sellOrders = new ArrayList<>();
     private List<SellOrderDto> sellOrderDtos = new ArrayList<>();
+    private String lang = "en";
 
 
     @Before
@@ -58,7 +61,7 @@ public class SellOrderServiceTest extends TestCase {
     @Test
     public void shouldSaveWithDto() {
         when(sellOrderRepository.saveAll(any())).thenReturn(sellOrders);
-        List<SellOrder> lst  = sellOrderService.addOrderLst(sellOrderDtos);
+        List<SellOrder> lst  = sellOrderService.addOrderLst(sellOrderDtos, lang);
         assertEquals(lst.get(0).getCount(), sellOrders.get(0).getCount());
 
     }

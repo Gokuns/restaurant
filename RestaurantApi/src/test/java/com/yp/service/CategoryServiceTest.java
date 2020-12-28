@@ -20,7 +20,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.context.MessageSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,8 @@ public class CategoryServiceTest extends TestCase {
 
     @Mock
     private MediaMapper mediaMapper;
+    @Mock
+    private MessageSource messageSource;
 
     private Category category = new CategoryBuilder().build();
     private CategoryDto categoryDto = new CategoryDtoBuilder().build();
@@ -57,6 +60,7 @@ public class CategoryServiceTest extends TestCase {
     private List<Product> products = new ArrayList<>();
     private Product product = new ProductBuilder().build();
     private Media media = new MediaBuilder().build();
+    private String lang = "en";
 
     @Before
     public void setUp() {
@@ -67,13 +71,14 @@ public class CategoryServiceTest extends TestCase {
         when(categoryMapper.toEntity(any())).thenReturn(category);
         when(mediaMapper.toEntity(any())).thenReturn(media);
         when(categoryMapper.toDtoList(any())).thenReturn(categoryDtoList);
+        //when(messageSource.getMessage(any(),any(),any())).thenReturn("test");
 //        when(categoryMapper.toEntityList(any())).thenReturn(categoryList);
     }
 
     @Test
     public void shouldgetCategoryWithId() {
         when(categoryRepository.findById(1L)).thenReturn(Optional.of(category));
-        CategoryDto cat = categoryService.getCategory(1L);
+        CategoryDto cat = categoryService.getCategory(1L, lang);
         assertEquals(cat.getName(), category.getName());
     }
 
@@ -87,7 +92,7 @@ public class CategoryServiceTest extends TestCase {
     @Test
     public void shouldSaveWithDto() {
         when(categoryRepository.save(any())).thenReturn(category);
-        Category cat = categoryService.addCategory(categoryDto);
+        Category cat = categoryService.addCategory(categoryDto, lang);
         assertEquals(cat.getId(), categoryDto.getId());
     }
 
@@ -95,14 +100,14 @@ public class CategoryServiceTest extends TestCase {
     public void shouldEditWithId() {
         when(categoryRepository.save(any())).thenReturn(category);
         when(categoryRepository.findById(any())).thenReturn(Optional.of(category));
-        Category cat = categoryService.editCategory(1L, categoryDto);
+        Category cat = categoryService.editCategory(1L, categoryDto, lang);
         assertEquals(cat.getId(), categoryDto.getId());
 
     }
 
     @Test
     public void shouldDeleteWithId() {
-        categoryService.deleteCategory(1L);
+        categoryService.deleteCategory(1L, lang);
         verify(categoryRepository, times(1)).deleteById(any());
 
     }
@@ -111,7 +116,7 @@ public class CategoryServiceTest extends TestCase {
     public void shouldGetProductsFromCat(){
         when(categoryRepository.findById(any())).thenReturn(Optional.of(category));
         when(productRepository.findAllByCategoriesIn(any())).thenReturn(products);
-        List<ProductDto> lst = categoryService.getProductsWithCategoryId(1L);
+        List<ProductDto> lst = categoryService.getProductsWithCategoryId(1L, lang);
         assertNotNull(lst);
     }
 }

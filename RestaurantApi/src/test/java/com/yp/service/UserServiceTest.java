@@ -5,10 +5,8 @@ import com.yp.builder.AuthorityDtoBuilder;
 import com.yp.builder.UserBuilder;
 import com.yp.builder.UserDtoBuilder;
 import com.yp.dto.AuthorityDto;
-import com.yp.dto.TableCategoryDto;
 import com.yp.dto.UserDto;
 import com.yp.entity.Authority;
-import com.yp.entity.TableCategory;
 import com.yp.entity.User;
 import com.yp.mapper.UserMapper;
 import com.yp.repos.UserRepository;
@@ -19,7 +17,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.context.MessageSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -34,12 +34,14 @@ public class UserServiceTest extends TestCase {
 
     @InjectMocks
     private UserService userService;
-
     @Mock
     private UserRepository userRepository;
-
     @Mock
     private UserMapper userMapper;
+    @Mock
+    private MessageSource messageSource;
+    @Mock
+    private BCryptPasswordEncoder encoder;
 
     private User user = new UserBuilder().withPassWord("123456789").build();
     private UserDto editUserDto = new UserDtoBuilder().build();
@@ -50,6 +52,7 @@ public class UserServiceTest extends TestCase {
     private HashSet<AuthorityDto> setDto = new HashSet<>();
     private Authority authority = new AuthorityBuilder().build();
     private HashSet<Authority> set = new HashSet<>();
+    private String lang = "en";
 
 
     @Before
@@ -66,7 +69,7 @@ public class UserServiceTest extends TestCase {
     @Test
     public void shouldgetWithId() {
         Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(user));
-        UserDto us = userService.getUser(1L);
+        UserDto us = userService.getUser(1L, lang);
         assertNotNull(us);
         assertEquals(user.getUsername(), us.getName());
     }
@@ -81,7 +84,7 @@ public class UserServiceTest extends TestCase {
     @Test
     public void shouldSaveWithDto() {
         when(userRepository.save(any())).thenReturn(user);
-        User us = userService.addUser(userDto);
+        User us = userService.addUser(userDto, lang);
         assertEquals(us.getUsername(), user.getUsername());
 
     }
@@ -90,13 +93,13 @@ public class UserServiceTest extends TestCase {
     public void shouldEditWithId() {
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
         when(userRepository.save(any())).thenReturn(user);
-        User us = userService.updateUser(1L, editUserDto);
+        User us = userService.updateUser(1L, editUserDto, lang);
         assertEquals(us.getPassword(), user.getPassword());
     }
 
     @Test
     public void shouldDeleteWithId() {
-        userService.deleteUser(1L);
+        userService.deleteUser(1L, lang);
         verify(userRepository, times(1)).deleteById(any());
 
     }

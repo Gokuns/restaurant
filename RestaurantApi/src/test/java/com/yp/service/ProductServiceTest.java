@@ -17,8 +17,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.context.MessageSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +40,9 @@ public class ProductServiceTest extends TestCase {
     private CategoryRepository categoryRepository;
     @Mock
     private ProductMapper productMapper;
+    @Mock
+    private MessageSource messageSource;
+
 
     private Product product = new ProductBuilder().build();
     private ProductDto productDto = new ProductDtoBuilder().build();
@@ -47,6 +50,7 @@ public class ProductServiceTest extends TestCase {
     private List<ProductDto> productDtos = new ArrayList<>();
     private Category cat = new CategoryBuilder().build();
     private CategoryDto catDto = new CategoryDtoBuilder().build();
+    private String lang = "en";
 
 
     @Before
@@ -62,7 +66,7 @@ public class ProductServiceTest extends TestCase {
     @Test
     public void shouldgetAuthorityWithId() {
         when(productRepository.findById(1L)).thenReturn(Optional.of(product));
-        ProductDto p = productService.getProduct(1L);
+        ProductDto p = productService.getProduct(1L, lang);
         assertNotNull(p);
         assertEquals(p.getName(), product.getName());
     }
@@ -78,8 +82,8 @@ public class ProductServiceTest extends TestCase {
     @Test
     public void shouldSaveWithDto() {
         when(productRepository.save(any())).thenReturn(product);
-        when(categoryRepository.findById(any())).thenReturn(Optional.of(cat));
-        Product p = productService.addProduct(productDto);
+//        when(categoryRepository.findById(any())).thenReturn(Optional.of(cat));
+        Product p = productService.addProduct(productDto, lang);
         assertEquals(p.getName(), product.getName());
     }
 
@@ -87,15 +91,14 @@ public class ProductServiceTest extends TestCase {
     public void shouldEditWithId() {
         when(productRepository.findById(any())).thenReturn(Optional.of(product));
         when(productRepository.save(any())).thenReturn(product);
-        Product p = productService.editProduct(1L, productDto);
+        Product p = productService.editProduct(1L, productDto, lang);
         assertNotNull(p);
         assertEquals(p.getName(), product.getName());
     }
 
     @Test
     public void shouldDeleteWithId() {
-        productService.deleteProduct(1L);
+        productService.deleteProduct(1L, lang);
         verify(productRepository, times(1)).deleteById(any());
-
     }
 }

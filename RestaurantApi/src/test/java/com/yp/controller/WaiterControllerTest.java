@@ -1,16 +1,13 @@
 package com.yp.controller;
 
 import com.yp.dto.WaiterDto;
-import com.yp.service.UserService;
 import com.yp.service.WaiterService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import org.mockito.junit.MockitoJUnitRunner;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -24,10 +21,11 @@ public class WaiterControllerTest {
     private WaiterService waiterService;
 
     private WaiterDto waiterDto = new WaiterDto();
+    private String lang = "en";
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         waiterDto.setId(1L);
         waiterDto.setName("Goko");
         waiterDto.setSurname("Man");
@@ -38,8 +36,8 @@ public class WaiterControllerTest {
 
     @Test
     public void shouldgetAuthorityWithId() {
-        waiterController.getUser(1L);
-        verify(waiterService,times(1)).getWaiter(1L);
+        waiterController.getUser(1L,lang);
+        verify(waiterService,times(1)).getWaiter(1L,lang);
     }
 
     @Test
@@ -50,22 +48,22 @@ public class WaiterControllerTest {
 
     @Test
     public void shouldSaveWithDto() {
-        waiterController.addUser(waiterDto);
-        verify(waiterService, times(1)).addWaiter(waiterDto);
+        waiterController.addUser(waiterDto,lang);
+        verify(waiterService, times(1)).addWaiter(waiterDto,lang);
 
     }
 
     @Test
     public void shouldEditWithDtop(){
-        waiterController.putUser(1L, waiterDto);
-        verify(waiterService, times(1)).updateWaiter(1L, waiterDto);
+        waiterController.putUser(1L, waiterDto,lang);
+        verify(waiterService, times(1)).updateWaiter(1L, waiterDto,lang);
 
     }
 
     @Test
     public void shouldDeleteWithId() {
-        waiterController.deleteUser(1L);
-        verify(waiterService, times(1)).deleteWaiter(1L);
+        waiterController.deleteUser(1L,lang);
+        verify(waiterService, times(1)).deleteWaiter(1L,lang);
     }
 
 }

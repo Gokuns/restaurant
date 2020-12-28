@@ -1,19 +1,13 @@
 package com.yp.controller;
 
-import com.yp.dto.CategoryDto;
 import com.yp.dto.TableCategoryDto;
-import com.yp.entity.TableCategory;
-import com.yp.service.ProductService;
 import com.yp.service.TableCategoryService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import static org.junit.Assert.*;
+import org.mockito.junit.MockitoJUnitRunner;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -27,15 +21,16 @@ public class TableCategoryControllerTest {
     private TableCategoryService tableCategoryService;
 
     private TableCategoryDto tableCategoryDto = new TableCategoryDto();
+    private String lang = "en";
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
     }
 
     @Test
     public void shouldgetWithId() {
-        tableCategoryController.getTableCat(1L);
-        verify(tableCategoryService,times(1)).getTableCategory(1L);
+        tableCategoryController.getTableCat(1L, lang);
+        verify(tableCategoryService,times(1)).getTableCategory(1L, lang);
     }
 
 
@@ -47,30 +42,22 @@ public class TableCategoryControllerTest {
     }
 
     @Test
-    public void shouldgetNameWithId() {
-        Mockito.when(tableCategoryService.getTableCategory(1L)).thenReturn(tableCategoryDto);
-
-        tableCategoryController.getCatName(1L);
-        verify(tableCategoryService,times(1)).getTableCategory(1L);
-    }
-
-    @Test
     public void shouldEditWithDto(){
-        tableCategoryController.editTableCat(1L, tableCategoryDto);
-        verify(tableCategoryService, times(1)).editTableCategory(1L, tableCategoryDto);
+        tableCategoryController.editTableCat(1L, tableCategoryDto, lang);
+        verify(tableCategoryService, times(1)).editTableCategory(1L, tableCategoryDto, lang);
     }
 
     @Test
     public void shouldSaveWithDto() {
-        tableCategoryController.addTableCat(tableCategoryDto);
-        verify(tableCategoryService, times(1)).addTableCategory(tableCategoryDto);
+        tableCategoryController.addTableCat(tableCategoryDto, lang);
+        verify(tableCategoryService, times(1)).addTableCategory(tableCategoryDto, lang);
 
     }
 
     @Test
     public void shouldDeleteWithId() {
-        tableCategoryController.deleteTableCat(1L);
-        verify(tableCategoryService, times(1)).deleteTableCategory(1L);
+        tableCategoryController.deleteTableCat(1L, lang);
+        verify(tableCategoryService, times(1)).deleteTableCategory(1L, lang);
     }
 
 }

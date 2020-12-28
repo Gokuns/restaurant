@@ -9,9 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import java.util.HashSet;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -26,6 +24,7 @@ public class UserControllerTest  extends TestCase {
     private UserService userService;
 
     private UserDto userDto = new UserDtoBuilder().build();
+    private String lang = "en";
 
     @Before
     public void setUp() {
@@ -33,8 +32,8 @@ public class UserControllerTest  extends TestCase {
 
     @Test
     public void shouldgetAuthorityWithId() {
-        userController.getUser(1L);
-        verify(userService,times(1)).getUser(1L);
+        userController.getUser(1L, lang);
+        verify(userService,times(1)).getUser(1L, lang);
     }
 
     @Test
@@ -45,22 +44,22 @@ public class UserControllerTest  extends TestCase {
 
     @Test
     public void shouldSaveWithDto() {
-        userController.addUser(userDto);
-        verify(userService, times(1)).addUser(userDto);
+        userController.addUser(userDto, lang);
+        verify(userService, times(1)).addUser(userDto, lang);
 
     }
 
     @Test
     public void shouldEditWithDtop(){
-        userController.putUser(1L, userDto);
-        verify(userService, times(1)).updateUser(1L, userDto);
+        userController.putUser(1L, userDto, lang);
+        verify(userService, times(1)).updateUser(1L, userDto, lang);
 
     }
 
     @Test
     public void shouldDeleteWithId() {
-        userController.deleteUser(1L);
-        verify(userService, times(1)).deleteUser(1L);
+        userController.deleteUser(1L, lang);
+        verify(userService, times(1)).deleteUser(1L, lang);
     }
 
 }

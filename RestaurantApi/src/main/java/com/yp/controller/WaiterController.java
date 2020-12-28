@@ -1,11 +1,10 @@
 package com.yp.controller;
 
-import com.yp.dto.UserDto;
 import com.yp.dto.WaiterDto;
-import com.yp.repos.WaiterRepository;
 import com.yp.service.WaiterService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,34 +12,43 @@ import java.util.List;
 @Api(tags = "Waiter Controller")
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/waiter")
+@RequestMapping("/waiters")
 public class WaiterController {
     @Autowired
     private WaiterService waiterService;
 
-    @GetMapping("/list")
+    @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
     public List<WaiterDto> getAllUsers(){
         return waiterService.getAllWaiters();
     }
 
     @GetMapping("/{id}")
-    public WaiterDto getUser(@PathVariable(value = "id")Long id){
-        return waiterService.getWaiter(id);
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    public WaiterDto getUser(@PathVariable(value = "id")Long id,
+                             @RequestParam(value = "lang", defaultValue = "en") String lang){
+        return waiterService.getWaiter(id, lang);
     }
 
-    @PostMapping("/add")
-    public void addUser(@RequestBody WaiterDto waiterDto){
-        waiterService.addWaiter(waiterDto);
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void addUser(@RequestBody WaiterDto waiterDto,
+                        @RequestParam(value = "lang", defaultValue = "en") String lang){
+        waiterService.addWaiter(waiterDto, lang);
     }
 
-    @PutMapping("/{id}/put")
-    public void putUser(@PathVariable(value = "id")Long id, @RequestBody WaiterDto waiterDto){
-        waiterService.updateWaiter(id, waiterDto);
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void putUser(@PathVariable(value = "id")Long id, @RequestBody WaiterDto waiterDto,
+                        @RequestParam(value = "lang", defaultValue = "en") String lang){
+        waiterService.updateWaiter(id, waiterDto, lang);
     }
 
-    @DeleteMapping("/{id}/delete")
-    public void deleteUser(@PathVariable(value = "id")Long id){
-        waiterService.deleteWaiter(id);
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void deleteUser(@PathVariable(value = "id")Long id,
+                           @RequestParam(value = "lang", defaultValue = "en") String lang){
+        waiterService.deleteWaiter(id, lang);
     }
 
 

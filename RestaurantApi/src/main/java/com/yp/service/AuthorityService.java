@@ -4,12 +4,17 @@ package com.yp.service;
 import com.yp.dto.AuthorityDto;
 import com.yp.dto.UserDto;
 import com.yp.entity.Authority;
+import com.yp.exception.BusinessRuleException;
+import com.yp.exception.ContentNotFoundException;
 import com.yp.mapper.AuthorityMapper;
+import com.yp.mapper.UserMapper;
 import com.yp.repos.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthorityService {
@@ -19,43 +24,59 @@ public class AuthorityService {
     @Autowired
     private AuthorityMapper authorityMapper;
 
-    public AuthorityDto getRole(Long id){
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private MessageSource messageSource;
+
+    private static final String BUSINESS_RULE_EXCEPTION = "BusinessRuleException";
+    private static final String CONTENT_NOT_FOUND = "ContentNotFound";
+
+
+    public AuthorityDto getRole(Long id, String lang){
         Optional<Authority> optionalAuthority= authorityRepository.findById(id);
-        if(optionalAuthority.isPresent()){
-            Authority authority=  optionalAuthority.get();
-            return authorityMapper.toDto(authority);
-        }else return  null;
+        if(optionalAuthority.isEmpty()){
+            throw new ContentNotFoundException(messageSource.getMessage(CONTENT_NOT_FOUND, new Object[0], new Locale(lang)));
+        }
+        return authorityMapper.toDto(optionalAuthority.get());
     }
+
     public List<AuthorityDto> getAllRoles(){
-        List<AuthorityDto>  authorityDtos = new ArrayList<>();
-        authorityRepository.findAll().iterator().forEachRemaining(authority ->
-                authorityDtos.add(authorityMapper.toDto(authority)));
-        return authorityDtos;
+        return authorityRepository.findAll().stream().map(authorityMapper::toDto).collect(Collectors.toList());
     }
-    public Authority addRole(AuthorityDto authority){
+    public Authority addRole(AuthorityDto authority, String lang){
+        if(authority==null) throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         Authority auth = authorityMapper.toEntity(authority);
         return authorityRepository.save(auth);
     }
-    public Authority editRole(AuthorityDto authority, Long id){
+    public Authority editRole(AuthorityDto authority, Long id, String lang){
         Optional<Authority> optionalAuthority = authorityRepository.findById(id);
-        if (optionalAuthority.isPresent()){
-            Authority auth = optionalAuthority.get();
-            auth.setAuthority(authority.getAuthority());
-            return authorityRepository.saveAndFlush(auth);
+        if (optionalAuthority.isEmpty()){
+            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         }
-        return null;
+        if(authority==null){
+            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        }
+        Authority auth = optionalAuthority.get();
+        if(!auth.getRole().equals(authority.getAuthority())){
+            auth.setRole(authority.getAuthority());
+        }
+        return authorityRepository.save(auth);
     }
-    public void deleterRole(Long id){
+    public void deleterRole(Long id, String lang){
+        if(id==null){
+            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        }
         authorityRepository.deleteById(id);
     }
 
-    public Set<UserDto> getUsersWithRole(Long id){
+    public Set<UserDto> getUsersWithRole(Long id, String lang){
         Optional<Authority> optionalAuthority = authorityRepository.findById(id);
-        Set<UserDto> userDtos = new HashSet<>();
-        if (optionalAuthority.isPresent()){
-            Authority authority = optionalAuthority.get();
+        if (optionalAuthority.isEmpty()) {
+            throw new ContentNotFoundException(messageSource.getMessage(CONTENT_NOT_FOUND, new Object[0], new Locale(lang)));
         }
-
-        return userDtos;
+            Authority authority = optionalAuthority.get();
+       return authorityRepository.findAllByRoles(authority).stream().map(userMapper::toDto).collect(Collectors.toSet());
     }
 }

@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class AuthorityControllerTest extends TestCase {
@@ -20,6 +20,7 @@ public class AuthorityControllerTest extends TestCase {
     private AuthorityService authorityService;
 
     private AuthorityDto authorityDto = new AuthorityDto();
+    private String lang = "en";
 
     @Before
     public void setUp() {
@@ -29,8 +30,8 @@ public class AuthorityControllerTest extends TestCase {
 
     @Test
     public void shouldgetAuthorityWithId() {
-        authorityController.getRole(1L);
-        verify(authorityService,times(1)).getRole(1L);
+        authorityController.getRole(1L, lang);
+        verify(authorityService,times(1)).getRole(1L, lang);
     }
 
 
@@ -42,23 +43,23 @@ public class AuthorityControllerTest extends TestCase {
 
     @Test
     public void shouldSaveWithDto() {
-        authorityController.addRole(authorityDto);
-        verify(authorityService, times(1)).addRole(authorityDto);
+        authorityController.addRole(authorityDto, lang);
+        verify(authorityService, times(1)).addRole(authorityDto, lang);
 
  }
 
 
     @Test
     public void shouldEditWithDto() {
-        authorityController.editRole(authorityDto, 1L);
-        verify(authorityService, times(1)).editRole(authorityDto,1L);
+        authorityController.editRole(authorityDto, 1L, lang);
+        verify(authorityService, times(1)).editRole(authorityDto,1L, lang);
 
     }
 
     @Test
     public void shouldDeleteWithId() {
-        authorityController.deleteRole(1L);
-        verify(authorityService, times(1)).deleterRole(1L);
+        authorityController.deleteRole(1L,lang);
+        verify(authorityService, times(1)).deleterRole(1L, lang);
   }
 
 }

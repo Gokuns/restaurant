@@ -1,15 +1,13 @@
 package com.yp.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
+@EqualsAndHashCode(callSuper = true)
 @SQLDelete(
         sql="UPDATE ROLES SET deleted= true where id=?")
 @Where(clause = "deleted=false")
@@ -21,5 +19,5 @@ import javax.persistence.*;
 public class Authority extends BaseEntity{
 
     @Column(name= "AUTHORITY", unique = true)
-    private String authority;
+    private String role;
 }

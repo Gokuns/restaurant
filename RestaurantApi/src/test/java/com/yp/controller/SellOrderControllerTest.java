@@ -1,20 +1,16 @@
 package com.yp.controller;
 
-import com.yp.dto.CategoryDto;
 import com.yp.dto.SellOrderDto;
-import com.yp.service.ProductService;
 import com.yp.service.SellOrderService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -29,6 +25,7 @@ public class SellOrderControllerTest {
 
     SellOrderDto sellOrderDto = new SellOrderDto();
     List<SellOrderDto> lst = new ArrayList<>();
+    private String lang = "en";
 
     @Before
     public void setUp() {
@@ -37,8 +34,8 @@ public class SellOrderControllerTest {
 
     @Test
     public void shouldSaveWithDto() {
-        sellOrderController.addOrder( lst);
-        verify(sellOrderService, times(1)).addOrderLst(lst);
+        sellOrderController.addOrder(lst, lang);
+        verify(sellOrderService, times(1)).addOrderLst(lst, lang);
 
     }
     @Test

@@ -10,4 +10,5 @@ public class TableCategoryDto {
     private Long id;
     private String name;
     private int number;
+    private MediaDto media;
 }

@@ -1,6 +1,7 @@
 package com.yp.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -8,7 +9,7 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-
+@EqualsAndHashCode(callSuper = true)
 @SQLDelete(
         sql="UPDATE SellOrder SET deleted= true where id=?")
 @Where(clause = "deleted=false")
