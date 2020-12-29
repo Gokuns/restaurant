@@ -14,7 +14,7 @@ import java.util.function.Function;
 public class SliceBuilder<T> {
 
     public Slice<T> build(){
-        return new Slice<T>() {
+        return new Slice<>() {
             @Override
             public int getNumber() {
                 return 1;
@@ -82,14 +82,14 @@ public class SliceBuilder<T> {
 
             @Override
             public Iterator<T> iterator() {
-                return new Iterator<T>() {
+                return new Iterator<>() {
                     @Override
                     public boolean hasNext() {
                         return false;
                     }
 
                     @Override
-                    public T next() throws NoSuchElementException {
+                    public T next() {
                         throw new NoSuchElementException("no such element");
                     }
                 };

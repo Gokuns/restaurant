@@ -48,7 +48,7 @@ public class CustomerServiceTest {
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         customerList.add(customer);
         customerDtoList.add(customerDto);
         when(customerRepository.findAll()).thenReturn(customerList);

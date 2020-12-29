@@ -2,7 +2,6 @@ package com.yp.builder;
 
 import com.yp.dto.MediaDto;
 import com.yp.dto.TableCategoryDto;
-import com.yp.entity.TableCategory;
 
 public class TableCategoryDtoBuilder implements Builder{
     private Long id;

@@ -132,7 +132,7 @@ public class CategoryServiceTest extends TestCase {
         assertNotNull(lst);
     }
     @Test(expected = BusinessRuleException.class)
-    public void shouldRaiseExceptionInGetWıthCat(){
+    public void shouldRaiseExceptionInGetWithCat(){
         categoryService.getProductsWithCategoryId(null, lang);
     }
 

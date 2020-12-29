@@ -1,7 +1,6 @@
 package com.yp.builder;
 
 import com.yp.dto.MediaDto;
-import com.yp.entity.Media;
 
 import static org.apache.tomcat.util.buf.HexUtils.fromHexString;
 

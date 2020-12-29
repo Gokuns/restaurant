@@ -13,7 +13,7 @@ import java.util.function.Function;
 public class PageBuilder<T> {
 
     public Page<T> build(){
-        return new Page<T>() {
+        return new Page<>() {
             @Override
             public int getTotalPages() {
                 return 1;
@@ -91,15 +91,15 @@ public class PageBuilder<T> {
 
             @Override
             public Iterator<T> iterator() {
-                return new Iterator<T>() {
+                return new Iterator<>() {
                     @Override
                     public boolean hasNext() {
                         return false;
                     }
 
                     @Override
-                    public T next() throws NoSuchElementException {
-                        return null;
+                    public T next(){
+                        throw new NoSuchElementException();
                     }
                 };
             }
