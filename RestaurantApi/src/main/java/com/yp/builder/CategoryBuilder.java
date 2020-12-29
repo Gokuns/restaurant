@@ -6,32 +6,32 @@ import com.yp.entity.Product;
 
 import java.util.*;
 
-public class CategoryBuilder extends Builder{
-    private Long _id;
-    private String _name;
-    private Media _media;
+public class CategoryBuilder implements Builder{
+    private Long id;
+    private String name;
+    private Media media;
 
     public CategoryBuilder(){
-        this._id=1L;
-        this._name="";
-        this._media = new MediaBuilder().build();
+        this.id=1L;
+        this.name="";
+        this.media = new MediaBuilder().build();
     }
 
 
     @Override
     public CategoryBuilder withId(Long id) {
-        this._id=id;
+        this.id=id;
         return this;
     }
 
     @Override
     public CategoryBuilder withName(String name) {
-        this._name=name;
+        this.name=name;
         return this;
     }
 
     public CategoryBuilder withMedia(Media media){
-        this._media = media;
+        this.media = media;
         return this;
     }
 
@@ -40,9 +40,9 @@ public class CategoryBuilder extends Builder{
 
     public Category build(){
         Category category = new Category();
-        category.setId(this._id);
-        category.setName(this._name);
-        category.setMedia(this._media);
+        category.setId(this.id);
+        category.setName(this.name);
+        category.setMedia(this.media);
         return category;
     }
 }

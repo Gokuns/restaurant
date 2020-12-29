@@ -11,8 +11,8 @@ import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @SQLDelete(
-        sql="UPDATE USERS SET deleted= true where id=?")
-@Where(clause = "deleted=false")
+        sql="UPDATE USERS SET DELETED= true WHERE ID=?")
+@Where(clause = "DELETED=false")
 @Entity(name = "USERS")
 @Data
 @NoArgsConstructor
@@ -28,8 +28,8 @@ public class User extends BaseEntity {
     @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "AUTHORITIES",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "authority_id")}
+            joinColumns = {@JoinColumn(name = "USER_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID")}
 
     )
     private Set<Authority> authorities;

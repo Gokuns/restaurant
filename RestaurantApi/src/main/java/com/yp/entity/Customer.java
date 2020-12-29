@@ -10,18 +10,22 @@ import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @SQLDelete(
-        sql="UPDATE Customer SET deleted= true where id=?")
-@Where(clause = "deleted=false")
-@Entity
+        sql="UPDATE CUSTOMERS SET DELETED= true WHERE ID=?")
+@Where(clause = "DELETED=false")
+@Entity(name = "CUSTOMERS")
 @Data
 @NoArgsConstructor
 public class Customer extends BaseEntity{
 
+    @Column(name = "NAME")
     private String name;
+    @Column(name = "SURNAME")
     private String surname;
+    @Column(name = "PHONE")
     private String phone;
+    @Column(name = "ADDRESS")
     private String address;
     @ManyToOne
-    @JoinColumn(name= "media_id")
+    @JoinColumn(name= "MEDIA_ID")
     private Media media;
 }

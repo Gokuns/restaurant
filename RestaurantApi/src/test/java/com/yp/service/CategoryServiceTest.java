@@ -140,7 +140,6 @@ public class CategoryServiceTest extends TestCase {
     public void shouldRaiseExceptionInEditWithId(){
         CategoryDto dto = new CategoryDtoBuilder().withName("test").withMedia(new MediaDtoBuilder().withName("test").build()).build();
         Category cat = categoryService.editCategory(null, dto, lang);
-        assertEquals(cat.getId(), categoryDto.getId());
     }
     @Test(expected = BusinessRuleException.class)
     public void shouldRaiseExceptionInEditWithObject(){

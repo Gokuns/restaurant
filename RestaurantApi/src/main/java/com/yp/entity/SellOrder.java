@@ -11,18 +11,25 @@ import java.sql.Timestamp;
 
 @EqualsAndHashCode(callSuper = true)
 @SQLDelete(
-        sql="UPDATE SellOrder SET deleted= true where id=?")
-@Where(clause = "deleted=false")
-@Entity
+        sql="UPDATE SELL_ORDERS SET DELETED= true WHERE ID=?")
+@Where(clause = "DELETED=false")
+@Entity(name = "SELL_ORDERS")
 @Data
 @NoArgsConstructor
 public class SellOrder extends BaseEntity{
 
+    @Column(name = "PRODUCT_ID")
     private int productId;
+    @Column(name = "COUNT")
     private int count;
+    @Column(name = "TOTAL_PRICE")
     private double totalPrice;
+    @Column(name = "CREATE_DATE")
     private Timestamp createDate;
+    @Column(name = "TABLE_NAME")
     private String tableName;
+    @Column(name = "WAITER_NAME")
     private String waiterName;
+    @Column(name = "CUSTOMER_ID")
     private Long customerId;
 }

@@ -10,6 +10,8 @@ import com.yp.repos.TableCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Locale;
@@ -38,6 +40,7 @@ public class TableCategoryService {
         return tableCategoryMapper.toDto(tableCategory);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public TableCategory addTableCategory(TableCategoryDto tableCat, String lang){
         if(tableCat==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
@@ -46,6 +49,7 @@ public class TableCategoryService {
         return tableCategoryRepository.save(tableCategory);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public TableCategory editTableCategory(Long id, TableCategoryDto tabCat, String lang){
         if(id==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
@@ -61,12 +65,13 @@ public class TableCategoryService {
         if(cat.getNumber()!=tabCat.getNumber()){
             cat.setNumber(tabCat.getNumber());
         }
-        if(!cat.getMedia().equals(tabCat.getMedia())){
+        if(cat.getMedia().getId().equals(tabCat.getMedia().getId())){
             cat.setMedia(mediaMapper.toEntity(tabCat.getMedia()));
         }
         return tableCategoryRepository.save(cat);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteTableCategory(Long id, String lang){
         if(id==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));

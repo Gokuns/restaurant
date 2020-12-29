@@ -10,8 +10,8 @@ import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @SQLDelete(
-        sql="UPDATE CATEGORIES SET deleted= true where id=?")
-@Where(clause = "deleted=false")
+        sql="UPDATE TABLE_CATEGORIES SET DELETED= true WHERE ID=?")
+@Where(clause = "DELETED=false")
 @Entity(name = "TABLE_CATEGORIES")
 @Data
 @NoArgsConstructor
@@ -19,6 +19,6 @@ public class    TableCategory extends BaseEntity{
     private String name;
     private int number;
     @ManyToOne
-    @JoinColumn(name= "media_id")
+    @JoinColumn(name= "MEDIA_ID")
     private Media media;
 }

@@ -16,6 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +90,8 @@ public class CustomerServiceTest {
 
     @Test
     public void shouldGetCustomerPage(){
-        customerService.getCustomerPage(PageRequest.of(0,1), lang);
+        Page<CustomerDto> customerPage = customerService.getCustomerPage(PageRequest.of(0, 1), lang);
+        assertNotNull(customerPage);
     }
 
     @Test(expected = BusinessRuleException.class)
@@ -99,8 +101,8 @@ public class CustomerServiceTest {
 
     @Test
     public void shouldGetCustomerSlice(){
-        customerService.getCustomerSlice(PageRequest.of(0,1), lang);
-
+        Slice<CustomerDto> customerSlice = customerService.getCustomerSlice(PageRequest.of(0, 1), lang);
+        assertNotNull(customerSlice);
     }
 
     @Test(expected = BusinessRuleException.class)
@@ -128,7 +130,8 @@ public class CustomerServiceTest {
     public void shoulEditCustomer(){
         CustomerDto customerDto = new CustomerDtoBuilder().withId(2L).withName("test").withSurname("test")
                 .withPhone("test").withAddress("test").withMedia(new MediaDtoBuilder().withName("test").build()).build();
-        customerService.editCustomer(1L, customerDto, lang);
+        String s = customerService.editCustomer(1L, customerDto, lang);
+        assertNotNull(s);
     }
 
     @Test

@@ -12,6 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 import java.util.Locale;
@@ -57,12 +60,14 @@ public class CustomerService {
         return customerRepository.findAllSlices(pageable).map(customerMapper::toDto);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public String addCustomer(CustomerDto customerDto, String lang){
         if(customerDto==null) throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         customerRepository.save(customerMapper.toEntity(customerDto));
         return "Success";
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public String editCustomer(Long id, CustomerDto customerDto, String lang){
         if(id==null){
             throw  new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
@@ -88,6 +93,7 @@ public class CustomerService {
         return "Successfully edited";
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public String deleteCustomer(Long id, String lang){
         if(id==null) throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         customerRepository.deleteById(id);

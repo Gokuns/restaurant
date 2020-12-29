@@ -2,82 +2,79 @@ package com.yp.builder;
 
 import com.yp.entity.Media;
 import com.yp.entity.Waiter;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-public class WaiterBuilder extends Builder{
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+public class WaiterBuilder implements Builder{
 
-    private Long _id;
-    private Long _waiterId;
-    private String _name;
-    private String _surname;
-    private LocalDate _dateOfBirth;
-    private String _phone;
-    private String _mail;
-    private Media _media;
+    private Long id;
+    private Long waiterId;
+    private String name;
+    private String surname;
+    private LocalDate dateOfBirth;
+    private String phone;
+    private String mail;
+    private Media media;
 
     public WaiterBuilder() {
-        this._id = 1L;
-        this._waiterId=1L;
-        this._name ="";
-        this._surname = "";
-        this._dateOfBirth = LocalDate.now();
-        this._phone = "";
-        this._mail = "asd@gmail.com";
-        this._media = new MediaBuilder().build();
+        this.id = 1L;
+        this.waiterId=1L;
+        this.name ="";
+        this.surname = "";
+        this.dateOfBirth = LocalDate.now();
+        this.phone = "";
+        this.mail = "asd@gmail.com";
+        this.media = new MediaBuilder().build();
     }
     @Override
     public WaiterBuilder withId(Long id) {
-        this._id= id;
+        this.id= id;
         return this;
     }
 
     public WaiterBuilder withWaiterId(Long id) {
-        this._waiterId=id;
+        this.waiterId=id;
         return this;
     }
 
     @Override
     public WaiterBuilder withName(String name) {
-        this._name=name;
+        this.name=name;
         return this;
     }
 
     public WaiterBuilder withSurname(String surname){
-        this._surname=surname;
+        this.surname=surname;
         return this;
     }
 
     public WaiterBuilder withDateOfBirth(LocalDate dateOfBirth){
-        this._dateOfBirth = dateOfBirth;
+        this.dateOfBirth = dateOfBirth;
         return this;
     }
     public WaiterBuilder withPhone(String phone){
-        this._phone=phone;
+        this.phone=phone;
         return this;
     }
     public WaiterBuilder withMail(String mail){
-        this._mail = mail;
+        this.mail = mail;
         return this;
     }
 
     public WaiterBuilder withMedia(Media media){
-        this._media = media;
+        this.media = media;
         return this;
     }
 
     public Waiter build(){
         Waiter waiter = new Waiter();
-        waiter.setId(this._id);
-        waiter.setWaiterId(this._waiterId);
-        waiter.setName(this._name);
-        waiter.setSurname(this._surname);
-        waiter.setDateOfBirth(this._dateOfBirth);
-        waiter.setPhone(this._phone);
-        waiter.setMail(this._mail);
-        waiter.setMedia(this._media);
+        waiter.setId(this.id);
+        waiter.setWaiterId(this.waiterId);
+        waiter.setName(this.name);
+        waiter.setSurname(this.surname);
+        waiter.setDateOfBirth(this.dateOfBirth);
+        waiter.setPhone(this.phone);
+        waiter.setMail(this.mail);
+        waiter.setMedia(this.media);
         return waiter;
     }
 }

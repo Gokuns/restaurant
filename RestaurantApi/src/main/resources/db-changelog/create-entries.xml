@@ -6,103 +6,103 @@
 
     <changeSet author="gokalp.unsal" id="12-9-2020-2-20">
         <insert tableName="CATEGORIES">
-            <column name="name" value="Top Sellers" />
-            <column name="media_id" value="1"/>
+            <column name="NAME" value="Top Sellers" />
+            <column name="MEDIA_ID" value="1"/>
         </insert>
     </changeSet>
 
     <changeSet author="gokalp.unsal" id="12-7-2020-20-10">
         <insert tableName="CATEGORIES">
-            <column name="name" value="Pizza" />
-            <column name="media_id" value="1"/>
+            <column name="NAME" value="Pizza" />
+            <column name="MEDIA_ID" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-11">
         <insert tableName="CATEGORIES">
-            <column name="name" value="Burger" />
-            <column name="media_id" value="1"/>
+            <column name="NAME" value="Burger" />
+            <column name="MEDIA_ID" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-12">
         <insert tableName="CATEGORIES">
-            <column name="name" value="Drink" />
-            <column name="media_id" value="1"/>
+            <column name="NAME" value="Drink" />
+            <column name="MEDIA_ID" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-13">
         <insert tableName="CATEGORIES">
-            <column name="name" value="Dessert" />
-            <column name="media_id" value="1"/>
+            <column name="NAME" value="Dessert" />
+            <column name="MEDIA_ID" value="1"/>
         </insert>
     </changeSet>
 
     <changeSet author="gokalp.unsal" id="12-7-2020-20-14">
-        <insert tableName="Product">
-            <column name="name" value="Margarita Pizza" />
-            <column name="details" value="Pizza" />
-            <column name="price" value="22" />
-            <column name="media_id" value="1"/>
+        <insert tableName="PRODUCTS">
+            <column name="NAME" value="Margarita Pizza" />
+            <column name="DETAILS" value="Pizza" />
+            <column name="PRICE" value="22" />
+            <column name="MEDIA_ID" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-15">
-        <insert tableName="Product">
-            <column name="name" value="Fungi Pizza" />
-            <column name="details" value="Pizza" />
-            <column name="price" value="23" />
-            <column name="media_id" value="1"/>
+        <insert tableName="PRODUCTS">
+            <column name="NAME" value="Fungi Pizza" />
+            <column name="DETAILS" value="Pizza" />
+            <column name="PRICE" value="23" />
+            <column name="MEDIA_ID" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-16">
-        <insert tableName="Product">
-            <column name="name" value="Steak Burger" />
-            <column name="details" value="200gr Steak" />
-            <column name="price" value="28" />
-            <column name="media_id" value="1"/>
+        <insert tableName="PRODUCTS">
+            <column name="NAME" value="Steak Burger" />
+            <column name="DETAILS" value="200gr Steak" />
+            <column name="PRICE" value="28" />
+            <column name="MEDIA_ID" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-17">
-        <insert tableName="Product">
-            <column name="name" value="Cheeseburger" />
-            <column name="details" value="Cheddar" />
-            <column name="price" value="25" />
-            <column name="media_id" value="1"/>
+        <insert tableName="PRODUCTS">
+            <column name="NAME" value="Cheeseburger" />
+            <column name="DETAILS" value="Cheddar" />
+            <column name="PRICE" value="25" />
+            <column name="MEDIA_ID" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-18">
-        <insert tableName="Product">
-            <column name="name" value="Latte" />
-            <column name="details" value="Middle" />
-            <column name="price" value="14" />
-            <column name="media_id" value="1"/>
+        <insert tableName="PRODUCTS">
+            <column name="NAME" value="Latte" />
+            <column name="DETAILS" value="Middle" />
+            <column name="PRICE" value="14" />
+            <column name="MEDIA_ID" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-19">
-        <insert tableName="Product">
-            <column name="name" value="Mocha" />
-            <column name="details" value="Middle" />
-            <column name="price" value="15" />
-            <column name="media_id" value="1"/>
+        <insert tableName="PRODUCTS">
+            <column name="NAME" value="Mocha" />
+            <column name="DETAILS" value="Middle" />
+            <column name="PRICE" value="15" />
+            <column name="MEDIA_ID" value="1"/>
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-20">
-        <insert tableName="Product">
-            <column name="name" value="Flat White" />
-            <column name="details" value="Middle" />
-            <column name="price" value="13" />
-            <column name="media_id" value="1"/>
+        <insert tableName="PRODUCTS">
+            <column name="NAME" value="Flat White" />
+            <column name="DETAILS" value="Middle" />
+            <column name="PRICE" value="13" />
+            <column name="MEDIA_ID" value="1"/>
         </insert>
     </changeSet>
 
     <changeSet id="12-9-2020-1-57" author="gokalp.unsal">
         <insert tableName="PRODUCT_CATEGORIES">
-            <column name="product_id" value="1"/>
-            <column name="category_id" value="2"/>
+            <column name="PRODUCT_ID" value="1"/>
+            <column name="CATEGORY_ID" value="2"/>
         </insert>
     </changeSet>
     <changeSet id="12-9-2020-2-04" author="gokalp.unsal">
         <insert tableName="PRODUCT_CATEGORIES">
-            <column name="product_id" value="1"/>
-            <column name="category_id" value="1"/>
+            <column name="PRODUCT_ID" value="1"/>
+            <column name="CATEGORY_ID" value="1"/>
         </insert>
     </changeSet>
 
@@ -110,43 +110,43 @@
 
     <changeSet id="12-9-2020-1-58" author="gokalp.unsal">
         <insert tableName="PRODUCT_CATEGORIES">
-            <column name="product_id" value="2"/>
-            <column name="category_id" value="2"/>
+            <column name="PRODUCT_ID" value="2"/>
+            <column name="CATEGORY_ID" value="2"/>
         </insert>
     </changeSet>
 
     <changeSet id="12-9-2020-1-59" author="gokalp.unsal">
         <insert tableName="PRODUCT_CATEGORIES">
-            <column name="product_id" value="3"/>
-            <column name="category_id" value="2"/>
+            <column name="PRODUCT_ID" value="3"/>
+            <column name="CATEGORY_ID" value="2"/>
         </insert>
     </changeSet>
 
     <changeSet id="12-9-2020-2-00" author="gokalp.unsal">
         <insert tableName="PRODUCT_CATEGORIES">
-            <column name="product_id" value="4"/>
-            <column name="category_id" value="3"/>
+            <column name="PRODUCT_ID" value="4"/>
+            <column name="CATEGORY_ID" value="3"/>
         </insert>
     </changeSet>
 
     <changeSet id="12-9-2020-2-01" author="gokalp.unsal">
         <insert tableName="PRODUCT_CATEGORIES">
-            <column name="product_id" value="5"/>
-            <column name="category_id" value="4"/>
+            <column name="PRODUCT_ID" value="5"/>
+            <column name="CATEGORY_ID" value="4"/>
         </insert>
     </changeSet>
 
     <changeSet id="12-9-2020-2-02" author="gokalp.unsal">
         <insert tableName="PRODUCT_CATEGORIES">
-            <column name="product_id" value="6"/>
-            <column name="category_id" value="4"/>
+            <column name="PRODUCT_ID" value="6"/>
+            <column name="CATEGORY_ID" value="4"/>
         </insert>
     </changeSet>
 
     <changeSet id="12-9-2020-2-03" author="gokalp.unsal">
         <insert tableName="PRODUCT_CATEGORIES">
-            <column name="product_id" value="7"/>
-            <column name="category_id" value="4"/>
+            <column name="PRODUCT_ID" value="7"/>
+            <column name="CATEGORY_ID" value="4"/>
         </insert>
     </changeSet>
 
@@ -157,14 +157,14 @@
         <insert tableName="USERS">
             <column name="USERNAME" value="user1" />
             <column name="PASSWORD" value="$2y$12$oh7UtirmVnSMk/4sQF6fp.duoalDq95XtFkiKaq3ADQ0tPCjPUUdS" />
-            <column name="ENABLED" value="true" />
+            <column name="ENABLED" value="1" />
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-22">
         <insert tableName="USERS">
             <column name="USERNAME" value="user2" />
             <column name="PASSWORD" value="$2y$12$.l6NT.PGNriin7PxaJT0W.26XgvtKbVtGvYvx9Ct8WtMs4uB4MYum " />
-            <column name="ENABLED" value="true" />
+            <column name="ENABLED" value="1" />
         </insert>
     </changeSet>
 
@@ -181,21 +181,21 @@
 
     <changeSet author="gokalp.unsal" id="12-7-2020-20-25">
         <insert tableName="AUTHORITIES">
-            <column name="user_id" value="1" />
-            <column name="authority_id" value="1" />
+            <column name="USER_ID" value="1" />
+            <column name="AUTHORITY_ID" value="1" />
         </insert>
     </changeSet>
     <changeSet author="gokalp.unsal" id="12-7-2020-20-26">
         <insert tableName="AUTHORITIES">
-            <column name="user_id" value="1" />
-            <column name="authority_id" value="2" />
+            <column name="USER_ID" value="1" />
+            <column name="AUTHORITY_ID" value="2" />
         </insert>
     </changeSet>
 
     <changeSet author="gokalp.unsal" id="12-7-2020-20-27">
         <insert tableName="AUTHORITIES">
-            <column name="user_id" value="2" />
-            <column name="authority_id" value="2" />
+            <column name="USER_ID" value="2" />
+            <column name="AUTHORITY_ID" value="2" />
         </insert>
     </changeSet>
 
@@ -203,40 +203,40 @@
 
 
     <changeSet author="gokalp.unsal" id="12-7-2020-20-32">
-        <insert tableName="Waiter">
-            <column name="waiter_id" value="18485280848" />
-            <column name="name" value="Gokalp" />
-            <column name="surname" value="Unsal" />
+        <insert tableName="WAITERS">
+            <column name="WAITER_ID" value="18485280848" />
+            <column name="NAME" value="Gokalp" />
+            <column name="SURNAME" value="Unsal" />
             <column name="DATE_OF_BIRTH" value="1997-11-14" />
-            <column name="phone" value="05350811311" />
-            <column name="mail" value="gokalp-yp@bilgeadam.com" />
-            <column name="media_id" value="1"/>
+            <column name="PHONE" value="05350811311" />
+            <column name="MAIL" value="gokalp-yp@bilgeadam.com" />
+            <column name="MEDIA_ID" value="1"/>
         </insert>
     </changeSet>
 
     <changeSet author="gokalp.unsal" id="12-7-2020-20-33">
-        <insert tableName="Waiter">
-            <column name="waiter_id" value="12345678912" />
-            <column name="name" value="Ahmet" />
-            <column name="surname" value="Yılmaz" />
+        <insert tableName="WAITERS">
+            <column name="WAITER_ID" value="12345678912" />
+            <column name="NAME" value="Ahmet" />
+            <column name="SURNAME" value="Yılmaz" />
             <column name="DATE_OF_BIRTH" value="2000-05-12" />
-            <column name="phone" value="05321234565" />
-            <column name="mail" value="aassdd@gmail.com" />
-            <column name="media_id" value="2"/>
+            <column name="PHONE" value="05321234565" />
+            <column name="MAIL" value="aassdd@gmail.com" />
+            <column name="MEDIA_ID" value="2"/>
         </insert>
     </changeSet>
     
     
     <changeSet id="12-10-2020-3-50" author="gokalp.unsal">
-        <insert tableName="Media">
-            <column name="name" value="icon"/>
-            <column name="file_Content" valueBlobFile="./pic.png"/>
+        <insert tableName="MEDIAS">
+            <column name="NAME" value="icon"/>
+            <column name="FILE_CONTENT" valueBlobFile="./pic.png"/>
         </insert>
     </changeSet>
     <changeSet id="12-10-2020-3-51" author="gokalp.unsal">
-        <insert tableName="Media">
-            <column name="name" value="graph"/>
-            <column name="file_Content" valueBlobFile="./indir.png"/>
+        <insert tableName="MEDIAS">
+            <column name="NAME" value="graph"/>
+            <column name="FILE_CONTENT" valueBlobFile="./indir.png"/>
         </insert>
     </changeSet>
 

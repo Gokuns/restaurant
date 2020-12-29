@@ -12,27 +12,29 @@ import javax.persistence.*;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
-@Entity
+@Entity(name = "PRODUCTS")
 @Data
 @NoArgsConstructor
 @SQLDelete(
-        sql="UPDATE Product SET deleted= true where id=?")
-@Where(clause = "deleted=false")
+        sql="UPDATE PRODUCTS SET DELETED= true WHERE ID=?")
+@Where(clause = "DELETED=false")
 public class Product extends BaseEntity{
 
+    @Column(name = "NAME")
     private String name;
+    @Column(name = "DETAILS")
     private String details;
-
+    @Column(name = "PRICE")
     private double price;
 
     @ManyToMany
     @JoinTable(name = "PRODUCT_CATEGORIES",
-    joinColumns = {@JoinColumn(name="product_id")},
-    inverseJoinColumns = {@JoinColumn(name = "category_id")})
+    joinColumns = {@JoinColumn(name="PRODUCT_ID")},
+    inverseJoinColumns = {@JoinColumn(name = "CATEGORY_ID")})
     private Set<Category> categories;
 
     @ManyToOne
-    @JoinColumn(name= "media_id")
+    @JoinColumn(name= "MEDIA_ID")
     private Media media;
 
   }

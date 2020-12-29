@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -23,9 +25,7 @@ import java.util.stream.Collectors;
 public class MediaService {
     private static final String JPG_EXTENSION = ".jpg";
     private static final String PNG_EXTENSION = ".png";
-//    private static final String BMP_EXTENSION = ".bmp";
     private static final String PNG_CONTENT = "image/png";
-//    private static final String BMP_CONTENT = "image/bmp";
     private static final String BUSINESS_RULE_EXCEPTION = "BusinessRuleException";
     private static final String CONTENT_NOT_FOUND = "ContentNotFound";
 
@@ -46,6 +46,7 @@ public class MediaService {
         return mediaRepository.findAll().stream().map(mediaMapper::toDto).collect(Collectors.toList());
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public Media addMedia(MultipartFile file, String imageName, String lang) throws IOException{
         if(file==null || file.isEmpty()){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
@@ -67,6 +68,7 @@ public class MediaService {
         return mediaRepository.save(media);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteMedia(Long id, String lang){
         if(id==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));

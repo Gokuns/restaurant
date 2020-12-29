@@ -9,6 +9,9 @@ import com.yp.repos.SellOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -24,6 +27,7 @@ public class SellOrderService {
     private MessageSource messageSource;
 
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public List<SellOrder> addOrderLst(List<SellOrderDto> sellOrders, String lang) {
         if(sellOrders==null){
             throw new BusinessRuleException(messageSource.getMessage("BusinessRuleException", new Object[0], new Locale(lang)));

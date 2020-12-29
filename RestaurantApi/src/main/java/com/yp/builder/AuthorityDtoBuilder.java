@@ -1,24 +1,18 @@
 package com.yp.builder;
 
 import com.yp.dto.AuthorityDto;
-import com.yp.dto.UserDto;
-import com.yp.entity.Authority;
-import com.yp.entity.User;
-
-import java.util.Set;
-
-public class AuthorityDtoBuilder extends Builder{
-    private Long _id;
-    private String _authority;
+public class AuthorityDtoBuilder implements Builder{
+    private Long id;
+    private String authority;
 
 
     public AuthorityDtoBuilder () {
-        this._id=1L;
-        this._authority="";
+        this.id=1L;
+        this.authority="";
     }
     @Override
     public AuthorityDtoBuilder withId(Long id) {
-        this._id=id;
+        this.id=id;
         return this;
     }
 
@@ -28,14 +22,14 @@ public class AuthorityDtoBuilder extends Builder{
     }
 
     public AuthorityDtoBuilder withAuthority(String authority) {
-        this._authority = authority;
+        this.authority = authority;
         return this;
     }
 
     public AuthorityDto build(){
-        AuthorityDto authority = new AuthorityDto();
-        authority.setId(this._id);
-        authority.setRole(this._authority);
-        return authority;
+        AuthorityDto auth = new AuthorityDto();
+        auth.setId(this.id);
+        auth.setRole(this.authority);
+        return auth;
     }
 }

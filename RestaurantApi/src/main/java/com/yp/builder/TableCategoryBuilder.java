@@ -3,47 +3,47 @@ package com.yp.builder;
 import com.yp.entity.Media;
 import com.yp.entity.TableCategory;
 
-public class TableCategoryBuilder extends Builder{
-    private Long _id;
-    private String _name;
-    private int _number;
-    private Media _media;
+public class TableCategoryBuilder implements Builder{
+    private Long id;
+    private String name;
+    private int number;
+    private Media media;
 
     public TableCategoryBuilder(){
-        this._id=1L;
-        this._name="";
-        this._number=1;
-        this._media=new MediaBuilder().build();
+        this.id=1L;
+        this.name="";
+        this.number=1;
+        this.media=new MediaBuilder().build();
     }
 
     @Override
     public TableCategoryBuilder withId(Long id) {
-        this._id=id;
+        this.id=id;
         return this;
     }
 
     @Override
     public TableCategoryBuilder withName(String name) {
-        this._name=name;
+        this.name=name;
         return this;
     }
 
     public TableCategoryBuilder withNumber(int number) {
-        this._number=number;
+        this.number=number;
         return this;
     }
 
     public TableCategoryBuilder withMedia(Media media){
-        this._media=media;
+        this.media=media;
         return this;
     }
 
     public TableCategory build(){
         TableCategory tableCategory = new TableCategory();
-        tableCategory.setId(this._id);
-        tableCategory.setName(this._name);
-        tableCategory.setNumber(this._number);
-        tableCategory.setMedia(this._media);
+        tableCategory.setId(this.id);
+        tableCategory.setName(this.name);
+        tableCategory.setNumber(this.number);
+        tableCategory.setMedia(this.media);
         return tableCategory;
     }
 }

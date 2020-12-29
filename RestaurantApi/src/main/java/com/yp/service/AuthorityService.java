@@ -2,7 +2,6 @@ package com.yp.service;
 
 
 import com.yp.dto.AuthorityDto;
-import com.yp.dto.UserDto;
 import com.yp.entity.Authority;
 import com.yp.exception.BusinessRuleException;
 import com.yp.exception.ContentNotFoundException;
@@ -12,6 +11,8 @@ import com.yp.repos.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -46,11 +47,13 @@ public class AuthorityService {
     public List<AuthorityDto> getAllRoles(){
         return authorityRepository.findAll().stream().map(authorityMapper::toDto).collect(Collectors.toList());
     }
+    @Transactional(propagation = Propagation.REQUIRED)
     public Authority addRole(AuthorityDto authority, String lang){
         if(authority==null) throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         Authority auth = authorityMapper.toEntity(authority);
         return authorityRepository.save(auth);
     }
+    @Transactional(propagation = Propagation.REQUIRED)
     public Authority editRole(AuthorityDto authority, Long id, String lang){
         Optional<Authority> optionalAuthority = authorityRepository.findById(id);
         if (optionalAuthority.isEmpty()){
@@ -65,6 +68,7 @@ public class AuthorityService {
         }
         return authorityRepository.save(auth);
     }
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleterRole(Long id, String lang){
         if(id==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));

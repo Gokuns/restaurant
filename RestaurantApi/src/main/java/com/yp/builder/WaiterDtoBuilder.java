@@ -2,86 +2,81 @@ package com.yp.builder;
 
 import com.yp.dto.MediaDto;
 import com.yp.dto.WaiterDto;
-import com.yp.entity.Media;
-import com.yp.entity.Waiter;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-public class WaiterDtoBuilder extends Builder{
+public class WaiterDtoBuilder implements Builder{
 
 
-    private Long _id;
-    private Long _waiterId;
-    private String _name;
-    private String _surname;
-    private String _dateOfBirth;
-    private String _phone;
-    private String _mail;
-    private MediaDto _media;
+    private Long id;
+    private Long waiterId;
+    private String name;
+    private String surname;
+    private String dateOfBirth;
+    private String phone;
+    private String mail;
+    private MediaDto media;
 
     public WaiterDtoBuilder() {
-        this._id = 1L;
-        this._waiterId=1L;
-        this._name ="";
-        this._surname = "";
-        this._dateOfBirth = "2020-12-10";
-        this._phone = "";
-        this._mail = "asd@gmail.com";
-        this._media = new MediaDtoBuilder().build();
+        this.id = 1L;
+        this.waiterId=1L;
+        this.name ="";
+        this.surname = "";
+        this.dateOfBirth = "2020-12-10";
+        this.phone = "";
+        this.mail = "asd@gmail.com";
+        this.media = new MediaDtoBuilder().build();
     }
 
     public WaiterDtoBuilder withWaiterId(Long id) {
-        this._waiterId= id;
+        this.waiterId= id;
         return this;
     }
 
     @Override
     public WaiterDtoBuilder withId(Long id) {
-        this._id=id;
+        this.id=id;
         return this;
     }
 
     @Override
     public WaiterDtoBuilder withName(String name) {
-        this._name=name;
+        this.name=name;
         return this;
     }
 
     public WaiterDtoBuilder withSurname(String surname){
-        this._surname=surname;
+        this.surname=surname;
         return this;
     }
 
     public WaiterDtoBuilder withDateOfBirth(String dateOfBirth){
-        this._dateOfBirth = dateOfBirth;
+        this.dateOfBirth = dateOfBirth;
         return this;
     }
     public WaiterDtoBuilder withPhone(String phone){
-        this._phone=phone;
+        this.phone=phone;
         return this;
     }
     public WaiterDtoBuilder withMail(String mail){
-        this._mail = mail;
+        this.mail = mail;
         return this;
     }
 
     public WaiterDtoBuilder withMedia(MediaDto media){
-        this._media = media;
+        this.media = media;
         return this;
     }
 
 
     public WaiterDto build(){
         WaiterDto waiter = new WaiterDto();
-        waiter.setId(this._id);
-        waiter.setWaiterId(this._waiterId);
-        waiter.setName(this._name);
-        waiter.setSurname(this._surname);
-        waiter.setDateOfBirth(this._dateOfBirth);
-        waiter.setPhone(this._phone);
-        waiter.setMail(this._mail);
-        waiter.setMedia(this._media);
+        waiter.setId(this.id);
+        waiter.setWaiterId(this.waiterId);
+        waiter.setName(this.name);
+        waiter.setSurname(this.surname);
+        waiter.setDateOfBirth(this.dateOfBirth);
+        waiter.setPhone(this.phone);
+        waiter.setMail(this.mail);
+        waiter.setMedia(this.media);
         return waiter;
     }
 

@@ -11,9 +11,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    @Query("Select c from Customer c")
-    public Page<Customer> findAllPages(Pageable pageable);
+    @Query("SELECT c from CUSTOMERS c")
+    Page<Customer> findAllPages(Pageable pageable);
 
-    @Query("Select c from Customer c")
-    public Slice<Customer> findAllSlices(Pageable pageable);
+    @Query("SELECT c from CUSTOMERS c")
+    Slice<Customer> findAllSlices(Pageable pageable);
 }

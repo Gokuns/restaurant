@@ -14,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -51,6 +53,7 @@ public class ProductService {
         return  productMapper.toDto(optionalProduct.get());
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public Product addProduct(ProductDto product, String lang){
         if(product==null){
             throw new BusinessRuleException(messageSource.getMessage(CONTENT_NOT_FOUND, new Object[0], new Locale(lang)));
@@ -59,6 +62,7 @@ public class ProductService {
         return productRepository.save(p);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public Product editProduct(Long id, ProductDto product, String lang){
         if(id==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
@@ -118,6 +122,7 @@ public class ProductService {
 
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteProduct(Long id, String lang){
         if(id==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));

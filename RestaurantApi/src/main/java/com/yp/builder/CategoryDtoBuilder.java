@@ -4,40 +4,40 @@ import com.yp.dto.CategoryDto;
 import com.yp.dto.MediaDto;
 import com.yp.entity.Category;
 
-public class CategoryDtoBuilder extends  Builder{
-    private Long _id;
-    private String _name;
-    private MediaDto _media;
+public class CategoryDtoBuilder implements  Builder{
+    private Long id;
+    private String name;
+    private MediaDto media;
 
     public CategoryDtoBuilder(){
-        this._id=1L;
-        this._name="";
-        this._media=new MediaDtoBuilder().build();
+        this.id=1L;
+        this.name="";
+        this.media=new MediaDtoBuilder().build();
     }
 
 
     @Override
     public CategoryDtoBuilder withId(Long id) {
-        this._id=id;
+        this.id=id;
         return this;
     }
 
     @Override
     public CategoryDtoBuilder withName(String name) {
-        this._name=name;
+        this.name=name;
         return this;
     }
 
     public CategoryDtoBuilder withMedia(MediaDto media){
-        this._media=media;
+        this.media=media;
         return this;
     }
 
     public CategoryDto build(){
         CategoryDto category = new CategoryDto();
-        category.setId(this._id);
-        category.setName(this._name);
-        category.setMedia(this._media);
+        category.setId(this.id);
+        category.setName(this.name);
+        category.setMedia(this.media);
         return category;
     }
 }

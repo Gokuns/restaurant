@@ -11,9 +11,9 @@ import java.time.LocalDate;
 
 @EqualsAndHashCode(callSuper = true)
 @SQLDelete(
-        sql="UPDATE Waiter SET deleted= true where id=?")
-@Where(clause = "deleted=false")
-@Entity
+        sql="UPDATE WAITERS SET DELETED= true WHERE ID=?")
+@Where(clause = "DELETED=false")
+@Entity(name = "WAITERS")
 @Data
 @NoArgsConstructor
 public class Waiter extends BaseEntity{
@@ -25,7 +25,7 @@ public class Waiter extends BaseEntity{
     private String mail;
 
     @OneToOne
-    @JoinColumn(name= "media_id")
+    @JoinColumn(name= "MEDIA_ID")
     private Media media;
 }
 

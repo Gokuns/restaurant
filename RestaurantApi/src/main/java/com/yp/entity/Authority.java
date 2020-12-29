@@ -9,8 +9,8 @@ import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @SQLDelete(
-        sql="UPDATE ROLES SET deleted= true where id=?")
-@Where(clause = "deleted=false")
+        sql="UPDATE ROLES SET DELETED= true WHERE ID=?")
+@Where(clause = "DELETED=false")
 @Entity(name = "ROLES")
 @Data
 @Getter

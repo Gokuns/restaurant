@@ -4,40 +4,40 @@ import com.yp.entity.Media;
 
 import static org.apache.tomcat.util.buf.HexUtils.fromHexString;
 
-public class MediaBuilder extends Builder {
+public class MediaBuilder implements Builder {
 
-    private Long _id;
-    private String _name;
-    private byte[] _content;
+    private Long id;
+    private String name;
+    private byte[] content;
 
     public MediaBuilder(){
-        this._id=1L;
-        this._name="";
-        this._content= fromHexString("00");
+        this.id=1L;
+        this.name="";
+        this.content= fromHexString("00");
     }
 
     @Override
     public MediaBuilder withId(Long id) {
-        this._id = id;
+        this.id = id;
         return this;
     }
 
     @Override
     public MediaBuilder withName(String name) {
-        this._name=name;
+        this.name=name;
         return this;
     }
 
     public MediaBuilder withContent(byte[] content){
-        this._content=content;
+        this.content=content;
         return this;
     }
 
     public Media build(){
         Media media = new Media();
-        media.setName(this._name);
-        media.setId(this._id);
-        media.setFileContent(this._content);
+        media.setName(this.name);
+        media.setId(this.id);
+        media.setFileContent(this.content);
         return media;
     }
 }

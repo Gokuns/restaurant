@@ -8,13 +8,11 @@ import org.springframework.data.domain.Sort;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.function.Function;
 
 public class SliceBuilder<T> {
 
-    public SliceBuilder(){
-
-    }
     public Slice<T> build(){
         return new Slice<T>() {
             @Override
@@ -91,8 +89,8 @@ public class SliceBuilder<T> {
                     }
 
                     @Override
-                    public T next() {
-                        return null;
+                    public T next() throws NoSuchElementException {
+                        throw new NoSuchElementException("no such element");
                     }
                 };
             }

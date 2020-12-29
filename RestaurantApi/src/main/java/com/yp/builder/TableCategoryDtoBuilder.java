@@ -4,47 +4,47 @@ import com.yp.dto.MediaDto;
 import com.yp.dto.TableCategoryDto;
 import com.yp.entity.TableCategory;
 
-public class TableCategoryDtoBuilder extends Builder{
-    private Long _id;
-    private String _name;
-    private int _number;
-    private MediaDto _media;
+public class TableCategoryDtoBuilder implements Builder{
+    private Long id;
+    private String name;
+    private int number;
+    private MediaDto media;
 
     public TableCategoryDtoBuilder(){
-        this._id=1L;
-        this._name="";
-        this._number=1;
-        this._media= new MediaDtoBuilder().build();
+        this.id=1L;
+        this.name="";
+        this.number=1;
+        this.media= new MediaDtoBuilder().build();
     }
 
     @Override
     public TableCategoryDtoBuilder withId(Long id) {
-        this._id=id;
+        this.id=id;
         return this;
     }
 
     @Override
     public TableCategoryDtoBuilder withName(String name) {
-        this._name=name;
+        this.name=name;
         return this;
     }
 
     public TableCategoryDtoBuilder withNumber(int number) {
-        this._number=number;
+        this.number=number;
         return this;
     }
 
     public TableCategoryDtoBuilder withMedia(MediaDto media){
-        this._media = media;
+        this.media = media;
         return this;
     }
 
     public TableCategoryDto build(){
         TableCategoryDto tableCategory = new TableCategoryDto();
-        tableCategory.setId(this._id);
-        tableCategory.setName(this._name);
-        tableCategory.setNumber(this._number);
-        tableCategory.setMedia(this._media);
+        tableCategory.setId(this.id);
+        tableCategory.setName(this.name);
+        tableCategory.setNumber(this.number);
+        tableCategory.setMedia(this.media);
         return tableCategory;
     }
 }

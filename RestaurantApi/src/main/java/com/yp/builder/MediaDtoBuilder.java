@@ -5,39 +5,39 @@ import com.yp.entity.Media;
 
 import static org.apache.tomcat.util.buf.HexUtils.fromHexString;
 
-public class MediaDtoBuilder extends Builder{
-    private Long _id;
-    private String _name;
-    private byte[] _content;
+public class MediaDtoBuilder implements Builder{
+    private Long id;
+    private String name;
+    private byte[] content;
 
     public MediaDtoBuilder(){
-        this._id=1L;
-        this._name="";
-        this._content= fromHexString("00");
+        this.id=1L;
+        this.name="";
+        this.content= fromHexString("00");
     }
 
     @Override
     public MediaDtoBuilder withId(Long id) {
-        this._id = id;
+        this.id = id;
         return this;
     }
 
     @Override
     public MediaDtoBuilder withName(String name) {
-        this._name=name;
+        this.name=name;
         return this;
     }
 
     public MediaDtoBuilder withContent(byte[] content){
-        this._content=content;
+        this.content=content;
         return this;
     }
 
     public MediaDto build(){
         MediaDto media = new MediaDto();
-        media.setName(this._name);
-        media.setId(this._id);
-        media.setFileContent(this._content);
+        media.setName(this.name);
+        media.setId(this.id);
+        media.setFileContent(this.content);
         return media;
     }
 }

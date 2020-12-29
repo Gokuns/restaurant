@@ -1,10 +1,8 @@
 package com.yp.builder;
 
-public abstract class Builder {
-    public Builder() {
+public  interface Builder {
 
-    }
-    public abstract Builder withId(Long id);
-    public abstract Builder withName(String name);
+     Builder withId(Long id);
+     Builder withName(String name);
 
 }

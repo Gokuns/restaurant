@@ -2,7 +2,6 @@ package com.yp.mapper;
 
 import com.yp.dto.ProductDto;
 import com.yp.entity.Product;
-import org.mapstruct.Context;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

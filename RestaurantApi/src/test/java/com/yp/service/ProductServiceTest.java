@@ -144,7 +144,8 @@ public class ProductServiceTest extends TestCase {
     }
     @Test
     public void shouldGetSlice() {
-        productService.getProductSlices(PageRequest.of(0,1), lang);
+        Slice<ProductDto> slices = productService.getProductSlices(PageRequest.of(0, 1), lang);
+        assertNotNull(slices);
     }
 
     @Test(expected = BusinessRuleException.class)
@@ -158,7 +159,8 @@ public class ProductServiceTest extends TestCase {
 
     @Test
     public void shouldGetSliceCat() {
-        productService.getProductSliceWithCategory(1L,PageRequest.of(0,1), lang);
+        Slice<ProductDto> slice = productService.getProductSliceWithCategory(1L, PageRequest.of(0, 1), lang);
+        assertNotNull(slice);
     }
 
     @Test(expected = BusinessRuleException.class)
@@ -168,7 +170,9 @@ public class ProductServiceTest extends TestCase {
 
     @Test
     public void shouldGetPage(){
-        productService.getProductPage(PageRequest.of(0,1), lang);
+        Page<ProductDto> productPage = productService.getProductPage(PageRequest.of(0, 1), lang);
+        assertNotNull(productPage);
+
     }
 
     @Test(expected = BusinessRuleException.class)

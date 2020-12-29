@@ -19,6 +19,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -63,6 +65,7 @@ public class CategoryService {
         return categoryMapper.toDto(optionalCategory.get());
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @CacheEvict(value = "CategoryCache", allEntries = true)
     public Category addCategory(CategoryDto categoryDto, String lang){
         if(categoryDto==null) throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
@@ -72,6 +75,7 @@ public class CategoryService {
 
     //@CacheEvict(value = "CategoryCache", key = "'CATEGORY_CACHE_BY_ID'.concat(#id)")
     @CacheEvict(value = "CategoryCache", allEntries = true)
+    @Transactional(propagation = Propagation.REQUIRED)
     public Category editCategory(Long id, CategoryDto categoryDto, String lang){
         if(id==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
@@ -93,6 +97,7 @@ public class CategoryService {
         return categoryRepository.save(cat);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @CacheEvict(value = "CategoryCache", allEntries = true)
     public void deleteCategory(Long id, String lang){
         if(id==null) {

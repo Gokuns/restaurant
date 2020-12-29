@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.awt.*;
@@ -19,18 +18,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
    List<Product> findAllByCategoriesIn(List<Category> categories);
 
-   Slice<Product> findAllByCategories(Category category, Pageable Pageable);
+   Slice<Product> findAllByCategories(Category category, Pageable pageable);
 
-   @Query("Select p from Product p")
+   @Query("SELECT p from PRODUCTS p")
    Page<Product> findAllPages(Pageable pageable);
 
    //@Query("Select p from Product p ")
 
-   @Query("Select p from Product p")
+   @Query("SELECT p from PRODUCTS p")
    Slice<Product> findAllSlice(Pageable pageable) ;
-
-//   @Query(value = "Select u from Product u inner join u.categories c where u.category_id=:cat_id")
-//   List<Product> findAllByCategoryId(@Param(value = "cat_id")int cat_id);
 
 
 }

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
@@ -54,6 +56,7 @@ public class UserService {
          return userMapper.toDto(optionalUser.get());
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public User addUser(UserDto user, String lang){
         if(user==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
@@ -63,6 +66,7 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public User updateUser(Long id, UserDto user, String lang){
         if(id==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
@@ -92,6 +96,7 @@ public class UserService {
         return userRepository.save(oldUser);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteUser(Long id, String lang){
         if(id==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));

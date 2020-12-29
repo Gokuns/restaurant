@@ -10,6 +10,8 @@ import com.yp.repos.WaiterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Locale;
@@ -47,6 +49,7 @@ public class WaiterService {
         return waiterMapper.toDto(optionalWaiter.get());
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public Waiter addWaiter(WaiterDto waiterDto, String lang) {
         if(waiterDto==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
@@ -55,6 +58,7 @@ public class WaiterService {
         return waiterRepository.save(waiter);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public Waiter updateWaiter(Long id, WaiterDto waiterDto, String lang) {
         if(id==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
@@ -93,6 +97,8 @@ public class WaiterService {
         return waiterRepository.save(waiter);
 
     }
+
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteWaiter(Long id, String lang) {
         if(id==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
