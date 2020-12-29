@@ -1,6 +1,7 @@
 package com.yp.service;
 
 import com.yp.dto.UserDto;
+import com.yp.entity.Authority;
 import com.yp.entity.User;
 import com.yp.exception.BusinessRuleException;
 import com.yp.exception.ContentNotFoundException;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,14 +32,15 @@ public class UserService {
     private UserMapper userMapper;
     @Autowired
     private MessageSource messageSource;
+    @Autowired
     private BCryptPasswordEncoder encoder;
     private static final String BUSINESS_RULE_EXCEPTION = "BusinessRuleException";
     private static final String CONTENT_NOT_FOUND = "ContentNotFound";
 
 
     public List<UserDto> getAllUsers(){
-        return userRepository.findAll().stream().map(userMapper::toDto).collect(Collectors.toList());
-
+        List<User> users = userRepository.findAll();
+        return users.stream().map(userMapper::toDto).collect(Collectors.toList());
     }
 
     public UserDto getUser(Long id, String lang){
@@ -63,6 +66,10 @@ public class UserService {
     public User updateUser(Long id, UserDto user, String lang){
         if(id==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        }
+        if(user==null){
+            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+
         }
         User newUser = userMapper.toEntity(user);
         Optional<User> optionalUser = userRepository.findById(id);
@@ -90,6 +97,15 @@ public class UserService {
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         }
         userRepository.deleteById(id);
+    }
+
+    public Set<UserDto> getUsersWithRole(Long id, String lang){
+        Optional<Authority> optionalAuthority = authorityRepository.findById(id);
+        if (optionalAuthority.isEmpty()) {
+            throw new ContentNotFoundException(messageSource.getMessage(CONTENT_NOT_FOUND, new Object[0], new Locale(lang)));
+        }
+        Authority authority = optionalAuthority.get();
+        return userRepository.findAllByAuthorities(authority).stream().map(userMapper::toDto).collect(Collectors.toSet());
     }
 
 }

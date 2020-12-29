@@ -4,6 +4,7 @@ import com.yp.builder.SellOrderBuilder;
 import com.yp.builder.SellOrderDtoBuilder;
 import com.yp.dto.SellOrderDto;
 import com.yp.entity.SellOrder;
+import com.yp.exception.BusinessRuleException;
 import com.yp.mapper.SellOrderMapper;
 import com.yp.repos.SellOrderRepository;
 import junit.framework.TestCase;
@@ -56,6 +57,11 @@ public class SellOrderServiceTest extends TestCase {
         when(sellOrderRepository.findAll()).thenReturn(sellOrders);
         List<SellOrderDto> lst = sellOrderService.getAllOrders();
         assertEquals(lst.get(0).getCount(), sellOrders.get(0).getCount());
+    }
+
+    @Test(expected = BusinessRuleException.class)
+    public void shouldRaiseExceptionInAddWithObject(){
+        sellOrderService.addOrderLst(null, lang);
     }
 
     @Test

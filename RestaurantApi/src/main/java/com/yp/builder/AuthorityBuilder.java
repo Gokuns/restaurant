@@ -36,7 +36,7 @@ public class AuthorityBuilder extends Builder{
     public Authority build(){
         Authority authority = new Authority();
         authority.setId(this._id);
-        authority.setAuthority(this._authority);
+        authority.setRole(this._authority);
         return authority;
     }
 }

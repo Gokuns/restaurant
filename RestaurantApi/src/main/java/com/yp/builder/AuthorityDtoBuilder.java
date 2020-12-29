@@ -35,7 +35,7 @@ public class AuthorityDtoBuilder extends Builder{
     public AuthorityDto build(){
         AuthorityDto authority = new AuthorityDto();
         authority.setId(this._id);
-        authority.setAuthority(this._authority);
+        authority.setRole(this._authority);
         return authority;
     }
 }

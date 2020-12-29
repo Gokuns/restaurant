@@ -59,7 +59,7 @@ public class UserDtoBuilder extends  Builder{
         user.setName(this._userName);
         user.setPassword(this._passWord);
         user.setEnabled(this._enabled);
-        user.setRoles(this._authorities);
+        user.setAuthorities(this._authorities);
         return user;
     }
 

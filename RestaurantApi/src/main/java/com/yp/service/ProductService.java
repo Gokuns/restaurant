@@ -68,14 +68,14 @@ public class ProductService {
         }
         Optional<Product> optionalProduct = productRepository.findById(id);
         if(optionalProduct.isEmpty()){
-            throw new BusinessRuleException(messageSource.getMessage(CONTENT_NOT_FOUND, new Object[0], new Locale(lang)));
+            throw new ContentNotFoundException(messageSource.getMessage(CONTENT_NOT_FOUND, new Object[0], new Locale(lang)));
         }
         Product p = optionalProduct.get();
         Product newProduct = productMapper.toEntity(product);
         if(!p.getName().equals(newProduct.getName())){
             p.setName(newProduct.getName());
         }
-        if(p.getDetails().equals(newProduct.getDetails())){
+        if(!p.getDetails().equals(newProduct.getDetails())){
             p.setDetails(newProduct.getDetails());
         }
         if(!p.getMedia().equals(newProduct.getMedia())){

@@ -23,9 +23,9 @@ import java.util.stream.Collectors;
 public class MediaService {
     private static final String JPG_EXTENSION = ".jpg";
     private static final String PNG_EXTENSION = ".png";
-    private static final String BMP_EXTENSION = ".bmp";
+//    private static final String BMP_EXTENSION = ".bmp";
     private static final String PNG_CONTENT = "image/png";
-    private static final String BMP_CONTENT = "image/bmp";
+//    private static final String BMP_CONTENT = "image/bmp";
     private static final String BUSINESS_RULE_EXCEPTION = "BusinessRuleException";
     private static final String CONTENT_NOT_FOUND = "ContentNotFound";
 
@@ -47,10 +47,10 @@ public class MediaService {
     }
 
     public Media addMedia(MultipartFile file, String imageName, String lang) throws IOException{
-        if(file.isEmpty()){
+        if(file==null || file.isEmpty()){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         }
-        if(imageName.isEmpty()){
+        if(imageName==null || imageName.isEmpty()){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
 
         }
@@ -68,6 +68,9 @@ public class MediaService {
     }
 
     public void deleteMedia(Long id, String lang){
+        if(id==null){
+            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        }
         Optional<Media> optionalMedia = mediaRepository.findById(id);
         if(optionalMedia.isEmpty()){
             throw new ContentNotFoundException(messageSource.getMessage(CONTENT_NOT_FOUND, new Object[0], new Locale(lang)));
@@ -83,9 +86,7 @@ public class MediaService {
     private String generateFullFilePath(MultipartFile file){
         String extension = JPG_EXTENSION;
 
-        if (BMP_CONTENT.equals(file.getContentType())){
-            extension = BMP_EXTENSION;
-        }else if (PNG_CONTENT.equals(file.getContentType())){
+         if (PNG_CONTENT.equals(file.getContentType())){
             extension = PNG_EXTENSION;
         }
         return uploadDir + generateUUID() + extension;

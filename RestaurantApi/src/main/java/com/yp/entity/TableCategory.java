@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Entity(name = "TABLE_CATEGORIES")
 @Data
 @NoArgsConstructor
-public class TableCategory extends BaseEntity{
+public class    TableCategory extends BaseEntity{
     private String name;
     private int number;
     @ManyToOne

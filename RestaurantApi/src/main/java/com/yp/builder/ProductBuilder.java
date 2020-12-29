@@ -63,6 +63,7 @@ public class ProductBuilder extends Builder{
         product.setName(this._name);
         product.setDetails(this._details);
         product.setMedia(this._media);
+        product.setPrice(this._price);
         product.setCategories(this._categories);
         return product;
     }

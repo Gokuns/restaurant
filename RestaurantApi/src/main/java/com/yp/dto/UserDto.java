@@ -16,5 +16,5 @@ public class UserDto {
     private String name;
     private String password;
     private boolean enabled;
-    private Set<AuthorityDto> roles = new HashSet<>();
+    private Set<AuthorityDto> authorities = new HashSet<>();
 }

@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthorityDto {
     private Long id;
-    private String authority;
+    private String role;
 }

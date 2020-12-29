@@ -46,7 +46,7 @@ public class CategoryController {
     }
 
 
-    @GetMapping("/list/{id}")
+    @GetMapping("/{id}/list")
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
     public List<ProductDto> getProductsofCategory(@PathVariable(value = "id")Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
         return categoryService.getProductsWithCategoryId(id, lang);

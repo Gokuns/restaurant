@@ -30,6 +30,7 @@ public class AuthorityService {
     @Autowired
     private MessageSource messageSource;
 
+
     private static final String BUSINESS_RULE_EXCEPTION = "BusinessRuleException";
     private static final String CONTENT_NOT_FOUND = "ContentNotFound";
 
@@ -53,14 +54,14 @@ public class AuthorityService {
     public Authority editRole(AuthorityDto authority, Long id, String lang){
         Optional<Authority> optionalAuthority = authorityRepository.findById(id);
         if (optionalAuthority.isEmpty()){
-            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+            throw new ContentNotFoundException(messageSource.getMessage(CONTENT_NOT_FOUND, new Object[0], new Locale(lang)));
         }
         if(authority==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         }
         Authority auth = optionalAuthority.get();
-        if(!auth.getRole().equals(authority.getAuthority())){
-            auth.setRole(authority.getAuthority());
+        if(!auth.getRole().equals(authority.getRole())){
+            auth.setRole(authority.getRole());
         }
         return authorityRepository.save(auth);
     }
@@ -71,12 +72,5 @@ public class AuthorityService {
         authorityRepository.deleteById(id);
     }
 
-    public Set<UserDto> getUsersWithRole(Long id, String lang){
-        Optional<Authority> optionalAuthority = authorityRepository.findById(id);
-        if (optionalAuthority.isEmpty()) {
-            throw new ContentNotFoundException(messageSource.getMessage(CONTENT_NOT_FOUND, new Object[0], new Locale(lang)));
-        }
-            Authority authority = optionalAuthority.get();
-       return authorityRepository.findAllByRoles(authority).stream().map(userMapper::toDto).collect(Collectors.toSet());
-    }
+
 }

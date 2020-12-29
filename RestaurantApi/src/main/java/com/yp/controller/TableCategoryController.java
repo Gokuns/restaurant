@@ -4,6 +4,7 @@ import com.yp.dto.TableCategoryDto;
 import com.yp.service.TableCategoryService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,25 +16,30 @@ public class TableCategoryController {
     @Autowired
     private TableCategoryService tableCategoryService;
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
     public TableCategoryDto getTableCat(@PathVariable(value = "id") Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
         return tableCategoryService.getTableCategory(id, lang);
     }
 
-    @GetMapping("/list")
+    @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
     public List<TableCategoryDto> getCats(){
         return tableCategoryService.getAllTableCategories();
     }
 
-    @PostMapping("/add")
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void addTableCat(@RequestBody TableCategoryDto table, @RequestParam(value = "lang", defaultValue = "en") String lang){
         tableCategoryService.addTableCategory(table, lang);
     }
 
-    @PutMapping("/{id}/put")
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void editTableCat(@PathVariable(value = "id") Long id, @RequestBody TableCategoryDto tableCat, @RequestParam(value = "lang", defaultValue = "en") String lang){
         tableCategoryService.editTableCategory(id, tableCat, lang);
     }
-    @DeleteMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteTableCat(@PathVariable(value = "id") Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
         tableCategoryService.deleteTableCategory(id, lang);
     }

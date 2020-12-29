@@ -34,7 +34,7 @@ public class UserBuilder extends Builder{
         return this;
     }
 
-    public Builder withUserName(String userName) {
+    public UserBuilder withUserName(String userName) {
         this._userName=userName;
         return this;
     }

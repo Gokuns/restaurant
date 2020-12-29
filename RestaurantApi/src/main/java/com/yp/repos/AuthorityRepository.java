@@ -10,5 +10,5 @@ import java.util.Set;
 @Repository
 public interface AuthorityRepository extends JpaRepository<Authority, Long> {
 
-    Set<User> findAllByRoles(Authority authority);
+
 }

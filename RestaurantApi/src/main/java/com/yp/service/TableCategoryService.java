@@ -4,6 +4,7 @@ import com.yp.dto.TableCategoryDto;
 import com.yp.entity.TableCategory;
 import com.yp.exception.BusinessRuleException;
 import com.yp.exception.ContentNotFoundException;
+import com.yp.mapper.MediaMapper;
 import com.yp.mapper.TableCategoryMapper;
 import com.yp.repos.TableCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class TableCategoryService {
     private TableCategoryMapper tableCategoryMapper;
     @Autowired
     private MessageSource messageSource;
+    @Autowired
+    private MediaMapper mediaMapper;
     private static final String BUSINESS_RULE_EXCEPTION = "BusinessRuleException";
     private static final String CONTENT_NOT_FOUND = "ContentNotFound";
 
@@ -31,9 +34,6 @@ public class TableCategoryService {
     }
 
     public TableCategoryDto getTableCategory(Long id, String lang){
-        if(id==null){
-            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
-        }
         TableCategory tableCategory =  getTabCat(id, lang);
         return tableCategoryMapper.toDto(tableCategory);
     }
@@ -54,11 +54,15 @@ public class TableCategoryService {
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         }
         TableCategory cat = getTabCat(id, lang);
+
         if(!cat.getName().equals(tabCat.getName())){
             cat.setName(tabCat.getName());
         }
         if(cat.getNumber()!=tabCat.getNumber()){
             cat.setNumber(tabCat.getNumber());
+        }
+        if(!cat.getMedia().equals(tabCat.getMedia())){
+            cat.setMedia(mediaMapper.toEntity(tabCat.getMedia()));
         }
         return tableCategoryRepository.save(cat);
     }

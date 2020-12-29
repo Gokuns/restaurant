@@ -24,7 +24,7 @@ public class AuthorityControllerTest extends TestCase {
 
     @Before
     public void setUp() {
-        authorityDto.setAuthority("ROLE_ADMIN");
+        authorityDto.setRole("ROLE_ADMIN");
 
     }
 

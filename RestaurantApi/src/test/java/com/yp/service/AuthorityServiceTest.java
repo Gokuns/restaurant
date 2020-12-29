@@ -8,6 +8,7 @@ import com.yp.dto.AuthorityDto;
 import com.yp.dto.UserDto;
 import com.yp.entity.Authority;
 import com.yp.entity.User;
+import com.yp.exception.BusinessRuleException;
 import com.yp.exception.ContentNotFoundException;
 import com.yp.mapper.AuthorityMapper;
 import com.yp.mapper.UserMapper;
@@ -47,11 +48,11 @@ public class AuthorityServiceTest extends TestCase {
     private MessageSource messageSource;
 
 
-    private Authority authority = new AuthorityBuilder().build();
-    private AuthorityDto authorityDto = new AuthorityDtoBuilder().build();
-    private List<Authority> authorityList = new ArrayList<>();
-    private List<AuthorityDto> authorityDtoList = new ArrayList<>();
-    private String lang = "en";
+    private final Authority authority = new AuthorityBuilder().build();
+    private final AuthorityDto authorityDto = new AuthorityDtoBuilder().build();
+    private final List<Authority> authorityList = new ArrayList<>();
+    private final List<AuthorityDto> authorityDtoList = new ArrayList<>();
+    private final String lang = "en";
 
 
 
@@ -69,7 +70,7 @@ public class AuthorityServiceTest extends TestCase {
         Mockito.when(authorityRepository.findById(1L)).thenReturn(Optional.of(authority));
         AuthorityDto auth = authorityService.getRole(1L, lang);
         assertNotNull(auth);
-        assertEquals(authority.getRole(), auth.getAuthority() );
+        assertEquals(authority.getRole(), auth.getRole() );
     }
 
     @Test(expected =ContentNotFoundException.class )
@@ -82,7 +83,7 @@ public class AuthorityServiceTest extends TestCase {
     public void getAuthorityList(){
         Mockito.when(authorityRepository.findAll()).thenReturn(authorityList);
         List<AuthorityDto> auth = authorityService.getAllRoles();
-        assertEquals(auth.get(0).getAuthority(),authorityDtoList.get(0).getAuthority());
+        assertEquals(auth.get(0).getRole(),authorityDtoList.get(0).getRole());
     }
 
     @Test
@@ -101,24 +102,28 @@ public class AuthorityServiceTest extends TestCase {
     @Test
     public void shouldEdit(){
         Mockito.when(authorityRepository.findById(any())).thenReturn(Optional.of(authority));
+        AuthorityDto authorityDto = new AuthorityDtoBuilder().withAuthority("test").build();
         authorityService.editRole(authorityDto,1L, lang);
         verify(authorityRepository, times(1)).save(any());
     }
 
-
-    @Test
-    public void shouldgetUsersWithId(){
+    @Test(expected = BusinessRuleException.class)
+    public void shouldRaiseExceptionEditWithNullObject(){
         Mockito.when(authorityRepository.findById(any())).thenReturn(Optional.of(authority));
-        Set<UserDto> userDtoSet =  authorityService.getUsersWithRole(1L, lang);
-        assertNotNull(userDtoSet);
+        AuthorityDto authorityDto = null;
+        authorityService.editRole(authorityDto,1L, lang);
     }
 
+    @Test(expected = ContentNotFoundException.class)
+    public void shouldRaiseExceptionEditWithId(){
+        AuthorityDto authorityDto = new AuthorityDtoBuilder().withId(2L).build();
+        authorityService.editRole(authorityDto,3L, lang);
+    }
 
-
-
-
-
-
+    @Test(expected = BusinessRuleException.class)
+    public void shouldRaiseExceptionDeleteWithId(){
+        authorityService.deleterRole(null, lang);
+    }
 
 
 

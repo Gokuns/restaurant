@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.domain.PageRequest;
 
 import static org.mockito.Mockito.*;
 
@@ -38,9 +39,15 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void getAuthorityList(){
+    public void getAllList(){
         productController.getAllProducts();
         verify(productService,times(1)).getAllProducts();
+    }
+
+    @Test
+    public void getAllSlice(){
+        productController.findAllSlice(null, lang);
+        verify(productService,times(1)).getProductSlices(null, lang);
     }
 
     @Test
@@ -61,5 +68,16 @@ public class ProductControllerTest {
     public void shouldDeleteWithId() {
         productController.deleteProduct(1L, lang);
         verify(productService, times(1)).deleteProduct(1L, lang);
+    }
+
+    @Test
+    public void shouldGetSliceWithCategory(){
+        productController.getProductSliceWithCategory(1L,null , lang);
+        verify(productService, times(1)).getProductSliceWithCategory(1L,null , lang);
+    }
+    @Test
+    public void shouldGetProductPage(){
+        productController.getProductPages(0,1, lang);
+        verify(productService, times(1)).getProductPage(PageRequest.of(0,1), lang);
     }
 }

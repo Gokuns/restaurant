@@ -43,14 +43,14 @@ public class CustomerService {
         return customerRepository.findAll().stream().map(customerMapper::toDto).collect(Collectors.toList());
     }
 
-    public Page<CustomerDto> getCutomerPage(Pageable pageable, String lang){
+    public Page<CustomerDto> getCustomerPage(Pageable pageable, String lang){
         if(pageable==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         }
         return customerRepository.findAllPages(pageable).map(customerMapper::toDto);
     }
 
-    public Slice<CustomerDto> getCostomerSlice(Pageable pageable, String lang){
+    public Slice<CustomerDto> getCustomerSlice(Pageable pageable, String lang){
         if(pageable==null){
             throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
         }

@@ -57,7 +57,7 @@ public class ProductController {
         productService.deleteProduct(id, lang);
     }
 
-    @GetMapping("/sliced/{id}")
+    @GetMapping("/{id}/sliced")
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
     public Slice<ProductDto> getProductSliceWithCategory(@PathVariable(value = "id")Long id, Pageable pageable, @RequestParam(value = "lang", defaultValue = "en") String lang){
         return productService.getProductSliceWithCategory(id, pageable, lang);

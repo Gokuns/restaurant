@@ -26,7 +26,7 @@ public class UserDetailsImpl implements UserDetails {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
 
         for(Authority authority: authorities){
-            authorityList.add(new SimpleGrantedAuthority(authority.getAuthority()));
+            authorityList.add(new SimpleGrantedAuthority(authority.getRole()));
 
         }
         return authorityList;

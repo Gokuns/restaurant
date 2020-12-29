@@ -39,12 +39,12 @@ public class CustomerController {
                                               @RequestParam(defaultValue = "20") int size,
                                               @RequestParam(value = "lang", defaultValue = "en") String lang){
         Pageable pageable = PageRequest.of(page,size);
-        return customerService.getCutomerPage(pageable, lang);
+        return customerService.getCustomerPage(pageable, lang);
     }
     @GetMapping("/slice")
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
     public Slice<CustomerDto> getCustomerSlice(Pageable pageable, @RequestParam(value = "lang", defaultValue = "en") String lang){
-        return customerService.getCostomerSlice(pageable, lang);
+        return customerService.getCustomerSlice(pageable, lang);
     }
 
     @GetMapping("/{id}")

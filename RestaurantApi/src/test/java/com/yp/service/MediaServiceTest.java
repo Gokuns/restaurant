@@ -4,6 +4,8 @@ import com.yp.builder.MediaBuilder;
 import com.yp.builder.MediaDtoBuilder;
 import com.yp.dto.MediaDto;
 import com.yp.entity.Media;
+import com.yp.exception.BusinessRuleException;
+import com.yp.exception.ContentNotFoundException;
 import com.yp.mapper.MediaMapper;
 import com.yp.repos.MediaRepository;
 import org.junit.Before;
@@ -23,6 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -68,7 +71,7 @@ public class MediaServiceTest {
         mediaDtos.add(mediaDto);
         p= Paths.get("D:/codes/restauran/RestaurantApi/target");
         when(mediaMapper.toDto(any())).thenReturn(mediaDto);
-//        when(mediaMapper.toEntity(any())).thenReturn(media);
+        when(mediaRepository.findById(1L)).thenReturn(Optional.of(media));
     }
 
     @Test
@@ -76,6 +79,16 @@ public class MediaServiceTest {
         when(mediaRepository.findAll()).thenReturn(medias);
         List<MediaDto> lst = mediaService.getAllMedia();
         assertEquals(lst.get(0).getName(), medias.get(0).getName());
+    }
+
+    @Test(expected = BusinessRuleException.class)
+    public void shouldRaiseExceptionInAddWithFile() throws IOException {
+        mediaService.addMedia(null, "test", lang);
+    }
+
+    @Test(expected = BusinessRuleException.class)
+    public void shouldRaiseExceptionInAddWithName() throws IOException {
+        mediaService.addMedia(file, null, lang);
     }
 
     @Test
@@ -89,6 +102,21 @@ public class MediaServiceTest {
         }
         assertNotNull(m);
         assertEquals(m.getName(), media.getName());
+    }
+
+    @Test(expected = BusinessRuleException.class)
+    public void shouldRaiseExceptionInDeleteWithId(){
+        mediaService.deleteMedia(null, lang);
+    }
+
+    @Test(expected = ContentNotFoundException.class)
+    public void shouldRaiseExceptionInDeleteWithObject(){
+        mediaService.deleteMedia(2L, lang);
+    }
+
+    @Test
+    public void shouldDeleteMedia(){
+        mediaService.deleteMedia(1L, lang);
     }
 
 

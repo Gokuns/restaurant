@@ -53,11 +53,14 @@ public class CategoryService {
 
     @Cacheable(value = "CategoryCache",key = "'CATEGORY_CACHE_BY_ID'.concat(#id)")
     public CategoryDto getCategory(Long id, String lang){
-        if(id==null) throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        if(id==null) {
+            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        }
         Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if(optionalCategory.isEmpty()) throw new ContentNotFoundException(messageSource.getMessage(CONTENT_NOT_FOUND, new Object[0], new Locale(lang)));
+        if(optionalCategory.isEmpty()) {
+            throw new ContentNotFoundException(messageSource.getMessage(CONTENT_NOT_FOUND, new Object[0], new Locale(lang)));
+        }
         return categoryMapper.toDto(optionalCategory.get());
-
     }
 
     @CacheEvict(value = "CategoryCache", allEntries = true)
@@ -70,6 +73,12 @@ public class CategoryService {
     //@CacheEvict(value = "CategoryCache", key = "'CATEGORY_CACHE_BY_ID'.concat(#id)")
     @CacheEvict(value = "CategoryCache", allEntries = true)
     public Category editCategory(Long id, CategoryDto categoryDto, String lang){
+        if(id==null){
+            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        }
+        if(categoryDto==null){
+            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        }
         Optional<Category> optionalCategory = categoryRepository.findById(id);
         if(optionalCategory.isEmpty()) {
             throw new ContentNotFoundException(messageSource.getMessage(CONTENT_NOT_FOUND, new Object[0], new Locale(lang)));
@@ -86,7 +95,9 @@ public class CategoryService {
 
     @CacheEvict(value = "CategoryCache", allEntries = true)
     public void deleteCategory(Long id, String lang){
-        if(id==null) throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        if(id==null) {
+            throw new BusinessRuleException(messageSource.getMessage(BUSINESS_RULE_EXCEPTION, new Object[0], new Locale(lang)));
+        }
         categoryRepository.deleteById(id);
     }
 
