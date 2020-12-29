@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Api(tags = "User Controller")
@@ -32,13 +33,13 @@ public class UserController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void addUser(@RequestBody UserDto user, @RequestParam(value = "lang", defaultValue = "en") String lang){
+    public void addUser(@Valid  @RequestBody UserDto user, @RequestParam(value = "lang", defaultValue = "en") String lang){
         userService.addUser(user, lang);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void putUser(@PathVariable(value = "id")Long id, @RequestBody UserDto user, @RequestParam(value = "lang", defaultValue = "en") String lang){
+    public void putUser(@PathVariable(value = "id")Long id,@Valid @RequestBody UserDto user, @RequestParam(value = "lang", defaultValue = "en") String lang){
         userService.updateUser(id, user, lang);
     }
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 @Api(tags = "TableCategory Controller")
 @CrossOrigin(origins = "*")
@@ -29,13 +30,13 @@ public class TableCategoryController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void addTableCat(@RequestBody TableCategoryDto table, @RequestParam(value = "lang", defaultValue = "en") String lang){
+    public void addTableCat(@Valid  @RequestBody TableCategoryDto table, @RequestParam(value = "lang", defaultValue = "en") String lang){
         tableCategoryService.addTableCategory(table, lang);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void editTableCat(@PathVariable(value = "id") Long id, @RequestBody TableCategoryDto tableCat, @RequestParam(value = "lang", defaultValue = "en") String lang){
+    public void editTableCat(@PathVariable(value = "id") Long id,@Valid @RequestBody TableCategoryDto tableCat, @RequestParam(value = "lang", defaultValue = "en") String lang){
         tableCategoryService.editTableCategory(id, tableCat, lang);
     }
     @DeleteMapping("/{id}")

@@ -6,6 +6,8 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @EqualsAndHashCode(callSuper = true)
 @SQLDelete(
@@ -19,5 +21,7 @@ import javax.persistence.*;
 public class Authority extends BaseEntity{
 
     @Column(name= "AUTHORITY", unique = true)
+    @NotNull(message = "Role name cannot be null")
+    @NotBlank(message = "Role Name cannot be blank")
     private String role;
 }

@@ -12,6 +12,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Api(tags = "Customer Controller")
@@ -55,13 +56,13 @@ public class CustomerController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
-    public String addCustomer(@RequestBody CustomerDto customerDto, @RequestParam(value = "lang", defaultValue = "en") String lang){
+    public String addCustomer(@Valid  @RequestBody CustomerDto customerDto, @RequestParam(value = "lang", defaultValue = "en") String lang){
         return customerService.addCustomer(customerDto, lang);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String editCustomer(@PathVariable(value = "id") Long id, @RequestBody CustomerDto customerDto, @RequestParam(value = "lang", defaultValue = "en") String lang){
+    public String editCustomer(@PathVariable(value = "id") Long id,@Valid @RequestBody CustomerDto customerDto, @RequestParam(value = "lang", defaultValue = "en") String lang){
         return customerService.editCustomer(id, customerDto, lang);
     }
 

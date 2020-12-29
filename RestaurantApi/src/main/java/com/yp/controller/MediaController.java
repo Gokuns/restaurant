@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class MediaController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void addMedia(@RequestParam("file")MultipartFile file,@RequestParam String imageName, @RequestParam(value = "lang", defaultValue = "en")String lang)throws IOException{
+    public void addMedia(@Valid  @RequestParam("file")MultipartFile file,@Valid @RequestParam String imageName, @RequestParam(value = "lang", defaultValue = "en")String lang)throws IOException{
         mediaService.addMedia(file,imageName, lang);
     }
 

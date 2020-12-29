@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Api(tags = "Category Controller")
@@ -31,12 +32,12 @@ public class CategoryController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void addCategory(@RequestBody CategoryDto categoryDto, @RequestParam(value = "lang", defaultValue = "en") String lang){
+    public void addCategory(@Valid  @RequestBody CategoryDto categoryDto, @RequestParam(value = "lang", defaultValue = "en") String lang){
        categoryService.addCategory(categoryDto, lang);
     }
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void editCategory(@PathVariable(value = "id") Long id,  @RequestBody CategoryDto categoryDto,@RequestParam(value = "lang", defaultValue = "en")String lang){
+    public void editCategory(@PathVariable(value = "id") Long id,@Valid  @RequestBody CategoryDto categoryDto,@RequestParam(value = "lang", defaultValue = "en")String lang){
         categoryService.editCategory(id, categoryDto, lang);
     }
     @DeleteMapping("/{id}")

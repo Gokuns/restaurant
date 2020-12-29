@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Api(tags = "Waiter Controller")
@@ -32,14 +33,14 @@ public class WaiterController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void addUser(@RequestBody WaiterDto waiterDto,
+    public void addUser(@Valid  @RequestBody WaiterDto waiterDto,
                         @RequestParam(value = "lang", defaultValue = "en") String lang){
         waiterService.addWaiter(waiterDto, lang);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void putUser(@PathVariable(value = "id")Long id, @RequestBody WaiterDto waiterDto,
+    public void putUser(@PathVariable(value = "id")Long id,@Valid @RequestBody WaiterDto waiterDto,
                         @RequestParam(value = "lang", defaultValue = "en") String lang){
         waiterService.updateWaiter(id, waiterDto, lang);
     }

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Api(tags = "Product Controller")
@@ -42,13 +43,13 @@ public class ProductController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void addProduct( @RequestBody ProductDto product, @RequestParam(value = "lang", defaultValue = "en") String lang){
+    public void addProduct(@Valid  @RequestBody ProductDto product, @RequestParam(value = "lang", defaultValue = "en") String lang){
         productService.addProduct(product, lang);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void editProduct(@PathVariable(value = "id") Long id, @RequestBody ProductDto product, @RequestParam(value = "lang", defaultValue = "en") String lang){
+    public void editProduct(@PathVariable(value = "id") Long id,@Valid @RequestBody ProductDto product, @RequestParam(value = "lang", defaultValue = "en") String lang){
         productService.editProduct(id, product, lang);
     }
     @DeleteMapping("/{id}")

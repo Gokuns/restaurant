@@ -9,6 +9,8 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
@@ -21,10 +23,16 @@ import java.util.Set;
 public class Product extends BaseEntity{
 
     @Column(name = "NAME")
+    @NotNull(message = "Product name cannot be null")
+    @NotBlank(message = "Product name cannot be blank")
     private String name;
     @Column(name = "DETAILS")
+    @NotNull(message = "Product details cannot be null")
+    @NotBlank(message = "Product details cannot be blank")
     private String details;
     @Column(name = "PRICE")
+    @NotNull(message = "Product price cannot be null")
+    @NotBlank(message = "Product price cannot be blank")
     private double price;
 
     @ManyToMany

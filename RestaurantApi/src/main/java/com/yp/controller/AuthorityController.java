@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Api(tags = "Authority Controller")
@@ -36,18 +39,18 @@ public class AuthorityController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void addRole(@RequestBody AuthorityDto authority, @RequestParam(value = "lang", defaultValue = "en") String lang){
+    public void addRole(@Valid @RequestBody AuthorityDto authority, @RequestParam(value = "lang", defaultValue = "en") String lang){
         authorityService.addRole(authority, lang);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void editRole(@RequestBody AuthorityDto authority, @PathVariable(name = "id") Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
+    public void editRole(@Valid @RequestBody AuthorityDto authority, @PathVariable(name = "id") Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
         authorityService.editRole(authority,id, lang);
     }
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void deleteRole(@PathVariable(name = "id") Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
+    public void deleteRole( @PathVariable(name = "id") Long id, @RequestParam(value = "lang", defaultValue = "en") String lang){
         authorityService.deleterRole(id, lang);
     }
 
